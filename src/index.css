@@ -1,0 +1,8 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  font-family: "Montserrat", DroidSans, AppleSDGothicNeo, Sans-serif, Helvetica;
+}
