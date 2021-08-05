@@ -6,3 +6,6 @@
 #app {
   font-family: "Montserrat", DroidSans, AppleSDGothicNeo, Sans-serif, Helvetica;
 }
+button {
+  @apply focus:outline-none;
+}

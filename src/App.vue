@@ -29,7 +29,7 @@
           <span>iback</span>
         </div>
         <!-- 메뉴 -->
-        <div class=" hidden lg:inline-block w-4/5 text-gray-500 ">
+        <div class=" hidden lg:inline-block w-4/5 text-gray-500 text-lg">
           <div class="flex">
           <div class=" flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary">
             <span>홈</span>
@@ -64,7 +64,7 @@
       </div>
       <div class=" lg:text-2xl sm:text-xl text-xs mb-10">매년 120만 명의 사람들이 죽음과 슬픔을 치유하기 위해 우리와 함께해요</div>
 
-      <button class="text-white text-xl border border-primary bg-primary py-2 px-3 rounded-xl shadow-2xl hover:bg-dark"
+      <button class="text-white text-xl border border-primary bg-primary py-6 px-6 rounded-2xl shadow-2xl hover:bg-dark"
       >무료 계획 세워보기!</button>
     </div>
 
@@ -76,26 +76,58 @@
       <div class="flex items-center justify-center text-center text-sm lg:hidden py-3">
         <div class=" w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary">
           <i class="fas fa-home "></i>
-          <span>홈</span>
+          <span class="text-lg">홈</span>
         </div>
         <div class=" w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary">
           <i class="fas fa-book "></i>
-          <span>아이백이란?</span>
+          <span class="text-lg">아이백이란?</span>
         </div>
         <div class=" w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary">
           <i class="fas fa-envelope "></i>
-          <span>사업제휴</span>
+          <span class="text-lg">사업제휴</span>
         </div>
         <div class=" w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary">
           <i class="fas fa-chalkboard "></i>
-          <span>고객센터</span>
+          <span class="text-lg">고객센터</span>
         </div>
       </div>
     </div>
 
     <!-- side toggle menu -->
-    <div :class="`${sideToggleMenu ? 'md:w-1/5 w-3/5' : 'w-0'} fixed right-0 bg-white  h-full  z-50 transition-all`">
-    <i @click="sideToggleMenu = false" class="fas fa-times px-4 py-3 hover:bg-gray-100 rounded-full text-gray-400"></i>
+    <div :class="`${sideToggleMenu ? 'md:w-2/5 w-3/5' : 'w-0'} fixed right-0 bg-white  h-full  z-50 transition-all`">
+      <i @click="sideToggleMenu = false" class="fas fa-times px-4 py-3 hover:bg-gray-100 rounded-full text-gray-400"></i>
+      <div class=" flex flex-col">
+        <div class="flex justify-center">
+          <img class="w-24 h-24 border-4 border-white rounded-full "
+          src="/profile.jpeg" alt="">
+        </div>
+        <div class="text-center text-xl mt-3">홍길동</div>
+        <div class="text-center mt-2">
+          <button class=" text-primary hover:text-dark">프로필 수정</button>
+        </div>
+
+        <div class="flex flex-col mt-10">
+          <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+            <button class="py-5 ">무료 계획 세우기</button>
+            <i class="fas fa-angle-right text-gray-400 "></i>
+          </div>
+          <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+            <button class="py-5 ">무료 유언장 작성</button>
+            <i class="fas fa-angle-right text-gray-400 "></i>
+          </div>
+          <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+            <button class="py-5 ">서비스 이용약관</button>
+            <i class="fas fa-angle-right text-gray-400 "></i>
+          </div>
+          <div class="flex items-center w-full md:px-6 px-3  justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+            <button class="py-5">개인정보 보호정책</button>
+            <i class="fas fa-angle-right text-gray-400 "></i>
+          </div>
+          <div class="text-gray-500 w-full md:px-6 px-3">
+            <button class="py-4">로그아웃</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>  
  
@@ -128,7 +160,5 @@ setup() {
 </script>
 
 <style>
-#image-height {
-  /* height: 1000px */
-}
+
 </style>
