@@ -14,10 +14,10 @@ module.exports = {
         lighter: "#D4E5F4"
       },
       backgroundImage: theme => ({
-        'checklist': "url('http://picsum.photos/id/430/300/300')",
-        'will': "url('http://picsum.photos/id/798/300/300')",
-        'checklist-pc': "url('http://picsum.photos/id/430/600/350')",
-        'will-pc': "url('http://picsum.photos/id/798/600/350')",
+        'checklist': "url('http://picsum.photos/id/430/500/350')",
+        'will': "url('http://picsum.photos/id/798/500/350')",
+        'checklist-pc': "url('http://picsum.photos/id/430/800/350')",
+        'will-pc': "url('http://picsum.photos/id/798/800/350')",
       })
     },
   },

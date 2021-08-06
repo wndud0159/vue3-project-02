@@ -1,5 +1,5 @@
 <template>
- <div class="flex flex-col h-screen">
+ <div class="flex flex-col">
     <!-- header-section -->
     <div class="bg-white pl-10 pr-10 fixed w-full border-b-4 border-gray-100 top-0 z-30">
       
@@ -24,10 +24,10 @@
       <!--top nav bar -->
     <div class="flex items-center h-20 -mb-1">
         <!-- title  logo-->
-        <div class=" font-extrabold text-2xl flex-1 text-primary flex items-center">
+        <router-link to="/" class=" font-extrabold text-2xl flex-1 text-primary flex items-center">
           <i class="fas fa-feather-alt text-4xl mr-1"></i>
           <span>iback</span>
-        </div>
+        </router-link>
         <!--tmenu -->
         <div class=" hidden lg:inline-block w-4/5 text-gray-500 text-lg">
           <div class="flex">
@@ -43,7 +43,7 @@
     </div>
 
     <!-- main section -->
-    <div class="flex flex-col h-screen mt-20">
+    <div class="flex flex-col mt-20">
         <router-view></router-view>
     </div>
 
@@ -64,7 +64,7 @@
       <i @click="sideToggleMenu = false" class="fas fa-times px-4 py-3 hover:bg-gray-100 rounded-full text-gray-400"></i>
       <div class=" flex flex-col">
         <div class="flex justify-center">
-          <img class="w-24 h-24 border-4 border-white rounded-full "
+          <img v-if="sideToggleMenu" class="w-24 h-24 border-4 border-white rounded-full "
           src="/profile.jpeg" alt="">
         </div>
         <div class="text-center text-xl mt-3">홍길동</div>
@@ -73,14 +73,14 @@
         </div>
 
         <div class="flex flex-col mt-10">
-          <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+          <router-link @click="sideToggleMenu = false" to="/checklist" class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
             <button class="py-5 ">체크리스트 작성</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
-          </div>
-          <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+          </router-link>
+          <router-link @click="sideToggleMenu = false" to="/will" class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
             <button class="py-5 ">유언장 작성</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
-          </div>
+          </router-link>
           <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
             <button class="py-5 ">서비스 이용약관</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
