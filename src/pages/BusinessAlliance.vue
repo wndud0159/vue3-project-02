@@ -1,5 +1,5 @@
 <template>
-  고객센터 페이지
+  사업제휴 페이지
 </template>
 
 <script>

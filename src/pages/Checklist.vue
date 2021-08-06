@@ -1,5 +1,5 @@
 <template>
-  고객센터 페이지
+  체크리스트 페이지
 </template>
 
 <script>

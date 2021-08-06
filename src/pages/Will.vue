@@ -1,5 +1,5 @@
 <template>
-  고객센터 페이지
+  유언장 작성 페이지
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
  <div class="flex flex-col h-screen">
     <!-- header-section -->
-    <div class="bg-white pl-10 pr-10 fixed w-full border-b-4 border-gray-100 top-0 z-40">
+    <div class="bg-white pl-10 pr-10 fixed w-full border-b-4 border-gray-100 top-0 z-30">
       
       <!-- top banner -->
       <div class=" relative">
@@ -47,10 +47,8 @@
         <router-view></router-view>
     </div>
 
-   
-
     <!--bottom mobile menu -->
-    <div class="  fixed border-t-4 lg:border-0 border-gray-100 bottom-0 w-full bg-white text-gray-500 z-40">
+    <div class="  fixed border-t-4 lg:border-0 border-gray-100 bottom-0 w-full bg-white text-gray-500 z-30">
       <div class="flex items-center justify-center text-center text-sm lg:hidden">
         <router-link :to='route.path' 
         v-for="route in routes" :key="route"

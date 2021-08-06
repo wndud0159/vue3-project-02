@@ -1,5 +1,5 @@
 <template>
-  고객센터 페이지
+  아이백이란? 페이지
 </template>
 
 <script>

@@ -12,7 +12,13 @@ module.exports = {
         light: "#a5d0f5",
         // 클릭시 hover
         lighter: "#D4E5F4"
-      }
+      },
+      backgroundImage: theme => ({
+        'checklist': "url('http://picsum.photos/id/430/300/300')",
+        'will': "url('http://picsum.photos/id/798/300/300')",
+        'checklist-pc': "url('http://picsum.photos/id/430/600/350')",
+        'will-pc': "url('http://picsum.photos/id/798/600/350')",
+      })
     },
   },
   variants: {

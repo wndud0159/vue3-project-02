@@ -14,12 +14,34 @@
         <div class=" lg:text-2xl sm:text-xl text-xs mb-10">매년 120만 명의 사람들이 죽음과 슬픔을 치유하기 위해 우리와 함께해요</div>
 
         <!-- main button -->
-        <button class="text-white text-xl border border-primary bg-primary py-6 px-6 rounded-2xl shadow-2xl hover:bg-dark">무료 계획 세워보기!</button>
+        <button @click="showOpenOrCloseModal = true" class="text-white text-xl border border-primary bg-primary py-6 px-6 rounded-2xl shadow-2xl hover:bg-dark">무료 계획 세워보기!</button>
+
+        <!-- modal -->
+        <SelectionChecklistOrWillModal
+        @close-modal="showOpenOrCloseModal = false"
+        v-if="showOpenOrCloseModal"/>
+        
     </div>
 </template>
 
 <script>
+import {ref} from 'vue'
+import SelectionChecklistOrWillModal from '../components/SelectionChecklistOrWillModal.vue'
+
 export default {
+
+components: {
+    SelectionChecklistOrWillModal
+},
+setup() {
+    const showOpenOrCloseModal = ref(false)
+
+    return {
+        showOpenOrCloseModal,
+    }
+}
+
+
 
 }
 </script>
