@@ -43,9 +43,7 @@
     </div>
 
     <!-- main section -->
-    <div class="flex flex-col mt-20">
         <router-view></router-view>
-    </div>
 
     <!--bottom mobile menu -->
     <div class="  fixed border-t-4 lg:border-0 border-gray-100 bottom-0 w-full bg-white text-gray-500 z-30">
@@ -122,7 +120,6 @@ export default {
             // 라우터에 등록한 라우트중 ismenu가 true인 것만 가져오기
             routes.value = router.options.routes.filter((routes) => routes.meta.isMenu == true)
             
-            console.log(router.currentRoute.value, router.currentRoute.value)
         })
 
         return {

@@ -1,6 +1,6 @@
 <template>
     <!-- main section -->
-    <div>
+    <div class="pt-20">
         <img id="image-height" class=" h-auto w-full object-cover"
         src="http://picsum.photos/id/119/2000/1000">
     </div>
