@@ -11,7 +11,11 @@ module.exports = {
         // 못누르는
         light: "#a5d0f5",
         // 클릭시 hover
-        lighter: "#D4E5F4"
+        lighter: "#D4E5F4",
+        // 네이버
+        naver: '#00C43B',
+        // 카카오
+        kakao: '#FFEB34'
       },
       backgroundImage: theme => ({
         'checklist': "url('http://picsum.photos/id/430/500/350')",

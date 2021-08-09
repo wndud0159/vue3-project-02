@@ -8,16 +8,16 @@
         <!-- login -->
         <div class="flex items-center justify-center" >
           <div class="absolute right-0 top-4 mt-0.5 ">
-            <div @click="sideToggleMenu = true" class="flex items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50">
+            <div @click="sideToggleMenu = true" class="flex hidden items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50">
               <img 
               src="/profile.jpeg" 
               class="w-10 y-10 rounded-full">
               <i class="fas fa-sort-down text-xl text-gray-400"></i>
             </div>
           </div>
-          <div class="absolute right-0 mt-px top-6 text-gray-500 hover:text-primary cursor-pointer hidden pb-2" >
+          <router-link to="/login" class="absolute text-lg right-0  top-7 text-gray-500 hover:text-primary cursor-pointer pb-2" >
             <span>로그인</span>
-          </div>
+          </router-link>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
       <div class="flex items-center justify-center text-center text-sm lg:hidden">
         <router-link :to='route.path' 
         v-for="route in routes" :key="route"
-        :class="`${router.currentRoute.value.name == route.name ? 'text-primary' : ''} w-1/4 py-3 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+        :class="`${router.currentRoute.value.name == route.name ? 'text-primary' : ''} w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i :class="route.icon"></i>
           <span class="text-base">{{route.title}}</span>
         </router-link>  
