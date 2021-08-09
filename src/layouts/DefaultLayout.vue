@@ -52,7 +52,7 @@
         v-for="route in routes" :key="route"
         :class="`${router.currentRoute.value.name == route.name ? 'text-primary' : ''} w-1/4 py-3 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i :class="route.icon"></i>
-          <span class="text-lg">{{route.title}}</span>
+          <span class="text-base">{{route.title}}</span>
         </router-link>  
       </div>
     </div>
