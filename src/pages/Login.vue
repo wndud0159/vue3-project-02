@@ -9,7 +9,7 @@
       <i class="fas fa-comment px-px"></i>
       <button class="">카카오로 로그인</button>
     </div>
-    <div @click="getKakaoUserInfo" class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
+    <div class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
       <img src="/naver.ico" class="w-5 h-5" alt="">
       <button class="text-white">네이버로 로그인</button>
     </div>
@@ -22,62 +22,107 @@
 </template>
 
 <script>
-import {useRoute} from 'vue-router'
+import {useRouter} from 'vue-router'
 import {onBeforeMount, ref} from 'vue'
-import axios from 'axios'
+import store from '../store'
+import {USER_COLLECTION} from '../firebase'
 
 export default {
   setup() {
-    const route = useRoute()
-    const code = route.query.code
-
-    const params = {
-      redirectUri: "http://localhost:3000/login"
-    } 
-
-    const kakaoHeader = {
-    'Authorization': '	e6af24c8c86c049ac9f534aa5dfb1478',
-    'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-    };
-
-    const getKakaoToken = async (code) => {
-      if(code){
-        try {
-          console.log("찍어봐",code)
-          const data = {
-            grant_type: 'authorization_code',
-            client_id: 'f8c652126e5451b4651ab934105903ff',
-            redirect_uri: 'http://localhost:3000/login',
-            code: code,
-          };
-          const queryString = Object.keys(data)
-            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
-            .join('&');
-          const result = await axios.post('https://kauth.kakao.com/oauth/token', queryString, { headers: kakaoHeader });
-          console.log('카카오 토큰', result)
-     
-        } catch (e) {
-          console.log("안녕",e.messge)
-          }
-      }
-    };
+    const router = useRouter()
+    const token = ref('')
+    const userName = ref('')
+    const profile_image_url = ref('')
+    const email = ref('')
 
     onBeforeMount(() => {
-      console.log("인증코드 : ", code)
-      getKakaoToken(code)
-      
+        console.log('유저상태', store.state.user)              
     })
-
-    
-    
-    
-    
-    const loginWithKakao = () => {
-       window.Kakao.Auth.authorize(params)
+  
+    const loginWithKakao = async () => {
+       window.Kakao.Auth.login({
+         scope: 'profile_nickname, profile_image, account_email',
+         success: function(response) {
+           getKakaoProfile(response)
+         },
+         fail : function(error) {
+           console.log('kakao Login error : ',error.message)
+         }
+       })
     }
 
+
+    const getKakaoProfile = async (request) => {
+      window.Kakao.API.request({
+        url: '/v2/user/me',
+        success: response => {
+          //토큰 할당
+          token.value = Kakao.Auth.getAccessToken();
+          //토큰 셋업
+          Kakao.Auth.setAccessToken(token.value);
+          //정보 셋업
+          const kakao_account = response.kakao_account
+          userName.value = kakao_account.profile.nickname
+          profile_image_url.value  = kakao_account.profile.profile_image_url
+          email.value = kakao_account.email
+          // console.log('email : ', email.value)
+
+        // 데이터 확인 절차
+        try {
+            USER_COLLECTION.where("email", "==", email.value).get()
+              .then((querySnapshot) => {
+                if (querySnapshot.docs.length > 0) {
+                  const documentSnapshot = querySnapshot.docs[0];
+                  // console.log(documentSnapshot.data());
+                  // console.log('database : ',documentSnapshot.data())
+                  store.commit("SET_USER", documentSnapshot.data())      
+                }
+                else {
+                  // decide what you want to do if the query resulted in no documents.
+                  console.log('유저정보 없음')
+                  onCreateUsers()
+                }
+                router.replace('/')
+              })
+              .catch((error) => { console.log('firebase store error : ',error) })
+            
+            
+           } catch(e) {
+            //  console.log('유저 정보 없음 : ', e.message)
+            //  onCreateUsers()
+           }
+
+        }
+        ,fail: function(error) {
+          console.log('getKakaoProfile error', error.message)  
+        }
+      })
+    }
+
+    const onCreateUsers = async ()  => {
+        // console.log('데이터등록')
+        // 새로운 유저 데이터 등록
+        try{
+          const doc = USER_COLLECTION.doc(token.value)
+          await doc.set({
+            uid: token.value,
+            email: email.value,
+            nickname: userName.value,
+            profile_image_url: profile_image_url.value,
+            social_type : '카카오',
+            create_at: Date.now(),
+          })
+          router.replace('/')
+        } catch(e) {
+            console.log('firebase db error : ', e.message)
+        }
+    }
+
+    
+
+
     return {
-      loginWithKakao, getKakaoUserInfo
+      loginWithKakao
     }
   }
 

@@ -8,14 +8,14 @@
         <!-- login -->
         <div class="flex items-center justify-center" >
           <div class="absolute right-0 top-4 mt-0.5 ">
-            <div @click="sideToggleMenu = true" class="flex hidden items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50">
+            <div v-if="currentUser" @click="sideToggleMenu = true" class="flex items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50">
               <img 
-              src="/profile.jpeg" 
+              :src="currentUser.profile_image_url" 
               class="w-10 y-10 rounded-full">
               <i class="fas fa-sort-down text-xl text-gray-400"></i>
             </div>
           </div>
-          <router-link to="/login" class="absolute text-lg right-0  top-7 text-gray-500 hover:text-primary cursor-pointer pb-2" >
+          <router-link v-if="!currentUser"  to="/login" class="absolute text-lg right-0  top-7 text-gray-500 hover:text-primary cursor-pointer pb-2" >
             <span>로그인</span>
           </router-link>
         </div>
@@ -63,9 +63,9 @@
       <div class=" flex flex-col">
         <div class="flex justify-center">
           <img v-if="sideToggleMenu" class="w-24 h-24 border-4 border-white rounded-full "
-          src="/profile.jpeg" alt="">
+          :src="currentUser.profile_image_url" alt="">
         </div>
-        <div class="text-center text-xl mt-3">홍길동</div>
+        <div class="text-center text-xl mt-3">{{currentUser.nickname}}</div>
         <div class="text-center mt-2">
           <button class=" text-primary hover:text-dark">프로필 수정</button>
         </div>
@@ -87,7 +87,7 @@
             <button class="py-5">개인정보 보호정책</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </div>
-          <div class="text-gray-500 w-full md:px-6 px-3">
+          <div @click="logoutWithKakao" class="text-gray-500 w-full md:px-6 px-3">
             <button class="py-4">로그아웃</button>
           </div>
         </div>
@@ -100,8 +100,9 @@
 </template>
 
 <script>
-import {ref, onBeforeMount} from 'vue'
+import {ref, onBeforeMount, computed} from 'vue'
 import router from '../router'
+import store from '../store'
 
 export default {
 
@@ -111,10 +112,25 @@ export default {
     setup() {
         const sideToggleMenu = ref(false)
         const routes = ref([])
+        const currentUser = computed(() => store.state.user)
 
+
+        const logoutWithKakao = async () => {
+          if (!Kakao.Auth.getAccessToken()) {
+            console.log('Not logged in.');
+            return;
+          }
+          Kakao.Auth.logout(function() {
+            // console.log(Kakao.Auth.getAccessToken())
+            store.commit("SET_USER", null)
+            router.replace('/login')
+            console.log('로그아웃 성공')
+          });
+        }
         
 
         onBeforeMount(() => {
+            console.log(store.state.user)
             //라우터에 등록한 라우트 가져오기
             // routes.value = router.options.routes
             // 라우터에 등록한 라우트중 ismenu가 true인 것만 가져오기
@@ -123,7 +139,7 @@ export default {
         })
 
         return {
-            sideToggleMenu, router, routes
+            sideToggleMenu, router, routes, currentUser, logoutWithKakao
         }
     }
 }
