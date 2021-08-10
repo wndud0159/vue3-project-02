@@ -1,5 +1,6 @@
 <template>
-    <div class="flex flex-col h-screen overflow-y-scroll  bg-gray-200 items-center pt-28 pb-48 md:pb-10 px-3 md:px-20">
+    
+    <div class="flex flex-col h-screen overflow-y-scroll  bg-gray-200 items-center pt-28 lg:pt-40 pb-48 md:pb-10 px-3 md:px-20">
 
 
 

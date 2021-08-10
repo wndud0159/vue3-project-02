@@ -13,9 +13,9 @@ import Will from '../pages/Will.vue'
 const routes = [
     //메뉴
     { path: '/', name: 'home', component: Home, title: '홈', icon: 'fas fa-home text-xl', meta: { isMenu: true, } },
-    { path: '/ibackIntrodues', name: 'ibackIntrodues', component: IbackIntrodues, title: '아이백이란?', icon: 'fas fa-book text-xl', meta: { isMenu: true, } },
-    { path: '/businessAlliance', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, } },
-    { path: '/serviceCenter', name: 'seviceCenter', component: ServiceCenter, title: '고객센터', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, } },
+    { path: '/', name: 'ibackIntrodues', component: IbackIntrodues, title: '아이백이란?', icon: 'fas fa-book text-xl', meta: { isMenu: true, } },
+    { path: '/', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, } },
+    { path: '/', name: 'seviceCenter', component: ServiceCenter, title: '고객센터', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, } },
     
     
     { path: '/checklist', name: 'checklist', component: Checklist, title: '체크리스트작성', meta: { isMenu: false, } },
@@ -24,7 +24,7 @@ const routes = [
 
     
 
-    { path: '/login', component: Login, title: '로그인', meta: { isMenu: false, layout: 'EmptyLayout'} }
+    { path: '/login', component: Login, title: '로그인', props: true, meta: { isMenu: false, layout: 'EmptyLayout'} }
     
 ]
 
