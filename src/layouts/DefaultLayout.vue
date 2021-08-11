@@ -141,17 +141,17 @@ export default {
             // routes.value = router.options.routes
             // 라우터에 등록한 라우트중 ismenu가 true인 것만 가져오기
             routes.value = router.options.routes.filter((routes) => routes.meta.isMenu == true)
-            setCurrentUser()
+            // setCurrentUser()
           })
 
-          const setCurrentUser = async () => {
-                try { 
-                  const doc = await USER_COLLECTION.doc(currentUser.value.uid).get()
-                  store.commit('SET_USER', doc.data())
-                } catch (e) {
-                  console.log(`firebase users data error:${e}`)
-                }   
-          }
+          // const setCurrentUser = async () => {
+          //       try { 
+          //         const doc = await USER_COLLECTION.doc(currentUser.value.uid).get()
+          //         store.commit('SET_USER', doc.data())
+          //       } catch (e) {
+          //         console.log(`firebase users data error:${e}`)
+          //       }   
+          // }
 
         return {
             sideToggleMenu, router, routes, currentUser, logoutWithKakao, showProfileEditModal

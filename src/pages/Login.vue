@@ -9,7 +9,7 @@
       <i class="fas fa-comment px-px"></i>
       <button class="">카카오로 로그인</button>
     </div>
-    <div class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
+    <div @click="logoutWithKakao" class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
       <img src="/naver.ico" class="w-5 h-5" alt="">
       <button class="text-white">네이버로 로그인</button>
     </div>
@@ -121,11 +121,24 @@ export default {
         }
     }
 
+    const logoutWithKakao = async () => {
+          if (!Kakao.Auth.getAccessToken()) {
+            console.log('Not logged in.');
+            return;
+          }
+          Kakao.Auth.logout(function() {
+            // console.log(Kakao.Auth.getAccessToken())
+            // store.commit("SET_USER", null)
+            // router.replace('/login')
+            console.log('로그아웃 성공')
+          });
+        }
+
     
 
 
     return {
-      loginWithKakao
+      loginWithKakao, logoutWithKakao
     }
   }
 

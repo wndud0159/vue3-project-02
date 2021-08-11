@@ -35,7 +35,7 @@ const router = createRouter({
     routes
 })
 
-// navigation guard
+//navigation guard
 router.beforeEach((to, from, next) => {
     const currentUser = store.state.user
     // console.log(to.matched)
