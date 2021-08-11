@@ -25,7 +25,8 @@
 import {useRouter} from 'vue-router'
 import {onBeforeMount, ref} from 'vue'
 import store from '../store'
-import {USER_COLLECTION} from '../firebase'
+import {USER_COLLECTION,} from '../firebase'
+
 
 export default {
   setup() {
@@ -34,9 +35,10 @@ export default {
     const userName = ref('')
     const profile_image_url = ref('')
     const email = ref('')
+    const introduce_myself = ref('')
 
     onBeforeMount(() => {
-        console.log('유저상태', store.state.user)              
+        // console.log('유저상태', store.state.user)              
     })
   
     const loginWithKakao = async () => {
@@ -109,6 +111,7 @@ export default {
             email: email.value,
             nickname: userName.value,
             profile_image_url: profile_image_url.value,
+            introduce_myself: '',
             social_type : '카카오',
             create_at: Date.now(),
           })

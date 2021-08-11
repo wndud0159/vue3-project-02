@@ -67,7 +67,7 @@
         </div>
         <div class="text-center text-xl mt-3">{{currentUser.nickname}}</div>
         <div class="text-center mt-2">
-          <button class=" text-primary hover:text-dark">프로필 수정</button>
+          <button @click="showProfileEditModal = true" class=" text-primary hover:text-dark">프로필 수정</button>
         </div>
 
         <div class="flex flex-col mt-10">
@@ -93,6 +93,7 @@
         </div>
       </div>
     </div>
+    <ProfileEditModal v-if="showProfileEditModal" @close-modal="showProfileEditModal = false"/>
   </div>  
 
 
@@ -100,19 +101,24 @@
 </template>
 
 <script>
+import ProfileEditModal from '../components/ProfileEditModal.vue'
 import {ref, onBeforeMount, computed} from 'vue'
 import router from '../router'
 import store from '../store'
+import {USER_COLLECTION} from '../firebase'
+
 
 export default {
 
     components: {
-    
+      ProfileEditModal,
     },
     setup() {
+        const showProfileEditModal = ref(false)
         const sideToggleMenu = ref(false)
         const routes = ref([])
         const currentUser = computed(() => store.state.user)
+        
 
 
         const logoutWithKakao = async () => {
@@ -129,17 +135,26 @@ export default {
         }
         
 
-        onBeforeMount(() => {
-            console.log(store.state.user)
+        onBeforeMount(()  =>  {
+            // console.log(store.state.user)
             //라우터에 등록한 라우트 가져오기
             // routes.value = router.options.routes
             // 라우터에 등록한 라우트중 ismenu가 true인 것만 가져오기
             routes.value = router.options.routes.filter((routes) => routes.meta.isMenu == true)
-            
-        })
+            setCurrentUser()
+          })
+
+          const setCurrentUser = async () => {
+                try { 
+                  const doc = await USER_COLLECTION.doc(currentUser.value.uid).get()
+                  store.commit('SET_USER', doc.data())
+                } catch (e) {
+                  console.log(`firebase users data error:${e}`)
+                }   
+          }
 
         return {
-            sideToggleMenu, router, routes, currentUser, logoutWithKakao
+            sideToggleMenu, router, routes, currentUser, logoutWithKakao, showProfileEditModal
         }
     }
 }
