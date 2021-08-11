@@ -7,11 +7,11 @@
       <div class=" relative">
         <!-- login -->
         <div class="flex items-center justify-center" >
-          <div class="absolute right-0 top-4 mt-0.5 ">
+          <div class="absolute right-0 top-4 ">
             <div v-if="currentUser" @click="sideToggleMenu = true" class="flex items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50">
               <img 
               :src="currentUser.profile_image_url" 
-              class="w-10 y-10 rounded-full">
+              class="w-12 h-12 rounded-full object-cover">
               <i class="fas fa-sort-down text-xl text-gray-400"></i>
             </div>
           </div>
