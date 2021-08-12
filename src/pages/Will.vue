@@ -1,9 +1,10 @@
 <template>
   <div class="flex flex-col h-screen overflow-y-scroll  bg-gray-200 items-center pt-28 lg:pt-40 pb-48 md:pb-10 px-3 md:px-20">
     <div>
-    <i class="fas fa-microphone text-4xl py-2 px-4 bg-white rounded-full text-gray-400 hover:text-black"></i>
-    <div @click="startSpeechRecognition">녹음하기</div>
-    <div @click="endSpeechRecognition">멈추기</div>
+    <input type=checkbox id="chk-hear-mic"><label for="chk-hear-mic">마이크 소리 듣기</label>
+    <button id="record">녹음</button>
+    <button id="stop">정지</button>
+    <div id="sound-clips"></div>
     </div>
     <div>
       <textarea name="" id="speech_result" cols="30" rows="10"></textarea>
@@ -16,46 +17,123 @@ import { onBeforeMount } from 'vue';
 
 export default {
 setup() {
-  let recognition = null;
-
-  onBeforeMount(() => {
-    recognition = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'ko';
-    recognition.maxAlternatives = 5;
-    if(!recognition) {
-      alert('음성기능을 지원하지 않는 브라우저 입니다.');
-    }
-  })
-  
-
-  const startSpeechRecognition = () => {
-    console.log('Start')
-    recognition.addEventListener("speechStart", ()=> {
-      console.log('speech start');
-    });
-    recognition.addEventListener('speechEnd', () => {
-      console.log('speech end');
-    });
-    recognition.addEventListener('result', (event) => {
-      console.log('speech result', event.results);
-      const text = event.results[0][0].transcript;
-      document.getElementById('speech_result').value = text;
-    });
-
-    recognition.start();
-
-  }
-
-  const endSpeechRecognition = () => {
-    recognition.stop();
-  }
+        
 
   return {
-    startSpeechRecognition, endSpeechRecognition
+    
   }
   // window.addEventListener('load', checkCompatibility)
 }
 }
+
+const record = document.getElementById("record")
+        const stop = document.getElementById("stop")
+        const soundClips = document.getElementById("sound-clips")
+        const chkHearMic = document.getElementById("chk-hear-mic")
+
+        const audioCtx = new(window.AudioContext || window.webkitAudioContext)() // 오디오 컨텍스트 정의
+
+        const analyser = audioCtx.createAnalyser()
+        //        const distortion = audioCtx.createWaveShaper()
+        //        const gainNode = audioCtx.createGain()
+        //        const biquadFilter = audioCtx.createBiquadFilter()
+
+        function makeSound(stream) {
+            const source = audioCtx.createMediaStreamSource(stream)
+
+            source.connect(analyser)
+            //            analyser.connect(distortion)
+            //            distortion.connect(biquadFilter)
+            //            biquadFilter.connect(gainNode)
+            //            gainNode.connect(audioCtx.destination) // connecting the different audio graph nodes together
+            analyser.connect(audioCtx.destination)
+
+        }
+
+        if (navigator.mediaDevices) {
+            console.log('getUserMedia supported.')
+
+            const constraints = {
+                audio: true
+            }
+            let chunks = []
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(stream => {
+
+                    const mediaRecorder = new MediaRecorder(stream)
+                    
+                    chkHearMic.onchange = e => {
+                        if(e.target.checked == true) {
+                            audioCtx.resume()
+                            makeSound(stream)
+                        } else {
+                            audioCtx.suspend()
+                        }
+                    }
+                    
+                    record.onclick = () => {
+                        mediaRecorder.start()
+                        console.log(mediaRecorder.state)
+                        console.log("recorder started")
+                        record.style.background = "red"
+                        record.style.color = "black"
+                    }
+
+                    stop.onclick = () => {
+                        mediaRecorder.stop()
+                        console.log(mediaRecorder.state)
+                        console.log("recorder stopped")
+                        record.style.background = ""
+                        record.style.color = ""
+                    }
+
+                    mediaRecorder.onstop = e => {
+                        console.log("data available after MediaRecorder.stop() called.")
+
+                        const clipName = prompt("오디오 파일 제목을 입력하세요.", new Date())
+
+                        const clipContainer = document.createElement('article')
+                        const clipLabel = document.createElement('p')
+                        const audio = document.createElement('audio')
+                        const deleteButton = document.createElement('button')
+
+                        clipContainer.classList.add('clip')
+                        audio.setAttribute('controls', '')
+                        deleteButton.innerHTML = "삭제"
+                        clipLabel.innerHTML = clipName
+
+                        clipContainer.appendChild(audio)
+                        clipContainer.appendChild(clipLabel)
+                        clipContainer.appendChild(deleteButton)
+                        soundClips.appendChild(clipContainer)
+
+                        audio.controls = true
+                        const blob = new Blob(chunks, {
+                            'type': 'audio/ogg codecs=opus'
+                        })
+                        chunks = []
+                        const audioURL = URL.createObjectURL(blob)
+                        audio.src = audioURL
+                        console.log("recorder stopped")
+
+                        deleteButton.onclick = e => {
+                            evtTgt = e.target
+                            evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode)
+                        }
+                    }
+
+                    mediaRecorder.ondataavailable = e => {
+                        chunks.push(e.data)
+                    }
+                })
+                .catch(err => {
+                    console.log('The following error occurred: ' + err)
+                })
+        }
+
+
+
 </script>
 
 <style>
