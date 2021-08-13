@@ -30,10 +30,6 @@ export default class RecorderService {
         }
     }
 
-    checkRecording() {
-        console.log(this.recording)
-    }
-
     createWorker(fn) {
         var js = fn
             .toString()
