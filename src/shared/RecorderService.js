@@ -29,7 +29,7 @@ export default class RecorderService {
             enableEchoCancellation: true
         }
     }
-
+    // test
     createWorker(fn) {
         var js = fn
             .toString()

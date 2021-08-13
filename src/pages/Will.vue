@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-screen overflow-y-scroll  bg-gray-200 items-center pt-28 lg:pt-40 pb-48 md:pb-10 px-3 md:px-20">
-    <div class=" space-x-2">
+    <div class=" space-x-3">
     <button  @click="startRecording" :disabled="recordingInProgress">Start Recording</button>
     <button @click="stopRecording" :disabled="!recordingInProgress">Stop Recording</button>
     <button @click="checkRecording">valueCheck</button>
