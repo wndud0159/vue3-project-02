@@ -111,6 +111,7 @@ export default {
             email: email.value,
             nickname: userName.value,
             profile_image_url: profile_image_url.value,
+            record_url: '',
             introduce_myself: '',
             social_type : '카카오',
             create_at: Date.now(),
