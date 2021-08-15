@@ -32,10 +32,21 @@
         <div class=" hidden lg:inline-block w-4/5 text-gray-500 text-lg">
           <div class="flex">
 
-          <router-link :to='route.path' 
-          v-for="route in routes" :key="route" 
-          :class="`${router.currentRoute.value.name == route.name ? 'text-primary' : ''} flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
-            <span>{{route.title}}</span>
+          <router-link to='/' 
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+            <span>홈</span>
+          </router-link>
+          <a @click="onIbackIntroduce"
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+            <span>아이백이란?</span>
+          </a>
+          <router-link to='/' 
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+            <span>사업제휴</span>
+          </router-link>
+          <router-link to='/' 
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+            <span>고객센터</span>
           </router-link>
           </div>
         </div>
@@ -48,18 +59,32 @@
     <!--bottom mobile menu -->
     <div class="  fixed border-t-4 lg:border-0 border-gray-100 bottom-0 w-full bg-white text-gray-500 z-30">
       <div class="flex items-center justify-center text-center text-sm lg:hidden">
-        <router-link :to='route.path' 
-        v-for="route in routes" :key="route"
-        :class="`${router.currentRoute.value.name == route.name ? 'text-primary' : ''} w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
-          <i :class="route.icon"></i>
-          <span class="text-base">{{route.title}}</span>
+        <router-link to='/' 
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-base">홈</span>
+        </router-link>
+        <a  @click="onIbackIntroduce"
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+          <i class="fas fa-book text-xl"></i>
+          <span class="text-base">아이백이란?</span>
+        </a>  
+        <router-link to='/' 
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+          <i class="fas fa-envelope text-xl"></i>
+          <span class="text-base">사업제휴</span>
         </router-link>  
+        <router-link to='/' 
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+          <i class="fas fa-chalkboard text-xl"></i>
+          <span class="text-base">고객센터</span>
+        </router-link>    
       </div>
     </div>
 
     <!-- side toggle menu -->
     <div :class="`${sideToggleMenu ? 'md:w-2/5 w-3/5' : 'w-0'} fixed right-0 bg-white  h-full  z-50 transition-all`">
-      <i @click="sideToggleMenu = false" class="fas fa-times px-4 py-3 hover:bg-gray-100 rounded-full text-gray-400"></i>
+      <i @click="sideToggleMenu = false" class="fas fa-times px-4 py-3 hover:bg-gray-100 rounded-full text-primary"></i>
       <div class=" flex flex-col">
         <div class="flex justify-center">
           <img v-if="sideToggleMenu" class="w-24 h-24 border-4 border-white rounded-full "
@@ -120,6 +145,9 @@ export default {
         const currentUser = computed(() => store.state.user)
         
 
+        const onIbackIntroduce = () => {
+          window.open('https://bigwavvv.notion.site/Bigwavv-3faaf9ea2d694c209e4f4ccfe0922698')
+        } 
 
         const logoutWithKakao = async () => {
           if (!Kakao.Auth.getAccessToken()) {
@@ -154,7 +182,7 @@ export default {
           // }
 
         return {
-            sideToggleMenu, router, routes, currentUser, logoutWithKakao, showProfileEditModal
+            sideToggleMenu, router, routes, currentUser, logoutWithKakao, showProfileEditModal, onIbackIntroduce
         }
     }
 }

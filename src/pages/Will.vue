@@ -23,7 +23,7 @@
     
     
     
-    <div class="text-xs md:text-lg flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-start  border-b border-gray-200 ">
+    <div class="text-xs md:text-lg flex cursor-pointer bg-white w-full py-4 px-6 shadow-md items-center justify-start  border-b border-gray-200 ">
         <div v-if="!recordings.length" class="flex items-center">
         <i @click="startRecording" v-if="!recordingInProgress" class="fas hover:opacity-70 fa-microphone rounded-full text-4xl py-2 px-4 bg-gray-200"></i>
         <div v-if="!recordingInProgress" class=" ml-2">[ 마이크를 눌러주세요. ]</div>
@@ -35,13 +35,13 @@
         <div  class=" ml-2 flex">[ 녹음불가 /<div class="text-primary "> 저장 혹은 취소 후 마이크 이용가능</div> ]</div>
         </div>
     </div>
-    <div class= "pt-1 w-full text-xs md:text-base h-screen shadow-md bg-white px-6 transition-all mb-36 md:mb-0 "> 
-      <div class="relative flex flex-col border-b py-5  border-gray-200">
+    <div class= "pt-1 w-full text-xs md:text-base shadow-md bg-white px-6 transition-all pb-40 md:pb-0  "> 
+      <div class="relative flex flex-col py-5  border-gray-200">
                 <div class="space-y-2 ">
                     <div class="md:flex flex-none">
                         <div class="md:w-1/2 w-full">
                             <div class="mb-2">
-                                <textarea readonly class=" md:h-72 h-40 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
+                                <textarea readonly class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
                                  ></textarea>
                             </div>
                             <div  class="space-y-3" v-if="recordings.length > 0">

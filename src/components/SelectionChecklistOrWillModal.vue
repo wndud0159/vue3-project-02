@@ -28,7 +28,7 @@
 
         <!-- 취소 버튼 -->
         <div class=" absolute right-0 top-0 z-40 lg:right-5 lg:top-1">
-            <i class="fas fa-times text-lighter py-3 px-4 hover:bg-gray-500 rounded-full" @click="$emit('close-modal')"></i>
+            <i class="fas fa-times text-light py-3 px-4 hover:bg-gray-500 rounded-full" @click="$emit('close-modal')"></i>
         </div>
     </div>
 
