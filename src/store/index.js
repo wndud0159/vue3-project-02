@@ -6,7 +6,7 @@ const store = createStore({
         return {
             user: null,
         }
-    },
+    },//s
     mutations: {
         SET_USER: (state, user) => {
             state.user = user

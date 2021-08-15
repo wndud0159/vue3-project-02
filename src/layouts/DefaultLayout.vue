@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-
+<!-- 1 -->
     <!-- main section -->
         <router-view></router-view>
 

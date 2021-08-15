@@ -12,7 +12,7 @@ import store from '../store'
 
 
 const routes = [
-    //메뉴
+    //메뉴d
     { path: '/', name: 'home', component: Home, title: '홈', icon: 'fas fa-home text-xl', meta: { isMenu: true, requireAuth: true} },
     // { path: 'https://bigwavvv.notion.site/Bigwavv-3faaf9ea2d694c209e4f4ccfe0922698', name: 'ibackIntrodues', title: '아이백이란?', icon: 'fas fa-book text-xl', meta: { isMenu: true, requireAuth: true} },
     { path: '/', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },

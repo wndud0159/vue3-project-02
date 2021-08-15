@@ -6,7 +6,7 @@
         <img id="image-height" class=" h-auto w-full object-cover"
         src="/flower01.png">
     </div>
-
+<!-- 1 -->
     <!-- main text -->
     <div class="fixed  lg:bottom-48 sm:bottom-60  bottom-28 flex flex-col items-center w-full">
         <div class="mb-5 lg:text-4xl sm:text-3xl text-2xl">

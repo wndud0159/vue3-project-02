@@ -342,7 +342,7 @@ export default class RecorderService {
             this.inputStreamNode.disconnect()
             this.inputStreamNode = null
         }
-// dd/ssss
+// dd/sssss
         if (this.config.stopTracksAndCloseCtxWhenFinished) {
             // This removes the red bar in iOS/Safari
             this.micAudioStream.getTracks().forEach((track) => track.stop())

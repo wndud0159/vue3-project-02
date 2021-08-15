@@ -3,7 +3,7 @@
 
     </div>
 
-
+<!-- ss -->
     <div @click.stop class="fixed top-0  mt-24 transition-all w-full z-30  h-screen  overflow-y-auto ">
             
             <div class=" py-5 px-5 pt-10 lg:pt-24 lg:flex flex-row w-full lg:space-x-5  mb-72 mt-3 ">
