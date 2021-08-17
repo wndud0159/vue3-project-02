@@ -3,7 +3,7 @@
     <div class="pt-20">
         <!-- <img id="image-height" class=" h-auto w-full object-cover"
         src="http://picsum.photos/id/119/2000/1000"> -->
-        <img id="image-height" class=" h-auto w-full object-cover"
+        <img id="image-height" class=" h-auto w-full object-cover opacity-50"
         src="/flower01.png">
     </div>
 <!-- 1 -->

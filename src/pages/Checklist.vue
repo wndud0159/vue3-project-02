@@ -15,7 +15,7 @@
                 <div class="flex ml-5">
                     <div class=" space-y-2 md:space-y-1">
                         <div class="-mb-1">건강</div>
-                        <div>귀하를 대신하여 말할 수 있는 케어 선호 사항 등</div>
+                        <div>건강에 대한 결정권</div>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                             <div class="">
                                 <div>
                                     <div class="mb-2">의사 소통이 불가능한 경우 의료 결정을 대신하여 누구를 신뢰합니까?</div>
-                                    <div class="mb-2">귀하의 의료 대리인 또는 대리인 및/또는 귀하가 관련될 것으로 신뢰하는 다른 사람의 이름을 지정하십시오.</div>
+                                    <div class="mb-2">귀하의 의료 대리인 신상 정보를 공유하세요.</div>
                                 </div>
                                 <span v-if="!heartResponse1 && !heartDetailLists1" class="text-gray-300">응답하지 않음</span>
                                 <span v-if="heartResponse1" >{{heartBox1}}</span>
@@ -76,8 +76,7 @@
                         <div class="md:w-1/2 w-full">
                             <div class="">
                                 <div>
-                                    <div class="mb-2">다른 사람들이 귀하를 대신하여 의료 결정을 내려야 한다면 무엇을 알아야 합니까?</div>
-                                    <div class="mb-2">삶을 가치 있게 만드는 것과 두려워하는 것이 무엇인지 생각해 보십시오.</div>
+                                    <div class="mb-2">의료 대리인 혹 의료진이 귀하를 대신하여 의료 결정을 내려야 한다면 꼭 알아야 할 정보가 무엇입니까?</div>
                                 </div>
                                 <span v-if="!heartResponse2 && !heartDetailLists2" class="text-gray-300">응답하지 않음</span>
                                 <span v-if="heartResponse2" >{{heartBox2}}</span>
@@ -106,10 +105,8 @@
                         <div v-if="heartDetailLists2" class=" mt-4 md:mt-0 md:w-1/2 w-full flex flex-col h-full md:ml-6 py-3 px-6 bg-green-100 opacity-80 border-l-8  border-green-900 border-opacity-30">
                             <div>예</div>
                             <ul class=" ml-5 list-disc">
-                                <li>아프고 싶지 않고, 사랑하는 사람과 소통할 수 없다면 인생은 살 가치가 없다고 생각합니다.</li>
-                                <li>당신이 생각하는 최선의 결정을 내리고 당신이 선택한 것에 대해 결코 죄책감을 느끼지 마십시오. 나는 사랑하는 사람들에게 짐을 지우고 싶지 않습니다.</li>
-                                <li>내가 가능한 한 오래 살 수 있도록 무슨 일이든 하십시오.</li>
-                                <li>나에게 좋은 삶의 질은 좋은 음식을 먹고, 밖에 나가서, 재즈를 듣는 것입니다.</li>
+                                <li>당뇨병 투병 10년 째, 연명치료금지 동의자</li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -123,7 +120,7 @@
                         <div class="md:w-1/2 w-full">
                             <div class="">
                                 <div>
-                                    <div class="mb-2">어떤 의료 문서가 있습니까? </div>
+                                    <div class="mb-2">중요한 의료 문서나 정보가 있다면 기입 및 업로드 하세요.</div>
                                 </div>
                                 <span v-if="!heartResponse3 && !heartDetailLists3" class="text-gray-300">응답하지 않음</span>
                                 <span class="mr-1" v-if="heartResponse3" >{{heartBox3}}</span>
@@ -160,8 +157,7 @@
                         <div v-if="heartDetailLists3" class=" mt-4 md:mt-0 md:w-1/2 w-full flex flex-col h-full md:ml-6 py-3 px-6 bg-green-100 opacity-80 border-l-8  border-green-900 border-opacity-30">
                             <div>예</div>
                             <ul class=" ml-5 list-disc">
-                                <li>내 사전 지시서 사본은 내 PCP Dr. Long에게 있고 디지털 사본은 내 케이크 프로필에 저장되어 있습니다.</li>
-                                <li>서명한 의료 문서는 모두 제 홈 오피스의 검은색 서류 캐비닛에 있습니다.</li>
+                                <li>연명치료금지 동의안</li>
                             </ul>
                         </div>
                     </div>
@@ -207,10 +203,10 @@
                         </div>
 
                         <div v-if="heartDetailLists4" class=" mt-4 md:mt-0 md:w-1/2 w-full flex flex-col h-full md:ml-6 py-3 px-6 bg-green-100 opacity-80 border-l-8  border-green-900 border-opacity-30">
-                            <div>예</div>
+                            <div></div>
                             <ul class=" ml-5 list-disc">
-                                <li>내 사전 지시서 사본은 내 PCP Dr. Long에게 있고 디지털 사본은 내 케이크 프로필에 저장되어 있습니다.</li>
-                                <li>서명한 의료 문서는 모두 제 홈 오피스의 검은색 서류 캐비닛에 있습니다.</li>
+                                <li>국립장기조직혈액관리원 또는 장기이식등록기관 을 통하여 기증 안내를 받으실 수 있습니다. 뇌사 또는 사후 장기기증 희망등록 을 하게 되면 등록증이 발급 되고, 실제 기증시점이 오면 가족의 동의가 있어야 기증이 이루어지기 때문에 기증희망 사실을 가족에게 알려 주셔야 합니다. 자세한 정보를 찾아보세요</li>
+                                <li><a class=" underline text-blue-500" href="https://www.konos.go.kr/konosis/sub3/sub03_01.jsp">https://www.konos.go.kr/konosis/sub3/sub03_01.jsp</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1037,15 +1033,20 @@
 </template>
 
 <script>
-import {ref, onBeforeMount} from 'vue'
+import {ref, onBeforeMount, computed} from 'vue'
+import store from '../store'
+import {useRouter} from 'vue-router'
 export default {
     
     setup() {
-        // onBeforeMount(() => {
-        //    for (let index = 0; index < hearts.value.length; index++) {
-        //        console.log(hearts.value[index])
+        const router = useRouter()
+        const currentUser = computed(() => store.state.user)
+        onBeforeMount(() => {
+            if(currentUser.value === null) {
+                router.push('/login')
+            }
+        })
                
-        //    }
         //  hearts.value.forEach(element => {
         //        console.log(element.length)
         //    });

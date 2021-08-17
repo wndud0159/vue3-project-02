@@ -83,7 +83,7 @@
     </div>
 
     <!-- side toggle menu -->
-    <div :class="`${sideToggleMenu ? 'md:w-2/5 w-3/5' : 'w-0'} fixed right-0 bg-white  h-full  z-50 transition-all`">
+    <div v-if="currentUser" :class="`${sideToggleMenu ? 'md:w-2/5 w-3/5' : 'w-0'} fixed right-0 bg-white  h-full  z-50 transition-all`">
       <i @click="sideToggleMenu = false" class="fas fa-times px-4 py-3 hover:bg-gray-100 rounded-full text-primary"></i>
       <div class=" flex flex-col">
         <div class="flex justify-center">
@@ -169,17 +169,17 @@ export default {
             // routes.value = router.options.routes
             // 라우터에 등록한 라우트중 ismenu가 true인 것만 가져오기
             routes.value = router.options.routes.filter((routes) => routes.meta.isMenu == true)
-            // setCurrentUser()
+            setCurrentUser()
           })
 
-          // const setCurrentUser = async () => {
-          //       try { 
-          //         const doc = await USER_COLLECTION.doc(currentUser.value.uid).get()
-          //         store.commit('SET_USER', doc.data())
-          //       } catch (e) {
-          //         console.log(`firebase users data error:${e}`)
-          //       }   
-          // }
+          const setCurrentUser = async () => {
+                try { 
+                  const doc = await USER_COLLECTION.doc(currentUser.value.uid).get()
+                  store.commit('SET_USER', doc.data())
+                } catch (e) {
+                  console.log(`firebase users data error:${e}`)
+                }   
+          }
 
         return {
             sideToggleMenu, router, routes, currentUser, logoutWithKakao, showProfileEditModal, onIbackIntroduce

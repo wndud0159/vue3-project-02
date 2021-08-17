@@ -11,7 +11,7 @@
     <div v-if="currentUser.record_url" class= " w-full text-xs md:text-base shadow-md bg-white px-6 transition-all mb-5"> 
       <div class="relative flex md:flex-row flex-col border-b py-5  border-gray-200">
         <div class="md:w-1/2 w-full mb-3 md:mb-0">
-          <audio class="w-full md:pr-4" :src="currentUser.record_url" controls="true" type="audio/webm;codecs=opus"></audio>
+          <audio class="w-full md:pr-4" :src="currentUser.record_url" controls="true"></audio>
         </div>
         <div class="md:w-1/2 w-full md:pl-2">
           <button @click="downloadSaveRecording"  class="bg-light rounded-md px-10 py-3 mr-2 hover:bg-dark">다운로드</button>
@@ -91,10 +91,20 @@ import RecorderService from '../shared/RecorderService'
 import {onBeforeMount, ref, computed} from 'vue'
 import store from '../store'
 import {USER_COLLECTION, storage} from '../firebase'
+import {useRouter} from 'vue-router'
 
 
 export default {
   setup() {
+    onBeforeMount(() => {
+      const router = useRouter()
+        const currentUser = computed(() => store.state.user)
+            if(currentUser.value === null) {
+                router.push('/login')
+            }
+    })
+
+
     const checklist1 = ref(true)
     const checklist2 = ref(false)
     const checklist3 = ref(false)

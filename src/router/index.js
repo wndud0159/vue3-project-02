@@ -35,16 +35,16 @@ const router = createRouter({
 })
 
 //navigation guard
-router.beforeEach((to, from, next) => {
-    const currentUser = store.state.user
-    // console.log(to.matched)
-    const requireAuth = to.matched.some((record) => record.meta.requireAuth)
-    // console.log(to)
-    // not authenticated
-    if(requireAuth && !currentUser) next('/login')
-    // authenticated
-    else next()
-})
+// router.beforeEach((to, from, next) => {
+//     const currentUser = store.state.user
+//     // console.log(to.matched)
+//     const requireAuth = to.matched.some((record) => record.meta.requireAuth)
+//     // console.log(to)
+//     // not authenticated
+//     if(requireAuth && !currentUser) next('/login')
+//     // authenticated
+//     else next()
+// })
 
 
 
