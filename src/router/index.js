@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
 import ServiceCenter from '../pages/ServiceCenter.vue'
-import IbackIntrodues from '../pages/IbackIntrodues.vue'
 import BusinessAlliance from '../pages/BusinessAlliance.vue'
 import Checklist from '../pages/Checklist.vue'
 import Will from '../pages/Will.vue'

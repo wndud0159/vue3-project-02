@@ -200,6 +200,7 @@ export default {
       this.recordingInProgress = false
     },
     async saveRecording()  {
+      // this.deleteSaveRecording();
       const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
         type: this.recordings[0].mimeType
       }));

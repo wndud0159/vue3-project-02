@@ -1,5 +1,5 @@
 <template>
-    <div @click="$emit('close-modal')" class="fixed z-10  inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
+    <div @click="$emit('close-modal')" class="fixed z-10  inset-0 bg-gray-500 opacity-90 transition-opacity" aria-hidden="true">
 
     </div>
 
@@ -8,17 +8,17 @@
             
             <div class=" py-5 px-5 pt-10 lg:pt-24 lg:flex flex-row w-full lg:space-x-5  mb-72 mt-3 ">
 
-                <router-link to="/checklist" class=" sm:bg-checklist-pc px-3 rounded-2xl bg-checklist w-full lg:w-1/2 mb-5 lg:mb-0 flex-col flex items-center space-y-3 pt-10 pb-10 sm:pb-14 sm:pt-14 hover:opacity-70">
-                    <div class=" font-semibold text-4xl pb-5 sm:text-4xl">체크리스트 작성</div>
-                    <div class=" text-lg  flex flex-col items-center space-y-1 space-y-4">
+                <router-link to="/checklist" class=" font-semibold sm:bg-checklist-pc px-3 rounded-2xl bg-checklist w-full lg:w-1/2 mb-5 lg:mb-0 flex-col flex items-center space-y-3 pt-10 pb-10 sm:pb-14 sm:pt-14">
+                    <div class=" font-semibold text-4xl pb-5 sm:text-4xl">웰다잉 준비 메뉴얼 리스트</div>
+                    <div class="  text-lg  flex flex-col items-center space-y-1 space-y-1">
                         <div>어떻게 삶을 정리하고 싶으신가요?</div>
                         <div>자산관리, 버킷리스트, 소셜미디어 관리 등</div>
                         <div>내 인생의 모든 정보와 기록을 한 번에 정리할 수 있어요</div>
                     </div>
                 </router-link>
-                <router-link to="/will" class=" sm:bg-will-pc px-3 rounded-2xl bg-will w-full lg:w-1/2 flex-col flex items-center space-y-3 pt-10 pb-10 sm:pb-14 sm:pt-14 hover:opacity-70">
+                <router-link to="/will" class=" font-semibold sm:bg-will-pc px-3 rounded-2xl bg-will w-full lg:w-1/2 flex-col flex items-center space-y-3 pt-10 pb-10 sm:pb-14 sm:pt-14 ">
                     <div class=" font-semibold text-4xl pb-5 sm:text-4xl">유언장 작성</div>
-                    <div class=" text-lg  flex flex-col items-center space-y-1 space-y-4">
+                    <div class=" text-lg  flex flex-col items-center space-y-1 space-y-1">
                         <div>어떻게 삶을 정리하고 싶으신가요?</div>
                         <div>자산관리, 버킷리스트, 소셜미디어 관리 등</div>
                         <div>내 인생의 모든 정보와 기록을 한 번에 정리할 수 있어요</div>

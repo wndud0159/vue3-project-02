@@ -18,10 +18,10 @@ module.exports = {
         kakao: '#FFEB34'
       },
       backgroundImage: theme => ({
-        'checklist': "url('http://picsum.photos/id/430/500/350')",
-        'will': "url('http://picsum.photos/id/798/500/350')",
-        'checklist-pc': "url('http://picsum.photos/id/430/800/350')",
-        'will-pc': "url('http://picsum.photos/id/798/800/350')",
+        'checklist': "url('/checklist02.png')",
+        'will': "url('/will01.png')",
+        'checklist-pc': "url('/checklist02.png')",
+        'will-pc': "url('/will01.png')",
       })
     },
   },
