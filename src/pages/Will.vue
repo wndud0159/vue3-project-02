@@ -92,6 +92,7 @@ import {onBeforeMount, ref, computed} from 'vue'
 import store from '../store'
 import {USER_COLLECTION, storage} from '../firebase'
 import {useRouter} from 'vue-router'
+import axios from 'axios'
 
 
 export default {
@@ -198,12 +199,55 @@ export default {
           alert('Exception while start recording: ' + error.message)
         })
     },
-    stopRecording () {
-      this.recorderSrvc.stopRecording()
+    async stopRecording () {
+      await this.recorderSrvc.stopRecording()
       this.recordingInProgress = false
+      // console.log(this.recordings[0].blobUrl)
+      // const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+      //   type: this.recordings[0].mimeType
+      // }));
+      // await axios({
+      //   method: 'post',
+      //   url: 'https://naveropenapi.apigw.ntruss.com/recog/v1/stt',
+      //   data: {
+      //     sound
+      //   },
+      //   headers: {
+      //     'X-NCP-APIGW-API-KEY-ID': 'rv83noxglp',
+      //     'X-NCP-APIGW-API-KEY': 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn',
+      //     'Content-Type': 'application/octet-stream'
+      //   }
+      // }).then((response) => {
+      //   console.log('성공 : ', response)
+      // }).catch((error) => {
+      //   console.log('CSA error : ', error.message)
+      // }) 
+
+      
     },
-    onNewRecording (evt) {
+    async onNewRecording (evt) {
       this.recordings.push(evt.detail.recording)
+      const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+        type: this.recordings[0].mimeType
+      }));
+      await axios({
+        method: 'post',
+        url: 'https://naveropenapi.apigw.ntruss.com/recog/v1/stt',
+        data: {
+          sound
+        },
+        headers: {
+          'Content-Type': 'application/octet-stream',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'X-NCP-APIGW-API-KEY-ID': 'rv83noxglp',
+          'X-NCP-APIGW-API-KEY': 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn',
+        }
+      }).then((response) => {
+        console.log('성공 : ', response)
+      }).catch((error) => {
+        console.log('CSA error : ', error.message)
+      }) 
     },
     deleteRecording() {
       this.recordings = []
