@@ -232,14 +232,12 @@ export default {
       }));
       await axios({
         method: 'post',
-        url: 'https://naveropenapi.apigw.ntruss.com/recog/v1/stt',
+        url: '/api',
         data: {
-          sound
+          data : sound
         },
         headers: {
           'Content-Type': 'application/octet-stream',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': 'true',
           'X-NCP-APIGW-API-KEY-ID': 'rv83noxglp',
           'X-NCP-APIGW-API-KEY': 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn',
         }
@@ -274,15 +272,23 @@ export default {
 
     async downloadSaveRecording() {
       // Create a reference to the file we want to download
-        const starsRef = await storage.refFromURL(this.currentUser.record_url)
-        console.log(starsRef)
-        // Get the download URL
+        const starsRef = await storage.ref(`record/${this.currentUser.uid}/record`)
+        //Get the download URL
         starsRef.getDownloadURL().then(function(url) {
+          
           // This can be downloaded directly:
           var xhr = new XMLHttpRequest();
           xhr.responseType = 'blob';
-          xhr.onload = function(event) {
-            var blob = xhr.response;
+          xhr.onload = function() {
+            var a = document.createElement('a');
+            a.href = window.URL.createObjectURL(xhr.response);
+            const fileName = new Date()
+            a.download = fileName; 
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            // delete a
+            // var blob = xhr.response;
           };
           xhr.open('GET', url);
           xhr.send();
@@ -293,7 +299,7 @@ export default {
           // https://firebase.google.com/docs/storage/web/handle-errors
           switch (error.code) {
             case 'storage/object-not-found':
-              // File doesn't exist
+              // File doesn't exist`
               break;
 
             case 'storage/unauthorized':
@@ -303,9 +309,6 @@ export default {
             case 'storage/canceled':
               // User canceled the upload
               break;
-
-  
-
             case 'storage/unknown':
               // Unknown error occurred, inspect the server response
               break;
