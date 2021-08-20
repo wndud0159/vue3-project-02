@@ -230,21 +230,23 @@ export default {
       const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
         type: this.recordings[0].mimeType
       }));
-      await axios({
-        method: 'post',
-        url: '/api',
-        data: {
-          data : sound
-        },
+      const data = window.URL.createObjectURL(sound)
+      console.log('data : ',data)
+
+      const language = 'Kor'
+      const clientId = 'rv83noxglp';
+      const clientSecret = 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn';
+
+      await axios.post(`/api/recog/v1/stt?lang=${language}`, data,{
         headers: {
           'Content-Type': 'application/octet-stream',
-          'X-NCP-APIGW-API-KEY-ID': 'rv83noxglp',
-          'X-NCP-APIGW-API-KEY': 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn',
-        }
+          'X-NCP-APIGW-API-KEY-ID': clientId,
+          'X-NCP-APIGW-API-KEY': clientSecret,
+        },
       }).then((response) => {
         console.log('성공 : ', response)
       }).catch((error) => {
-        console.log('CSA error : ', error.message)
+        console.log('CSA error : ', error)
       }) 
     },
     deleteRecording() {
