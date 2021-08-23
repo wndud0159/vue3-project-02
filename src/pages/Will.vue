@@ -202,52 +202,46 @@ export default {
     async stopRecording () {
       await this.recorderSrvc.stopRecording()
       this.recordingInProgress = false
-      // console.log(this.recordings[0].blobUrl)
-      // const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
-      //   type: this.recordings[0].mimeType
-      // }));
-      // await axios({
-      //   method: 'post',
-      //   url: 'https://naveropenapi.apigw.ntruss.com/recog/v1/stt',
-      //   data: {
-      //     sound
-      //   },
-      //   headers: {
-      //     'X-NCP-APIGW-API-KEY-ID': 'rv83noxglp',
-      //     'X-NCP-APIGW-API-KEY': 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn',
-      //     'Content-Type': 'application/octet-stream'
-      //   }
-      // }).then((response) => {
-      //   console.log('성공 : ', response)
-      // }).catch((error) => {
-      //   console.log('CSA error : ', error.message)
-      // }) 
-
-      
     },
     async onNewRecording (evt) {
       this.recordings.push(evt.detail.recording)
-      const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+
+      // const language = 'Kor'
+      // const clientId = 'rv83noxglp';
+      // const clientSecret = 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn';
+
+      // await axios.post(`/api/recog/v1/stt?lang=${language}`, await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+      //   type: this.recordings[0].mimeType
+      // })),{
+      //   headers: {
+      //     'Content-Type': 'application/octet-stream',
+      //     'X-NCP-APIGW-API-KEY-ID': clientId,
+      //     'X-NCP-APIGW-API-KEY': clientSecret,
+      //   },
+      // }).then((response) => {
+      //   console.log('성공 : ', response)
+      // }).catch((error) => {
+      //   console.log('CSA error : ', error)
+      // }) 
+      const sound = this.recordings[0].blobUrl;
+      const file = {
+        path: this.recordings[0].blobUrl,
+        name: 'audio',
+        type: this.recordings[0].mimeType,
+      }
+      await axios.post('https://us-central1-iback-project.cloudfunctions.net/apiSTT3', await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
         type: this.recordings[0].mimeType
-      }));
-      const data = window.URL.createObjectURL(sound)
-      console.log('data : ',data)
-
-      const language = 'Kor'
-      const clientId = 'rv83noxglp';
-      const clientSecret = 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn';
-
-      await axios.post(`/api/recog/v1/stt?lang=${language}`, data,{
+      })),{
         headers: {
-          'Content-Type': 'application/octet-stream',
-          'X-NCP-APIGW-API-KEY-ID': clientId,
-          'X-NCP-APIGW-API-KEY': clientSecret,
+          'Content-Type': 'application/octet-stream'
         },
       }).then((response) => {
-        console.log('성공 : ', response)
+        console.log(response)
       }).catch((error) => {
-        console.log('CSA error : ', error)
-      }) 
+        console.log(error.message)
+      })
+
+      
     },
     deleteRecording() {
       this.recordings = []

@@ -9,7 +9,7 @@ export default defineConfig({
       // '/foo': 'http://localhost:4567',
       // // with options
       '/api': {
-        target: 'https://naveropenapi.apigw.ntruss.com',
+        target: 'https://us-central1-iback-project.cloudfunctions.net',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
