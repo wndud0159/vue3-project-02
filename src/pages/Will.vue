@@ -41,7 +41,7 @@
                     <div class="md:flex flex-none">
                         <div class="md:w-1/2 w-full">
                             <div class="mb-2">
-                                <textarea readonly class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
+                                <textarea placeholder="음성을 녹음하면 텍스트로 변환됩니다." readonly v-model="speechToText" class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
                                  ></textarea>
                             </div>
                             <div  class="space-y-3" v-if="recordings.length > 0">
@@ -158,6 +158,7 @@ export default {
   },
   data () {
     return {
+      speechToText: '',
       currentUser: [],
       saveRecord : [],
       recordSate : false,
@@ -206,30 +207,7 @@ export default {
     async onNewRecording (evt) {
       this.recordings.push(evt.detail.recording)
 
-      // const language = 'Kor'
-      // const clientId = 'rv83noxglp';
-      // const clientSecret = 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn';
-
-      // await axios.post(`/api/recog/v1/stt?lang=${language}`, await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
-      //   type: this.recordings[0].mimeType
-      // })),{
-      //   headers: {
-      //     'Content-Type': 'application/octet-stream',
-      //     'X-NCP-APIGW-API-KEY-ID': clientId,
-      //     'X-NCP-APIGW-API-KEY': clientSecret,
-      //   },
-      // }).then((response) => {
-      //   console.log('성공 : ', response)
-      // }).catch((error) => {
-      //   console.log('CSA error : ', error)
-      // }) 
-      const sound = this.recordings[0].blobUrl;
-      const file = {
-        path: this.recordings[0].blobUrl,
-        name: 'audio',
-        type: this.recordings[0].mimeType,
-      }
-      await axios.post('https://us-central1-iback-project.cloudfunctions.net/apiSTT3', await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+      await axios.post('https://us-central1-iback-project.cloudfunctions.net/apiSpeechToText', await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
         type: this.recordings[0].mimeType
       })),{
         headers: {
@@ -237,6 +215,7 @@ export default {
         },
       }).then((response) => {
         console.log(response)
+        this.speechToText = response.data.text;
       }).catch((error) => {
         console.log(error.message)
       })
@@ -245,6 +224,7 @@ export default {
     },
     deleteRecording() {
       this.recordings = []
+      this.speechToText = ''
       this.recordingInProgress = false
     },
     async saveRecording()  {
@@ -260,6 +240,7 @@ export default {
         })
         store.commit("SET_RECORD_URL", this.saveRecord)
         this.recordings = []
+        this.speechToText = ''
         this.recordingInProgress = false
       } catch (error) {
         console.log('uproad error : ', error)

@@ -8,7 +8,7 @@ const clientSecret = 'NlFJB8UMtilrJ1G05TD9PBxENOXQMueV6r1Pizwn';
 const language = 'Kor';
 
 
-exports.apiSTT3 = functions.https.onRequest((req, res) => {
+exports.apiSpeechToText = functions.https.onRequest((req, res) => {
     return cors(req, res, async ()  => {
         try {
             const response = await axios.post(`https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=${language}`, req.body, {
