@@ -8,6 +8,8 @@ import Checklist from '../pages/Checklist.vue'
 import Will from '../pages/Will.vue'
 import store from '../store'
 
+import Inheritance from '../pages/Inheritance.vue'
+
 
 
 const routes = [
@@ -17,10 +19,12 @@ const routes = [
     { path: '/', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },
     { path: '/', name: 'seviceCenter', component: ServiceCenter, title: '고객센터', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, requireAuth: true} },
     
-    
     { path: '/checklist', name: 'checklist', component: Checklist, title: '체크리스트작성', meta: { isMenu: false, requireAuth: true} },
     { path: '/will', name: 'will', component: Will, title: '유언장작성', meta: { isMenu: false, requireAuth: true} },
     
+    
+    { path: '/inheritance', name: 'inheritance', component: Inheritance, meta: {isMenu: true, requireAuth: true}},
+
 
     
 

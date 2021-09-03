@@ -106,7 +106,7 @@
         </div>
 
         <!-- pets -->
-        <div v-for="list in 1" :key="list" class="w-full mb-5">
+        <router-link to="/inheritance" v-for="list in 1" :key="list" class="w-full mb-5">
         <div @click="showpetsLists" class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
             <div class="flex items-center">
                 <div class=" relative">
@@ -122,7 +122,7 @@
             </div>
             <i :class="`fas fa-chevron-down ${petsLists ? 'animate-bounce ' : ''}`"></i>
         </div>
-        </div>
+        </router-link>
     
 
 
