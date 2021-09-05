@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-screen overflow-y-scroll   items-start pt-40 pb-48 md:pb-10 px-3 xl:px-80">
-      <!-- title -->
+  <div class="flex flex-col h-screen overflow-y-scroll   items-start pt-28 pb-48 md:pb-10 px-3 xl:px-80">
+      <!-- title --> 
       <div class=" text-2xl font-semibold mb-2">유언장 작성 및 상속 설계</div>
       <!-- subtitle -->
       <div class=" text-sm text-gray-400 mb-10">자산을 입력하고 상속을 설계해 보세요</div>
@@ -137,7 +137,7 @@
         <!-- step4 -->
         <div v-if="step4" class="w-full">
            <div class="flex flex-col bg-gray-100 w-full px-5 rounded-xl mb-20">
-            <div @click="test()" class="py-5">클릭</div>
+            <div  class="py-5">test</div>
             <div class="bg-white rounded-lg mb-10 py-10 space-x-2">
                 <span v-for="item in willExample" :key="item">{{item}}</span>
             </div>
@@ -165,31 +165,30 @@ setup() {
         //         });
         //     })
     })
-    const test =(async() => {
-        await INHERITANCES_COLLECTION.where('uid', '==', currentUser.value.uid).get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                depo.value = doc.data()
-            });
-        })
-        willExample.value.push(moment(depo.value.create_at).format('YYYY년 MM월 DD일'))
-        willExample.value.push('내 이름은')
-        willExample.value.push(depo.value.name)
-        willExample.value.push(depo.value.address)
-        depo.value.deposit.forEach((el) => {
-            willExample.value.push(el.type)
-            willExample.value.push('계좌번호')
-            willExample.value.push(el.account_number)
-            willExample.value.push(el.estimated_amount)
-            willExample.value.push('정도의 금융재산을')
-            for (let index = 0; index < el.proportion.length; index++) {
-                willExample.value.push((el.inheritor[index]+'('+el.relationship[index]+')'))
-                willExample.value.push((el.proportion[index]+'%'))
-            }
-            willExample.value.push('에게 상속한다.')
-        })
-        console.log(willExample.value)
-    })
+    // const test =(async() => {
+    //     await INHERITANCES_COLLECTION.where('uid', '==', currentUser.value.uid).get()
+    //     .then((querySnapshot) => {
+    //         querySnapshot.forEach((doc) => {
+    //             depo.value = doc.data()
+    //         });
+    //     })
+    //     willExample.value.push(moment(depo.value.create_at).format('YYYY년 MM월 DD일'))
+    //     willExample.value.push('내 이름은')
+    //     willExample.value.push(depo.value.name)
+    //     willExample.value.push(depo.value.address)
+    //     depo.value.deposit.forEach((el) => {
+    //         willExample.value.push(el.type)
+    //         willExample.value.push('계좌번호')
+    //         willExample.value.push(el.account_number)
+    //         willExample.value.push(el.estimated_amount)
+    //         willExample.value.push('정도의 금융재산을')
+    //         for (let index = 0; index < el.proportion.length; index++) {
+    //             willExample.value.push((el.inheritor[index]+'('+el.relationship[index]+')'+el.proportion[index]+'%'))
+    //         }
+    //         willExample.value.push('에게 상속한다.')
+    //     })
+    //     console.log(willExample.value)
+    // })
 
     const depo = ref([])
     const willExample = ref([])
@@ -387,8 +386,7 @@ setup() {
                 willExample.value.push(el.estimated_amount)
                 willExample.value.push('정도의 금융재산을')
                 for (let index = 0; index < el.proportion.length; index++) {
-                    willExample.value.push((el.inheritor[index]+'('+el.relationship[index]+')'))
-                    willExample.value.push((el.proportion[index]+'%'))
+                    willExample.value.push((el.inheritor[index]+'('+el.relationship[index]+')'+el.proportion[index]+'%'))
                 }
                 willExample.value.push('에게 상속한다.')
             })
@@ -448,7 +446,6 @@ setup() {
         moment,
 
         willExample,
-        test,
     }
 }
 }
