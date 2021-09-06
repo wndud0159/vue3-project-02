@@ -18,6 +18,7 @@ firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
 export const database = firebase.firestore()
 export const storage = firebase.storage()
+export const functions = firebase.functions()
 
 export const USER_COLLECTION = database.collection('users')
 export const INHERITANCES_COLLECTION = database.collection('inheritances')

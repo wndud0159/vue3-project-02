@@ -174,8 +174,10 @@ export default {
 
           const setCurrentUser = async () => {
                 try { 
+                  if(currentUser){
                   const doc = await USER_COLLECTION.doc(currentUser.value.uid).get()
                   store.commit('SET_USER', doc.data())
+                  }
                 } catch (e) {
                   console.log(`firebase users data error:${e}`)
                 }   
