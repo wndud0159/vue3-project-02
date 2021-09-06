@@ -18,8 +18,10 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "firebase-admin": "^9.11.1",
-    "firebase-functions": "^3.15.4",
-    "fs": "^0.0.1-security"
+    "firebase-functions": "^3.15.5",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"

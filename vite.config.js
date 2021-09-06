@@ -22,7 +22,7 @@ export default defineConfig({
       // '/foo': 'http://localhost:4567',
       // // with options
       '/api': {
-        target: 'https://us-central1-iback-project.cloudfunctions.net',
+        target: 'https://nid.naver.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },

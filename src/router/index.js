@@ -6,6 +6,7 @@ import ServiceCenter from '../pages/ServiceCenter.vue'
 import BusinessAlliance from '../pages/BusinessAlliance.vue'
 import Checklist from '../pages/Checklist.vue'
 import Will from '../pages/Will.vue'
+import CollbackByNaver from '../collback/CollbackByNaver.vue'
 import store from '../store'
 
 import Inheritance from '../pages/Inheritance.vue'
@@ -28,7 +29,9 @@ const routes = [
 
     
 
-    { path: '/login', component: Login, title: '로그인', props: true, meta: { isMenu: false, layout: 'EmptyLayout'} }
+    { path: '/login', component: Login, title: '로그인', props: true, meta: { isMenu: false, layout: 'EmptyLayout' } },
+    { path: '/collback/naver', component: CollbackByNaver, title: 'loginByNaver', props: true, meta: { isMenu: false, layout: 'EmptyLayout' } }
+    
     
 ]
 

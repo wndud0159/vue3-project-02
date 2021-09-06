@@ -9,7 +9,7 @@
       <i class="fas fa-comment px-px"></i>
       <button class="">카카오로 로그인</button>
     </div>
-    <div class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
+    <div @click="loginWithNaver" class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
       <img src="/naver.ico" class="w-5 h-5" alt="">
       <button class="text-white">네이버로 로그인</button>
     </div>
@@ -17,6 +17,9 @@
       <img src="/google.ico" class="w-5 h-5" alt="">
       <button class="">구글로 로그인</button>
     </div>
+    <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+  <div id="naveridlogin"></div>
+  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
     
   </div>
 </template>
@@ -30,6 +33,11 @@ import axios from 'axios'
 
 
 export default {
+  //  head: {
+  //   script: [
+  //     { src: 'https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js' }
+  //   ]
+  // },
   setup() {
     const router = useRouter()
     const userData = ref([])
@@ -44,7 +52,7 @@ export default {
         // console.log('데이터등록')
         // 새로운 유저 데이터 등록
         try{
-          const doc = USER_COLLECTION.doc(userData.value[0].userId)
+          const doc = await USER_COLLECTION.doc(userData.value[0].userId)
           await doc.set({
             uid: userData.value[0].userId,
             nickname: userData.value[0].nickname,
@@ -55,7 +63,6 @@ export default {
             create_at: Date.now(),
           })
           store.commit("SET_USER", doc.data()) 
-          router.replace('/')
         } catch(e) {
             console.log('firebase db error : ', e.message)
         }
@@ -78,7 +85,7 @@ export default {
     const getKakaoProfile = async (request) => {
       window.Kakao.API.request({
         url: '/v2/user/me',
-        success: response => {
+        success: async response => {
           
           //info set
           const kakao_account = response.kakao_account
@@ -91,38 +98,64 @@ export default {
 
         // data checked
         try {
-          USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
-              .then((querySnapshot) => {
+          await axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithFirebase', userData.value[0], {
+          }).then( async response => {
+            console.log('펑션 성공 : ', response)
+            await auth.signInWithCustomToken(response.data)
+              .then(response => {
+                console.log('커스텀 토큰 로그인 성공 ', response)
+              })
+          // decide what you want to do if the query resulted in no documents.
+          }).catch(error => {
+            console.log('error : ', error)
+          })  
+          await USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
+              .then(async(querySnapshot) => {
                 if (querySnapshot.docs.length > 0) {
                   const documentSnapshot = querySnapshot.docs[0];
                   store.commit("SET_USER", documentSnapshot.data())      
                 }
                 else {
-                  // decide what you want to do if the query resulted in no documents.
                   console.log('유저정보 없음')
-                  axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithKakao', userData.value[0], {
-                  }).then(response => {
-                    console.log('펑션 성공 : ', response)
-                    auth.signInWithCustomToken(response.data)
-                      .then(response => {
-                        console.log('커스텀 토큰 로그인 성공 ', response)
-                      })
-                  }).catch(error => {
-                    console.log('error : ', error)
-                  })  
                   onCreateUsers()
                 }
-                router.replace('/')
               })
-           } catch(e) {
-            console.log('error : ', e)
-           }
+          } catch(e) {
+             console.log('error : ', e)
+          } finally {
+            router.replace('/')
+          }
 
         }
         ,fail: function(error) {
           console.log('getKakaoProfile error', error.message)  
         }
       })
+    }
+
+    const loginWithNaver = async () => {
+      const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        console.log(state);
+        window.localStorage.setItem('naverState', state);
+
+        const protocol = location.protocol;
+        const hostName = location.hostname;
+        const port = location.port;
+
+        let url = protocol + '//' + hostName + (port ? ':' + port : '');
+        url += '/collback/naver';
+
+        const authUrl = 'https://nid.naver.com/oauth2.0/authorize';
+        const params = [];
+        params.push('response_type=code');
+        params.push('client_id=' + import.meta.env.VITE_NAVER_APP_CLIENT_ID);
+        params.push('redirect_uri=' + url);
+        params.push('state=' + state);
+
+        const authCodeUrl = authUrl + "?" + params.join('&');
+        // console.log(authCodeUrl);
+        location.href = authCodeUrl;
+       
     }
 
     
@@ -141,11 +174,11 @@ export default {
 
     
 
-   
+  
 
 
     return {
-      loginWithKakao,
+      loginWithKakao, loginWithNaver,
     }
   }
 
