@@ -66,11 +66,10 @@ setup() {
         let code = {
             code : accesstoken
         }
-        console.log("access token checked : ", code.code)
-        
+
         await axios.post('https://us-central1-iback-project.cloudfunctions.net/getProfileNaver', code, {
         }).then( async response => {
-            console.log('userInfoByNaver : ', response);
+            console.log('get userInfo by naver');
 
           //info set
           const naver_account = response.data.response
@@ -80,7 +79,6 @@ setup() {
               profile_image_url: naver_account.profile_image,
               provider: 'NAVER'
           })
-          console.log('userinfo checked : ', userData);
 
           // data checked
           try {

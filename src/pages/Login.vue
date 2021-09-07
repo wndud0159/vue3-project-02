@@ -13,7 +13,7 @@
       <img src="/naver.ico" class="w-5 h-5" alt="">
       <button class="text-white">네이버로 로그인</button>
     </div>
-    <div class=" bg-white flex items-center space-x-1 w-full md:w-1/2 justify-center    py-2 rounded-md shadow hover:opacity-30">
+    <div @click="loginWithGoogle" class=" bg-white flex items-center space-x-1 w-full md:w-1/2 justify-center    py-2 rounded-md shadow hover:opacity-30">
       <img src="/google.ico" class="w-5 h-5" alt="">
       <button class="">구글로 로그인</button>
     </div>
@@ -27,6 +27,7 @@ import {onBeforeMount, ref, computed, onMounted} from 'vue'
 import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
 import axios from 'axios'
+import firebase from 'firebase'
 
 
 export default {
@@ -149,6 +150,68 @@ export default {
        
     }
 
+    const loginWithGoogle = async() => {
+      try{
+        var provider = new firebase.auth.GoogleAuthProvider();
+        // 추가적인 권한이 있을 경우에는 아래와 같이 추가합니다.
+        // provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+        // 로그인시 보여줄 언어를 지정합니다.
+        // firebase.auth().languageCode = 'pt';
+        // To apply the default browser preference instead of explicitly setting it.
+        // firebase.auth().useDeviceLanguage();
+
+        // 로그인 아이디의 기본값을 지정합니다. 지정하지 않아도 됩니다.
+        // provider.setCustomParameters({
+        //   'login_hint': 'user@example.com'
+        // });
+
+        // 로그인 팝업창을 띄웁니다.
+        auth.signInWithPopup(provider).then( async function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const token = result.credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          // set user info
+          userData.value.push({
+            userId: user.uid,
+            nickname: user.displayName,
+            profile_image_url: user.photoURL,
+            provider: 'GOOGLE'
+          })
+
+          //data checked
+          await USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
+              .then(async(querySnapshot) => {
+                if (querySnapshot.docs.length > 0) {
+                  const documentSnapshot = querySnapshot.docs[0];
+                  store.commit("SET_USER", documentSnapshot.data())      
+                }
+                else {
+                  console.log('new user')
+                  await onCreateUsers()
+                }
+              router.replace('/')
+          })
+
+          
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+          console.log('error', error);
+        });
+      } catch(error) {
+
+        console.log('google login error', error);
+      }
+    }
+
     
     
 
@@ -158,7 +221,7 @@ export default {
 
 
     return {
-      loginWithKakao, loginWithNaver,
+      loginWithKakao, loginWithNaver, loginWithGoogle,
     }
   }
 
