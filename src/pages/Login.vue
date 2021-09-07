@@ -17,9 +17,6 @@
       <img src="/google.ico" class="w-5 h-5" alt="">
       <button class="">구글로 로그인</button>
     </div>
-    <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  <div id="naveridlogin"></div>
-  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
     
   </div>
 </template>
@@ -33,11 +30,6 @@ import axios from 'axios'
 
 
 export default {
-  //  head: {
-  //   script: [
-  //     { src: 'https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js' }
-  //   ]
-  // },
   setup() {
     const router = useRouter()
     const userData = ref([])
@@ -49,7 +41,6 @@ export default {
 
 
     const onCreateUsers = async ()  => {
-        // console.log('데이터등록')
         // 새로운 유저 데이터 등록
         try{
           const doc = await USER_COLLECTION.doc(userData.value[0].userId)
@@ -62,7 +53,8 @@ export default {
             provider : userData.value[0].provider,
             create_at: Date.now(),
           })
-          store.commit("SET_USER", doc.data()) 
+          const user = await USER_COLLECTION.doc(userData.value[0].userId).get()
+          store.commit("SET_USER", user.data()) 
         } catch(e) {
             console.log('firebase db error : ', e.message)
         }
@@ -96,34 +88,33 @@ export default {
             provider: 'KAKAO'
           })
 
-        // data checked
-        try {
-          await axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithFirebase', userData.value[0], {
-          }).then( async response => {
-            console.log('펑션 성공 : ', response)
-            await auth.signInWithCustomToken(response.data)
-              .then(response => {
-                console.log('커스텀 토큰 로그인 성공 ', response)
-              })
-          // decide what you want to do if the query resulted in no documents.
-          }).catch(error => {
-            console.log('error : ', error)
-          })  
-          await USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
+          // data checked
+          try {
+            await axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithFirebase', userData.value[0], {
+            }).then( async response => {
+              console.log('get firebase token')
+              await auth.signInWithCustomToken(response.data)
+                .then(response => {
+                  console.log('custom token success')
+                })
+            // decide what you want to do if the query resulted in no documents.
+            }).catch(error => {
+              console.log('error : ', error)
+            })  
+            await USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
               .then(async(querySnapshot) => {
                 if (querySnapshot.docs.length > 0) {
                   const documentSnapshot = querySnapshot.docs[0];
                   store.commit("SET_USER", documentSnapshot.data())      
                 }
                 else {
-                  console.log('유저정보 없음')
-                  onCreateUsers()
+                  console.log('new user')
+                  await onCreateUsers()
                 }
-              })
+                router.replace('/')
+            })
           } catch(e) {
-             console.log('error : ', e)
-          } finally {
-            router.replace('/')
+            console.log('error : ', e)
           }
 
         }
@@ -159,18 +150,7 @@ export default {
     }
 
     
-    // const logoutWithKakao = async () => {
-    //       if (!Kakao.Auth.getAccessToken()) {
-    //         console.log('Not logged in.');
-    //         return;
-    //       }
-    //       Kakao.Auth.logout(function() {
-    //         // console.log(Kakao.Auth.getAccessToken())
-    //         // store.commit("SET_USER", null)
-    //         // router.replace('/login')
-    //         console.log('로그아웃 성공')
-    //       });
-    //     }
+    
 
     
 

@@ -112,7 +112,7 @@
             <button class="py-5">개인정보 보호정책</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </div>
-          <div @click="logoutWithKakao" class="text-gray-500 w-full md:px-6 px-3">
+          <div @click="logout" class="text-gray-500 w-full md:px-6 px-3">
             <button class="py-4">로그아웃</button>
           </div>
         </div>
@@ -149,17 +149,18 @@ export default {
           window.open('https://bigwavvv.notion.site/Bigwavv-3faaf9ea2d694c209e4f4ccfe0922698')
         } 
 
-        const logoutWithKakao = async () => {
-          if (!Kakao.Auth.getAccessToken()) {
-            console.log('Not logged in.');
-            return;
-          }
-          Kakao.Auth.logout(function() {
-            // console.log(Kakao.Auth.getAccessToken())
+        const logout = async () => {
+          // if (Kakao.Auth.getAccessToken()) {
+          //   Kakao.Auth.logout(function() {
+          //   store.commit("SET_USER", null)
+          //   router.replace('/login')
+          //   console.log('logout success by kakao')
+          //   });
+          // } else {
             store.commit("SET_USER", null)
             router.replace('/login')
-            console.log('로그아웃 성공')
-          });
+            console.log('logout success')
+          // }
         }
         
 
@@ -184,7 +185,7 @@ export default {
           }
 
         return {
-            sideToggleMenu, router, routes, currentUser, logoutWithKakao, showProfileEditModal, onIbackIntroduce
+            sideToggleMenu, router, routes, currentUser, logout, showProfileEditModal, onIbackIntroduce
         }
     }
 }

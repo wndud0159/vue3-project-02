@@ -34,7 +34,7 @@ setup() {
 
         await axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithNaver', code, {
             }).then(response => {
-                console.log('성공', response);
+                console.log('authWithNaver Success');
             getProfileNaver(response.data.access_token)
         }).catch(error => {
             console.log('naver request error : ', error)
@@ -43,10 +43,9 @@ setup() {
     })
 
     const onCreateUsers = async ()  => {
-        // console.log('데이터등록')
         // 새로운 유저 데이터 등록
         try{
-          const doc = USER_COLLECTION.doc(userData.value[0].userId)
+          const doc = await USER_COLLECTION.doc(userData.value[0].userId)
           await doc.set({
             uid: userData.value[0].userId,
             nickname: userData.value[0].nickname,
@@ -56,8 +55,8 @@ setup() {
             provider : userData.value[0].provider,
             create_at: Date.now(),
           })
-          store.commit("SET_USER", doc.data()) 
-          router.replace('/')
+          const user = await USER_COLLECTION.doc(userData.value[0].userId).get()
+          store.commit("SET_USER", user.data()) 
         } catch(e) {
             console.log('firebase db error : ', e.message)
         }
@@ -70,47 +69,47 @@ setup() {
         console.log("access token checked : ", code.code)
         
         await axios.post('https://us-central1-iback-project.cloudfunctions.net/getProfileNaver', code, {
-        }).then(response => {
+        }).then( async response => {
             console.log('userInfoByNaver : ', response);
 
-            //info set
-            const naver_account = response.data.response
-            userData.value.push({
-                userId: 'naver:'+naver_account.id,
-                nickname: naver_account.name,
-                profile_image_url: naver_account.profile_image,
-                provider: 'NAVER'
-            })
-            console.log('userinfo checked : ', userData);
+          //info set
+          const naver_account = response.data.response
+          userData.value.push({
+              userId: 'naver:'+naver_account.id,
+              nickname: naver_account.name,
+              profile_image_url: naver_account.profile_image,
+              provider: 'NAVER'
+          })
+          console.log('userinfo checked : ', userData);
 
-        // data checked
-        try {
-          USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
+          // data checked
+          try {
+            await axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithFirebase', userData.value[0], {
+            }).then( async response => {
+              console.log('get firebase token')
+              await auth.signInWithCustomToken(response.data)
+                .then(response => {
+                  console.log('custom token success')
+                })
+            // decide what you want to do if the query resulted in no documents.
+            }).catch(error => {
+              console.log('error : ', error)
+            })  
+            await USER_COLLECTION.where('uid', '==' ,userData.value[0].userId).get()
               .then(async(querySnapshot) => {
                 if (querySnapshot.docs.length > 0) {
                   const documentSnapshot = querySnapshot.docs[0];
                   store.commit("SET_USER", documentSnapshot.data())      
                 }
                 else {
-                  // decide what you want to do if the query resulted in no documents.
-                  console.log('유저정보 없음')
-                  await axios.post('https://us-central1-iback-project.cloudfunctions.net/authWithFirebase', userData.value[0], {
-                  }).then(response => {
-                    console.log('펑션 성공 : ', response)
-                    auth.signInWithCustomToken(response.data)
-                      .then(response => {
-                        console.log('커스텀 토큰 로그인 성공 ', response)
-                      })
-                  }).catch(error => {
-                    console.log('error : ', error)
-                  })  
-                  onCreateUsers()
+                  console.log('new user')
+                  await onCreateUsers()
                 }
                 router.replace('/')
-              })
-           } catch(e) {
+            })
+          } catch(e) {
             console.log('error : ', e)
-           }
+          }
 
 
 
