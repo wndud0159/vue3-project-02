@@ -130,7 +130,7 @@ import ProfileEditModal from '../components/ProfileEditModal.vue'
 import {ref, onBeforeMount, computed} from 'vue'
 import router from '../router'
 import store from '../store'
-import {USER_COLLECTION} from '../firebase'
+import {USER_COLLECTION, auth} from '../firebase'
 
 
 export default {
@@ -149,6 +149,19 @@ export default {
           window.open('https://bigwavvv.notion.site/Bigwavv-3faaf9ea2d694c209e4f4ccfe0922698')
         } 
 
+
+        // runs after firebase is initialized
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+              console.log('사용자 true', user);
+              // isLoggedIn.value = true // if we have a user
+            } else {
+              console.log('사용자 false');
+              // isLoggedIn.value = false // if we do not
+            }
+        })
+
+
         const logout = async () => {
           // if (Kakao.Auth.getAccessToken()) {
           //   Kakao.Auth.logout(function() {
@@ -158,6 +171,7 @@ export default {
           //   });
           // } else {
             store.commit("SET_USER", null)
+            auth.signOut();
             router.replace('/login')
             console.log('logout success')
           // }

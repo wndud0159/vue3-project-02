@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-center items-center text-4xl">잠시만 기다려 주세요 로그인 중 입니다.</div>
+    <div class="flex flex-col justify-center items-center text-4xl mt-40">잠시만 기다려 주세요 로그인 중 입니다.</div>
 </template>
 
 <script>

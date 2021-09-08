@@ -12,11 +12,14 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig)
+ 
 
-
+export const analytice = firebase.analytics()
 export const auth = firebase.auth()
 export const database = firebase.firestore()
 export const storage = firebase.storage()
+
+firebase.analytics().logEvent('notification_received');
 
 export const USER_COLLECTION = database.collection('users')
 export const INHERITANCES_COLLECTION = database.collection('inheritances')
