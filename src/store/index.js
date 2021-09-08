@@ -17,6 +17,9 @@ const store = createStore({
         SET_NICKNAME: (state, nickname) => {
             state.user.nickname = nickname
         },
+        SET_ADDRESS: (state, address) => {
+            state.user.address = address
+        },
         SET_INTRODUCE_MYSELF: (state, introduce_myself) => {
             state.user.introduce_myself = introduce_myself
         },

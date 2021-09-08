@@ -1,14 +1,20 @@
 <template>
-  <div class="flex flex-col h-screen overflow-y-scroll items-center pt-20 pb-48 md:pb-10 px-3 md:px-20">
+  <div class="flex flex-col h-screen overflow-y-scroll items-center pt-24 pb-48 md:pb-10 px-3 md:px-20">
         <div class="mb-10">
             <img class="object-cover w-20 h-20 rounded-full" src="/profile.jpeg" alt="">
         </div>
         <!-- title section -->
-        <div v-if="stepState" class="mb-10 text-2xl md:text-4xl font-bold text-gray-500">
-            <div v-if="step1">안녕하세요 원하시는걸 선택해주세요</div>
-            <div v-if="step2">당신의 이름은 무엇입니까?</div>
-            <div v-if="step3">{{}}님 안녕하세요 주소를 적어주세요</div>
-            <div v-if="step4">모두 완료 하셨습니다. 결과 확인하기</div>
+        <div v-if="stepState" class="flex flex-col items-center text-2xl md:text-4xl font-bold text-gray-700 w-7/8 md:w-4/6">
+            <div v-if="step1">안녕하세요. 원하시는걸 선택하고 시작하기를 눌러주세요.</div>
+            <div v-if="step2" class="mb-10">당신의 이름은 무엇입니까?</div>
+            <div v-if="step3" class="mb-10">{{userName}}님 반갑습니다 주소를 적어주세요.</div>
+            <div v-if="step4" class="mb-10">모두 완료 하셨습니다. 결과 확인하기</div>
+        </div>
+
+        <!-- userInfo section -->
+        <div v-if="stepState" class="w-full mb-10 flex flex-col items-center text-xl">
+                <input v-model="userName" v-if="step2" type="text" class="md:w-1/2 w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
+                <input v-model="userAddress" v-if="step3" type="text" class="md:w-1/2  w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
         </div>
 
         <!-- checklist section -->
@@ -106,12 +112,20 @@
         </div>
 
         <!-- button section -->
-        <div v-if="stepState" class="flex  justify-center w-full mt-10 space-x-4">
-            <button v-if="step1" @click="onSaveStep1" class=" bg-yellow-300 py-3 px-10 rounded-lg">시작하기</button>    
-            <button v-if="step2" @click="onPrevStep2" class=" bg-gray-100 py-3 px-10 rounded-lg">이전으로</button>    
-            <button v-if="step2" @click="onSaveStep2" class=" bg-yellow-300 py-3 px-10 rounded-lg">다음으로</button>    
-            <button v-if="step3" @click="onPrevStep3" class=" bg-gray-100 py-3 px-10 rounded-lg">이전으로</button>    
-            <button v-if="step3" @click="onSaveStep3" class=" bg-yellow-300 py-3 px-10 rounded-lg">다음으로</button>    
+        <div v-if="stepState" class="flex  justify-center w-full">
+            <div v-if="step1" class=" space-x-4">
+                <button @click="onSaveStep1" class=" bg-yellow-300 py-3 px-10 rounded-lg">시작하기</button>  
+            </div> 
+            <div v-if="step2" class=" space-x-4"> 
+                <button @click="onPrevStep2" class=" bg-gray-100 py-3 px-10 rounded-lg">이전으로</button>    
+                <button v-if="!userName" class=" bg-gray-100 py-3 px-10 rounded-lg">다음으로</button>    
+                <button v-if="userName" @click="onSaveStep2" class=" bg-yellow-300 py-3 px-10 rounded-lg">다음으로</button>
+            </div>
+            <div v-if="step3" class=" space-x-4">
+                <button @click="onPrevStep3" class=" bg-gray-100 py-3 px-10 rounded-lg">이전으로</button>    
+                <button v-if="!userAddress" class=" bg-gray-100 py-3 px-10 rounded-lg">다음으로</button>  
+                <button v-if="userAddress" @click="onSaveStep3" class=" bg-yellow-300 py-3 px-10 rounded-lg">다음으로</button>  
+            </div>  
         </div>
 
             
@@ -158,6 +172,8 @@ export default {
 
         const step1 = ref(true)
         const step2 = ref(false)
+        const userName = ref()
+        const userAddress = ref()
         const step3 = ref(false)
         const step4 = ref(false)
         const stepState = ref(true)
@@ -187,22 +203,32 @@ export default {
             } catch (error) {
                 console.log(`error:${error}`)
             }
-            if(currentUser.value.address === '') {
+            userInfoCheck()
+        }
+        const userInfoCheck = () => {
+            // if(currentUser.value.address === '') {
                 step1.value = false
                 checklistState.value = false
                 step2.value = true
-            } else {
-                step1.value = false
-                checklistState.value = false
-                stepState.value = false
-                onCheckOrderCount()  
-            }
+            // } else {
+            //     step1.value = false
+            //     checklistState.value = false
+            //     stepState.value = false
+            //     onCheckOrderCount()  
+            // }
         }
+
         const onSaveStep2 = async () => {
             step2.value = false
             step3.value = true
         }
         const onSaveStep3 = async () => {
+            await USER_COLLECTION.doc(currentUser.value.uid).update({
+                nickname: userName.value,
+                address: userAddress.value,
+            })
+            await store.commit("SET_NICKNAME", userName.value)
+            await store.commit("SET_ADDRESS", userAddress.value)
             step3.value = false
             stepState.value = false
             checklistState.value = false
@@ -221,7 +247,6 @@ export default {
         }
 
         const onPrev = () => {
-            nextOrPrev.value = false
             if(currentUser.value.mychecklist_count == 1) {
                 heartState.value = false
                 financeState.value = false
@@ -233,6 +258,7 @@ export default {
                 checklistState.value = true
                 return
             }
+            nextOrPrev.value = false
             onCheckOrderCount()
         }
 
@@ -314,11 +340,16 @@ export default {
         }
         
         return {
+            currentUser,
+
             step1,
             step2,
             step3,
             step4,
             stepState,
+
+            userName,
+            userAddress,
 
             onSaveStep1,
             onSaveStep2,
