@@ -22,6 +22,12 @@ const store = createStore({
         },
         SET_RECORD_URL: (state, record_url) => {
             state.user.record_url = record_url
+        },
+        SET_MYCHECKLIST_COUNT: (state, count) => {
+            state.user.mychecklist_count = count
+        },
+        SET_MYCHECKLIST_SELECTION: (state, selection) => {
+            state.user.mychecklist_selection = selection
         }
     },
     plugins: [createPersistedState()],

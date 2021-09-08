@@ -7,6 +7,13 @@ import BusinessAlliance from '../pages/BusinessAlliance.vue'
 import Checklist from '../pages/Checklist.vue'
 import Will from '../pages/Will.vue'
 import CollbackByNaver from '../collback/CollbackByNaver.vue'
+
+import WellDyingChecklist from '../pages/WellDyingChecklist.vue'
+import Heart from '../components/Heart.vue'
+import Finance from '../components/Finance.vue'
+import Digital from '../components/Digital.vue'
+import Maintain from '../components/Maintain.vue'
+import Pets from '../components/Pets.vue'
 import store from '../store'
 
 import Inheritance from '../pages/Inheritance.vue'
@@ -24,7 +31,9 @@ const routes = [
     { path: '/will', name: 'will', component: Will, title: '유언장작성', meta: { isMenu: false, requireAuth: true} },
     
     
-    { path: '/inheritance', name: 'inheritance', component: Inheritance, meta: {isMenu: true, requireAuth: true}},
+    { path: '/inheritance', name: 'inheritance', component: Inheritance, meta: { isMenu: true, requireAuth: true } },
+    
+    { path: '/welldyingchecklist', name: 'welldyingchecklist', component: WellDyingChecklist, meta: { isMenu: false, requireAuth: true} },
 
 
     

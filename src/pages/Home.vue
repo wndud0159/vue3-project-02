@@ -20,7 +20,7 @@
         </div>
 
         <!-- main button -->
-        <button @click="showOpenOrCloseModal = true" class="text-white text-2xl border font-bold border-primary bg-primary py-6 px-6 rounded-2xl shadow-2xl hover:bg-dark">무료 계획 세워보기!</button>
+        <button @click="goWellDyingChecklist" class="text-white text-2xl border font-bold border-primary bg-primary py-6 px-6 rounded-2xl shadow-2xl hover:bg-dark">무료 계획 세워보기!</button>
 
         <!-- modal -->
         <SelectionChecklistOrWillModal
@@ -32,6 +32,7 @@
 
 <script>
 import {ref} from 'vue'
+import {useRouter} from 'vue-router'
 import SelectionChecklistOrWillModal from '../components/SelectionChecklistOrWillModal.vue'
 
 export default {
@@ -40,10 +41,16 @@ components: {
     SelectionChecklistOrWillModal
 },
 setup() {
+
+    const router = useRouter()
     const showOpenOrCloseModal = ref(false)
+    
+    const goWellDyingChecklist = () => {
+        router.push("/welldyingchecklist")
+    }
 
     return {
-        showOpenOrCloseModal,
+        showOpenOrCloseModal, goWellDyingChecklist,
     }
 }
 
