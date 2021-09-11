@@ -153,7 +153,6 @@ export default {
                 text: [],
             }
         ])
-        pets.value.length = 3
         
         const petsMainTitle = ref([
             '펫1',

@@ -96,20 +96,20 @@
         </div>
 
         <div class="flex flex-col mt-10">
-          <router-link @click="sideToggleMenu = false" to="/checklist" class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+          <!-- <router-link @click="sideToggleMenu = false" to="/checklist" class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
             <button class="py-5 ">체크리스트 작성</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
-          </router-link>
+          </router-link> -->
           <router-link @click="sideToggleMenu = false" to="/will" class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-            <button class="py-5 ">유언장 작성</button>
+            <button class="py-5 ">유언장 작성 기능</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </router-link>
           <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-            <button class="py-5 ">서비스 이용약관</button>
+            <button class="py-5 ">서비스 이용약관(미완성)</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </div>
           <div class="flex items-center w-full md:px-6 px-3  justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-            <button class="py-5">개인정보 보호정책</button>
+            <button class="py-5">개인정보 보호정책(미완성)</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </div>
           <div @click="logout" class="text-gray-500 w-full md:px-6 px-3">

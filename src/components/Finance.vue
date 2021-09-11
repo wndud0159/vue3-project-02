@@ -153,7 +153,6 @@ export default {
                 text: [],
             }
         ])
-        finance.value.length = 3
         
         const financeMainTitle = ref([
             '재무1',

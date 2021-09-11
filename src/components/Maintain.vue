@@ -153,7 +153,6 @@ export default {
                 text: [],
             }
         ])
-        maintain.value.length = 3
         
         const maintainMainTitle = ref([
             '유지1',

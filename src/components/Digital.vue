@@ -153,7 +153,6 @@ export default {
                 text: [],
             }
         ])
-        digital.value.length = 3
         
         const digitalMainTitle = ref([
             '디지털1',

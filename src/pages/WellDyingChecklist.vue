@@ -24,7 +24,7 @@
                 <div class="flex items-center">
                     <div class=" relative">
                         <i class="fas fa-heart text-white bg-red-300 px-3 py-2 rounded-full text-3xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/4</div>
+                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/3</div>
                     </div>
                     <div class="flex ml-5">
                         <div class=" space-y-2 md:space-y-1">
@@ -42,7 +42,7 @@
                 <div class="flex items-center">
                     <div class=" relative">
                         <i class="fas fa-briefcase text-white bg-green-600 opacity-70 px-3 py-2 rounded-full text-3xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/4</div>
+                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/3</div>
                     </div>
                     <div class="flex ml-5">
                         <div class=" space-y-2 md:space-y-1">
@@ -60,7 +60,7 @@
                 <div class="flex items-center">
                     <div class=" relative">
                         <i class="fas fa-chalkboard text-white bg-yellow-500 opacity-70 px-3 py-2.5 rounded-full text-2xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/5</div>
+                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/3</div>
                     </div>
                     <div class="flex ml-5">
                         <div class=" space-y-2 md:space-y-1">
@@ -78,7 +78,7 @@
                 <div class="flex items-center">
                     <div class=" relative">
                         <i class="fas fa-infinity text-white bg-purple-400 opacity-70 px-3 py-2.5 rounded-full text-2xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/4</div>
+                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">/3</div>
                     </div>
                     <div class="flex ml-5">
                         <div class=" space-y-2 md:space-y-1">
@@ -108,6 +108,23 @@
                 <input v-model="checklistSelection" value="pets" class="w-6 h-6" type="checkbox">
             </div>
             </div>
+
+            <!-- will -->
+            <router-link to="/inheritance" class="w-full mb-10">
+            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
+                <div class="flex items-center">
+                    <div class=" relative">
+                        <i class="fas fa-fill text-white bg-primary opacity-70 px-3 py-2 rounded-full text-3xl"></i>
+                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white"></div>
+                    </div>
+                    <div class="flex ml-5">
+                        <div class=" space-y-2 md:space-y-1">
+                            <div class="-mb-1">유언장 작성 및 상속 설계 기능 테스트</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </router-link>
 
         </div>
 
@@ -247,7 +264,9 @@ export default {
         }
 
         const onPrev = () => {
+            console.log('찍어', currentUser.value.mychecklist_count)
             if(currentUser.value.mychecklist_count == 1) {
+                console.log('찍어')
                 heartState.value = false
                 financeState.value = false
                 digitalState.value = false
@@ -278,7 +297,7 @@ export default {
         }
 
         const onCheckOrderCount = async () => {
-            if(currentUser.value.mychecklist_count < currentUser.value.mychecklist_selection.length) {
+            if(currentUser.value.mychecklist_count <= currentUser.value.mychecklist_selection.length) {
                 if(currentUser.value.mychecklist_count >= 0) {
                     if(nextOrPrev.value) {
                         await USER_COLLECTION.doc(currentUser.value.uid).update({

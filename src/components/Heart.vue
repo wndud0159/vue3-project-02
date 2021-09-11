@@ -18,10 +18,10 @@
         <!-- radio section -->
         <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="heartBox1" class="w-8 h-8" type="radio" value="네"><span>네</span>
+                <input v-model="heartBox1" class="w-8 h-8" type="radio" value="저는 장기 기증자 입니다."><span>네</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="heartBox1" class="w-8 h-8" type="radio" value="아니요"><span>아니요</span>
+                <input v-model="heartBox1" class="w-8 h-8" type="radio" value="저는 장기 기증을 안하겠습니다."><span>아니요</span>
             </div>
         </div>
         <!-- checkbox section -->
@@ -136,24 +136,7 @@ export default {
         const step2 = ref(false)
         const step3 = ref(false)
 
-        const heart = ref([
-            {
-                title: [],
-                box: [],
-                text: [],
-            },
-            {
-                title: [],
-                box: [],
-                text: [],
-            },
-            {
-                title: [],
-                box: [],
-                text: [],
-            }
-        ])
-        heart.value.length = 3
+        const heart = ref([])
         
         const heartMainTitle = ref([
             '당신은 장기 기증자 입니까?',
@@ -171,10 +154,26 @@ export default {
         const heartText3 = ref('')
 
         onBeforeMount(() => {
-            console.log(heart.value)
         })
 
+        const onAddHeart = () => {
+            heart.value.push(
+                {
+                    title: [],
+                    box: [],
+                    text: [],
+                }
+            )
+        }
+
+        const onDeleteHeart = () => {
+            heart.value.pop()
+        }
+
         const onCreateHeart = async () => {
+            for (let index = 0; index < heart.value.length; index++) {
+                    heart.value[index].push(heartMainTitle.value[index])                
+            }
             try {
                 const doc = HEART_COLLECTION.doc()
                 await doc.set({
@@ -190,25 +189,31 @@ export default {
         }
 
         const onSaveStep1 = () => {
-            heart.value[0].title.push(heartMainTitle.value[0])
+            onAddHeart()
             heart.value[0].box.push(heartBox1.value)
             heart.value[0].text.push(heartText1.value)
-            console.log('첫번째',heart.value)
+            heartBox1.value = []
+            heartText1.value = ''
             step1.value = false
             step2.value = true
+            console.log('첫번째',heart.value)
         }
         const onSaveStep2 = () => {
-            heart.value[1].title.push(heartMainTitle.value[1])
+            onAddHeart()
             heart.value[1].box.push(heartBox2.value)
             heart.value[1].text.push(heartText2.value)
-            console.log('두번째',heart.value)
+            heartBox2.value = []
+            heartText2.value = ''
             step2.value = false
             step3.value = true
+            console.log('두번째',heart.value)
         }
         const onSaveStep3 = () => {
-            heart.value[2].title.push(heartMainTitle.value[2])
+            onAddHeart()
             heart.value[2].box.push(heartBox3.value)
             heart.value[2].text.push(heartText3.value)
+            heartBox3.value = []
+            heartText3.value = ''
             console.log('세번째',heart.value)
             emit('state-complete')
         }
@@ -219,10 +224,12 @@ export default {
         const onPrevStep2 = () => {
             step2.value = false
             step1.value = true
+            onDeleteHeart()
         }
         const onPrevStep3 = () => {
             step3.value = false
             step2.value = true
+            onDeleteHeart()
         }
 
         return {
