@@ -8,7 +8,7 @@ import Checklist from '../pages/Checklist.vue'
 import Will from '../pages/Will.vue'
 import CollbackByNaver from '../collback/CollbackByNaver.vue'
 
-import WellDyingChecklist from '../pages/WellDyingChecklist.vue'
+import WellDyingChecklistV2 from '../pages/WellDyingChecklistV2.vue'
 import Heart from '../components/Heart.vue'
 import Finance from '../components/Finance.vue'
 import Digital from '../components/Digital.vue'
@@ -33,7 +33,7 @@ const routes = [
     
     { path: '/inheritance', name: 'inheritance', component: Inheritance, meta: { isMenu: true, requireAuth: true } },
     
-    { path: '/welldyingchecklist', name: 'welldyingchecklist', component: WellDyingChecklist, meta: { isMenu: false, requireAuth: true} },
+    { path: '/welldyingchecklist', name: 'welldyingchecklist', component: WellDyingChecklistV2, meta: { isMenu: false, requireAuth: true} },
 
 
     
