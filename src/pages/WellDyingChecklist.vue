@@ -5,7 +5,7 @@
         </div>
         <!-- title section -->
         <div v-if="stepState" class="flex flex-col items-center text-2xl md:text-4xl font-bold text-gray-700 w-7/8 md:w-4/6">
-            <div v-if="step1">안녕하세요. 원하시는걸 선택하고 시작하기를 눌러주세요.</div>
+            <div v-if="step1">{{currentUser.nickname}}님 안녕하세요. 안내를 도와드릴 시리 입니다 무엇을 도와드릴까요?</div>
             <div v-if="step2" class="mb-10">당신의 이름은 무엇입니까?</div>
             <div v-if="step3" class="mb-10">{{userName}}님 반갑습니다 주소를 적어주세요.</div>
             <div v-if="step4" class="mb-10">모두 완료 하셨습니다. 결과 확인하기</div>
@@ -145,7 +145,11 @@
             </div>  
         </div>
 
-            
+        <!-- <div>
+            <button @click="onTextToPdfDownload()" class="py-2 px-4 bg-primary">pdf다운로드 테스트 버튼</button>
+        </div> -->
+       
+
             
         <Heart v-if="heartState" @state-incomplete="onPrev()" @state-complete="onNext()"/>
         <Finance v-if="financeState" @state-incomplete="onPrev()" @state-complete="onNext()"/>
@@ -161,7 +165,7 @@
 
 <script>
 import {ref, computed, onBeforeMount} from 'vue'
-import {USER_COLLECTION} from '../firebase'
+import {USER_COLLECTION, CHECKLISTS_COLLECTION} from '../firebase'
 import firebase from 'firebase'
 import store from '../store'
 import Heart from '../components/Heart.vue'
@@ -169,6 +173,9 @@ import Finance from '../components/Finance.vue'
 import Digital from '../components/Digital.vue'
 import Maintain from '../components/Maintain.vue'
 import Pets from '../components/Pets.vue'
+import html2pdf from 'html2pdf.js'
+import {storage} from '../firebase'
+import axios from 'axios'
 
 export default {
 
@@ -264,9 +271,9 @@ export default {
         }
 
         const onPrev = () => {
-            console.log('찍어', currentUser.value.mychecklist_count)
+            console.log('mychecklist_count check', currentUser.value.mychecklist_count)
             if(currentUser.value.mychecklist_count == 1) {
-                console.log('찍어')
+                console.log('onPrev if check')
                 heartState.value = false
                 financeState.value = false
                 digitalState.value = false
@@ -357,8 +364,61 @@ export default {
                 return
             }           
         }
+
+        const onTextToPdfDownload = () => {
+           
+            let data = document.getElementById('pdfTest')
+            console.log('check : ', data)
+           
+            const options = {
+                filename: `invoice-#003.pdf`,
+                margin: 0,
+                image: {type: 'jpeg', quality: 0.95 },
+                html2canvas: { scrollY: 0, scale: 1, dpi: 400, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compressPDF: true }
+            }
+
+            try {
+
+            html2pdf().set(options).from(data).toPdf().output('bloburl').then(async (result) => {
+                console.log('blob check : ', result)
+                // console.log('url check : ', blobUrl)
+                const pdf = await fetch(result).then(r=> r.blob()).then(blobFile=> new File([blobFile], "pdffile", {
+                    type: 'application/pdf'
+                }));
+                const blobUrl = window.URL.createObjectURL(pdf)
+                console.log(typeof blobUrl)
+                axios({
+                    url: blobUrl,
+                    method: 'GET',
+                    responseType: 'blob',
+                    // headers : {
+                    //     'Content-Type': 'application/pdf'
+                    // }
+                }).then(response => {
+                    console.log('success', response)
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'file.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log('fail', error.message)
+                    alert('axios error', error.message)
+                })
+
+
+            })
+                } catch (error) {
+                    alert('html2pdf error : ', error.message)
+                }
+
+
+        }
         
         return {
+            onTextToPdfDownload,
             currentUser,
 
             step1,

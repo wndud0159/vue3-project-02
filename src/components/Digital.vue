@@ -136,23 +136,7 @@ export default {
         const step2 = ref(false)
         const step3 = ref(false)
 
-        const digital = ref([
-            {
-                title: [],
-                box: [],
-                text: [],
-            },
-            {
-                title: [],
-                box: [],
-                text: [],
-            },
-            {
-                title: [],
-                box: [],
-                text: [],
-            }
-        ])
+        const digital = ref([])
         
         const digitalMainTitle = ref([
             '디지털1',
@@ -173,6 +157,20 @@ export default {
             console.log(digital.value)
         })
 
+        const onAddDigital = () => {
+            digital.value.push(
+                {
+                    title: [],
+                    box: [],
+                    text: [],
+                }
+            )
+        }
+
+        const onDeleteDigital = async () => {
+            digital.value.pop()
+        }
+
         const onCreateDigital = async () => {
             try {
                 const doc = DIGITAL_COLLECTION.doc()
@@ -189,25 +187,31 @@ export default {
         }
 
         const onSaveStep1 = () => {
-            digital.value[0].title.push(digitalMainTitle.value[0])
+            onAddDigital()
             digital.value[0].box.push(digitalBox1.value)
             digital.value[0].text.push(digitalText1.value)
-            console.log('첫번째',digital.value)
+            digitalBox1.value = []
+            digitalText1.value = ''
             step1.value = false
             step2.value = true
+            console.log('첫번째',digital.value)
         }
         const onSaveStep2 = () => {
-            digital.value[1].title.push(digitalMainTitle.value[1])
+            onAddDigital()
             digital.value[1].box.push(digitalBox2.value)
             digital.value[1].text.push(digitalText2.value)
-            console.log('두번째',digital.value)
+            digitalBox2.value = []
+            digitalText2.value = ''
             step2.value = false
             step3.value = true
+            console.log('두번째',digital.value)
         }
         const onSaveStep3 = () => {
-            digital.value[2].title.push(digitalMainTitle.value[2])
+            onAddDigital()
             digital.value[2].box.push(digitalBox3.value)
             digital.value[2].text.push(digitalText3.value)
+            digitalBox3.value = []
+            digitalText3.value = ''
             console.log('세번째',digital.value)
             emit('state-complete')
         }
@@ -218,10 +222,12 @@ export default {
         const onPrevStep2 = () => {
             step2.value = false
             step1.value = true
+            onDeleteDigital()
         }
         const onPrevStep3 = () => {
             step3.value = false
             step2.value = true
+            onDeleteDigital()
         }
 
         return {
