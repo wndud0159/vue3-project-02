@@ -18,32 +18,53 @@
         <div v-if="step4" class="flex flex-col items-center space-y-1">
             <div>4. {{digital[3].question}}</div>
         </div>
-        <div v-if="step5" class="flex flex-col items-center space-y-1">
-            <div>5. {{digital[4].question}}</div>
-        </div>
     </div>
 
 
     <!-- step1 -->
     <div v-if="step1 && digital.length" class="w-full">
         <!-- radio section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_box" class="w-8 h-8" type="radio" value='네'><span>네</span>
+                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='저의 소셜미디어는 그대로 유지하겠습니다'><span>그대로 놔두세요</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_box" class="w-8 h-8" type="radio" value='아니요'><span>아니요</span>
+                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='저의 소셜미디어는 모두 삭제하겠습니다'><span>삭제하세요</span>
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
+            </div>
+        </div>
         <!-- checkbox section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_box" class="w-8 h-8" type="checkbox" value="선택형1"><span>선택형1</span>
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
+                <input v-model="digital[0].answer_box2" class="w-8 h-8" type="checkbox" value="카카오"><span>카카오</span>
+                <select v-model="digital[0].box_state1" class=" w-20 py-0.5 text-center border-2">
+                    <option value="">선택</option>
+                    <option value="은 그대로 유지해주세요">유지</option>
+                    <option value="은 삭제해주세요">삭제</option>
+                </select>
+                <input v-model="digital[0].box_name1" class="w-20 text-center border-2 " placeholder="이름" type="text">
             </div>
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_box" class="w-8 h-8" type="checkbox" value="선택형2"><span>선택형2</span>
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
+                <input v-model="digital[0].answer_box2" class="w-8 h-8" type="checkbox" value="네이버"><span>네이버</span>
+                <select v-model="digital[0].box_state2" class=" w-20 py-0.5 text-center border-2">
+                    <option value="">선택</option>
+                    <option value="은 그대로 유지해주세요">유지</option>
+                    <option value="은 삭제해주세요">삭제</option>
+                </select>
+                <input v-model="digital[0].box_name2" class="w-20 text-center border-2 " placeholder="이름" type="text">
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
+                <input v-model="digital[0].answer_box2" class="w-8 h-8" type="checkbox" value="구글"><span>구글</span>
+                <select v-model="digital[0].box_state3" class=" w-20 py-0.5 text-center border-2">
+                    <option value="">선택</option>
+                    <option value="은 그대로 유지해주세요">유지</option>
+                    <option value="은 삭제해주세요">삭제</option>
+                </select>
+                <input v-model="digital[0].box_name3" class="w-20 text-center border-2 " placeholder="이름" type="text">
+            </div>   
+        </div>
         <!-- text section -->
         <div class="w-full flex justify-center mb-10">
             <textarea v-model="digital[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
@@ -55,26 +76,47 @@
     <!-- step2 -->
     <div v-if="step2 && digital.length" class="w-full">
         <!-- radio section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box" class="w-8 h-8" type="radio" value="네"><span>네</span>
+                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='저의 SNS는 그대로 유지하겠습니다'><span>그대로 놔두세요</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box" class="w-8 h-8" type="radio" value="아니요"><span>아니요</span>
+                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='저의 SNS는 모두 삭제하겠습니다'><span>삭제하세요</span>
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
+            </div>
+        </div>
         <!-- checkbox section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box" class="w-8 h-8" type="checkbox" value="선택형1"><span>선택형1</span>
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
+                <input v-model="digital[1].answer_box2" class="w-8 h-8" type="checkbox" value="페이스북"><span>페이스북</span>
+                <select v-model="digital[1].box_state1" class=" w-20 py-0.5 text-center border-2">
+                    <option value="">선택</option>
+                    <option value="은 그대로 유지해주세요">유지</option>
+                    <option value="은 삭제해주세요">삭제</option>
+                </select>
+                <input v-model="digital[1].box_name1" class="w-20 text-center border-2 " placeholder="이름" type="text">
             </div>
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box" class="w-8 h-8" type="checkbox" value="선택형2"><span>선택형2</span>
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
+                <input v-model="digital[1].answer_box2" class="w-8 h-8" type="checkbox" value="트위터"><span>트위터</span>
+                <select v-model="digital[1].box_state2" class=" w-20 py-0.5 text-center border-2">
+                    <option value="">선택</option>
+                    <option value="은 그대로 유지해주세요">유지</option>
+                    <option value="은 삭제해주세요">삭제</option>
+                </select>
+                <input v-model="digital[1].box_name2" class="w-20 text-center border-2 " placeholder="이름" type="text">
             </div>
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box" class="w-8 h-8" type="checkbox" value="선택형3"><span>선택형3</span>
-            </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
+                <input v-model="digital[1].answer_box2" class="w-8 h-8" type="checkbox" value="인스타그램"><span>인스타그램</span>
+                <select v-model="digital[1].box_state3" class=" w-20 py-0.5 text-center border-2">
+                    <option value="">선택</option>
+                    <option value="은 그대로 유지해주세요">유지</option>
+                    <option value="은 삭제해주세요">삭제</option>
+                </select>
+                <input v-model="digital[1].box_name3" class="w-20 text-center border-2 " placeholder="이름" type="text">
+            </div>   
+        </div>
         <!-- text section -->
         <div class="w-full flex justify-center mb-10">
             <textarea v-model="digital[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
@@ -97,10 +139,13 @@
         <!-- checkbox section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[2].answer_box" class="w-8 h-8" type="checkbox" value="선택형1"><span>선택형1</span>
+                <input v-model="digital[2].answer_box" class="w-8 h-8" type="checkbox" value="사전연명치료금지서"><span>사전연명치료금지서</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[2].answer_box" class="w-8 h-8" type="checkbox" value="선택형2"><span>선택형2</span>
+                <input v-model="digital[2].answer_box" class="w-8 h-8" type="checkbox" value="의료대리인"><span>의료대리인</span>
+            </div>
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
             </div>
         </div> -->
         <!-- text section -->
@@ -116,10 +161,10 @@
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[3].answer_box" class="w-8 h-8" type="radio" value='네'><span>네</span>
+                <input v-model="digital[3].answer_box" class="w-8 h-8" type="radio" value="저는 장기 기증을 희망합니다"><span>네</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[3].answer_box" class="w-8 h-8" type="radio" value='아니요'><span>아니요</span>
+                <input v-model="digital[3].answer_box" class="w-8 h-8" type="radio" value=false><span>아니요</span>
             </div>
         </div> -->
         <!-- checkbox section -->
@@ -139,49 +184,21 @@
         </div>
     </div>
 
-    <!-- step5-->
-    <div v-if="step5 && digital.length" class="w-full">
-        <!-- radio section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[4].answer_box" class="w-8 h-8" type="radio" value='네'><span>네</span>
-            </div>
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[4].answer_box" class="w-8 h-8" type="radio" value='아니요'><span>아니요</span>
-            </div>
-        </div> -->
-        <!-- checkbox section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[4].answer_box" class="w-8 h-8" type="checkbox" value="선택형1"><span>선택형1</span>
-            </div>
-            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[4].answer_box" class="w-8 h-8" type="checkbox" value="선택형2"><span>선택형2</span>
-            </div>
-        </div> -->
-        <!-- text section -->
-        <div class="w-full flex justify-center mb-10">
-            <textarea v-model="digital[4].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
-            rows="4">
-            </textarea>
-        </div>
-    </div>
-
     
     <!-- button section -->
     <div v-if="digital.length" class="flex  justify-center w-full">
         <div v-if="step1" class="">
             <button @click="onPrevStep1" class=" bg-gray-100 py-3 px-10 rounded-lg mr-5">이전으로</button>    
-            <button v-if="!digital[0].answer_text && !digital[0].answer_box.length" class=" bg-gray-100 py-3 px-10 rounded-lg">저장 / 다음</button>    
-            <button v-if="digital[0].answer_text || digital[0].answer_box.length" @click="onSaveStep1" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>
+            <button v-if="!digital[0].answer_text && !digital[0].answer_box1.length && !digital[0].answer_box2.length" class=" bg-gray-100 py-3 px-10 rounded-lg">저장 / 다음</button>    
+            <button v-if="digital[0].answer_text || digital[0].answer_box1.length || digital[0].answer_box2.length" @click="onSaveStep1" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>
             <div>
                 <button @click="onLaterStep1" class="bg-green-400 py-3 px-10 rounded-lg mt-5 w-full">나중에 적겠습니다</button>
             </div>
         </div> 
         <div v-if="step2" class=" "> 
             <button @click="onPrevStep2" class=" bg-gray-100 py-3 px-10 rounded-lg mr-5">이전으로</button>    
-            <button v-if="!digital[1].answer_text && !digital[1].answer_box.length" class=" bg-gray-100 py-3 px-10 rounded-lg">저장 / 다음</button>    
-            <button v-if="digital[1].answer_text || digital[1].answer_box.length" @click="onSaveStep2" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>
+            <button v-if="!digital[1].answer_text && !digital[1].answer_box1.length && !digital[1].answer_box2.length" class=" bg-gray-100 py-3 px-10 rounded-lg">저장 / 다음</button>    
+            <button v-if="digital[1].answer_text || digital[1].answer_box1.length || digital[1].answer_box2.length" @click="onSaveStep2" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>
             <div>
                 <button @click="onLaterStep2" class="bg-green-400 py-3 px-10 rounded-lg mt-5 w-full">나중에 적겠습니다</button>
             </div>
@@ -200,14 +217,6 @@
             <button v-if="digital[3].answer_text || digital[3].answer_box.length" @click="onSaveStep4" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>  
             <div>
                 <button @click="onLaterStep4" class="bg-green-400 py-3 px-10 rounded-lg mt-5 w-full">나중에 적겠습니다</button>
-            </div>
-        </div> 
-        <div v-if="step5" class=" ">
-            <button @click="onPrevStep5" class=" bg-gray-100 py-3 px-10 rounded-lg mr-5">이전으로</button>    
-            <button v-if="!digital[4].answer_text && !digital[4].answer_box.length" class=" bg-gray-100 py-3 px-10 rounded-lg">저장 / 다음</button>  
-            <button v-if="digital[4].answer_text || digital[4].answer_box.length" @click="onSaveStep5" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>  
-            <div>
-                <button @click="onLaterStep5" class="bg-green-400 py-3 px-10 rounded-lg mt-5 w-full">나중에 적겠습니다</button>
             </div>
         </div> 
     </div>
@@ -230,7 +239,6 @@ export default {
         const step2 = ref(false)
         const step3 = ref(false)
         const step4 = ref(false)
-        const step5 = ref(false)
 
         const digital = ref([])
               
@@ -324,26 +332,7 @@ export default {
                     })
                 })
             } catch(error) {
-                console.log('digital step4 error : ', error.message)
-            }
-            step4.value = false
-            step5.value = true
-            window.scrollTo(0,0)
-        }
-        const onSaveStep5 = async () => {
-            digital.value[4].iscomplete = true
-            try {
-                await CHECKLISTS_COLLECTION.where('uid', '==', currentUser.value.uid).get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        doc.ref.update({
-                            digital: digital.value,
-                            create_at : Date.now(),
-                        })
-                    })
-                })
-            } catch(error) {
-                console.log('digital step5 error : ', error.message)
+                console.log('digital step3 error : ', error.message)
             }
             router.push('/welldyingchecklist')
         }
@@ -366,11 +355,6 @@ export default {
             step3.value = true
             window.scrollTo(0,0)
         }
-        const onPrevStep5 = () => {
-            step5.value = false
-            step4.value = true
-            window.scrollTo(0,0)
-        }
 
         const onLaterStep1 = () => {
             step1.value = false
@@ -388,11 +372,6 @@ export default {
             window.scrollTo(0,0)
         }
         const onLaterStep4 = () => {
-            step4.value = false
-            step5.value = true
-            window.scrollTo(0,0)
-        }
-        const onLaterStep5 = () => {
             router.push('/welldyingchecklist')
         }
 
@@ -401,26 +380,22 @@ export default {
             step2,
             step3,
             step4,
-            step5,
 
 
             onSaveStep1,
             onSaveStep2,
             onSaveStep3,
             onSaveStep4,
-            onSaveStep5,
 
             onPrevStep1,
             onPrevStep2,
             onPrevStep3,
             onPrevStep4,
-            onPrevStep5,
 
             onLaterStep1,
             onLaterStep2,
             onLaterStep3,
             onLaterStep4,
-            onLaterStep5,
 
 
             digital,

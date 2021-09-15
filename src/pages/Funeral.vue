@@ -61,17 +61,20 @@
             </div>
         </div> -->
         <!-- checkbox section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="checkbox" value="선택형1"><span>선택형1</span>
+                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="저는 장례식장에서 장례식을 진행하고 싶습니다"><span>장례식장</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="checkbox" value="선택형2"><span>선택형2</span>
+                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="저는 집에서 장례식을 진행하고 싶습니다"><span>집</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="checkbox" value="선택형3"><span>선택형3</span>
+                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="저는 종교시설에서 장례식을 진행하고 싶습니다"><span>종교시설</span>
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="기타"><span>기타</span>
+            </div>
+        </div>
         <!-- text section -->
         <div class="w-full flex justify-center mb-10">
             <textarea v-model="funeral[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
@@ -83,14 +86,20 @@
     <!-- step3 -->
     <div v-if="step3 && funeral.length" class="w-full">
         <!-- radio section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='네'><span>네</span>
+                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='저는 제 장례식이 즐겁게 진행되기를 원해요'><span>즐겁게</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='아니요'><span>아니요</span>
+                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='저는 제 장례식이 엄중하게 진행되기를 원해요'><span>엄중하게</span>
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='저는 제 장례식이 전통적 방식으로 진행되기를 원해요'><span>전통적 방식으로</span>
+            </div>
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='저는 제 장례식이 종교 방식대로 진행되기를 원해요'><span>종교 방식대로</span>
+            </div>
+        </div>
         <!-- checkbox section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -101,24 +110,30 @@
             </div>
         </div> -->
         <!-- text section -->
-        <div class="w-full flex justify-center mb-10">
+        <!-- <div class="w-full flex justify-center mb-10">
             <textarea v-model="funeral[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
-        </div>
+        </div> -->
     </div>
 
     <!-- step4-->
     <div v-if="step4 && funeral.length" class="w-full">
         <!-- radio section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[3].answer_box" class="w-8 h-8" type="radio" value='네'><span>네</span>
+                <input v-model="funeral[3].answer_box" class="w-8 h-8" type="radio" value='저는 매장 방식으로 안장되고 싶습니다'><span>매장</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="funeral[3].answer_box" class="w-8 h-8" type="radio" value='아니요'><span>아니요</span>
+                <input v-model="funeral[3].answer_box" class="w-8 h-8" type="radio" value='저는 화장 방식으로 안장되고 싶습니다'><span>화장</span>
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="funeral[3].answer_box" class="w-8 h-8" type="radio" value='저는 수목장 방식으로 안장되고 싶습니다'><span>수목장</span>
+            </div>
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="funeral[3].answer_box" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
+            </div>
+        </div>
         <!-- checkbox section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">

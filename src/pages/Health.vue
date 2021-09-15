@@ -92,14 +92,17 @@
             </div>
         </div> -->
         <!-- checkbox section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="선택형1"><span>선택형1</span>
+                <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="사전연명치료금지서"><span>사전연명치료금지서</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="선택형2"><span>선택형2</span>
+                <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="의료대리인"><span>의료대리인</span>
             </div>
-        </div> -->
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
+            </div>
+        </div>
         <!-- text section -->
         <div class="w-full flex justify-center mb-10">
             <textarea v-model="health[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
@@ -111,14 +114,14 @@
     <!-- step4-->
     <div v-if="step4 && health.length" class="w-full">
         <!-- radio section -->
-        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="health[3].answer_box" class="w-8 h-8" type="radio" value='네'><span>네</span>
+                <input v-model="health[3].answer_box" class="w-8 h-8" type="radio" value="저는 장기 기증을 희망합니다"><span>네</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="health[3].answer_box" class="w-8 h-8" type="radio" value='아니요'><span>아니요</span>
+                <input v-model="health[3].answer_box" class="w-8 h-8" type="radio" value=false><span>아니요</span>
             </div>
-        </div> -->
+        </div>
         <!-- checkbox section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -129,11 +132,11 @@
             </div>
         </div> -->
         <!-- text section -->
-        <div class="w-full flex justify-center mb-10">
+        <!-- <div class="w-full flex justify-center mb-10">
             <textarea v-model="health[3].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
-        </div>
+        </div> -->
     </div>
 
     

@@ -47,6 +47,9 @@ const finance = [
     {
         question: '열심히 일해서 쌓아온 당신의 자산, 부동산, 은행 계좌, 주식을 관리하는 사람은 누군가요? 가족들이 누구에게 연락해야 할 지 알려주세요.',
         answer_box: [],
+        answer_box_text: [],
+        box_name1: '',
+        box_name2: '',
         answer_text: '',
         iscomplete: false
     },
@@ -87,19 +90,19 @@ const funeral = [
         iscomplete: false
     },
     {
-        question: '장례식은 어디서 진행되면 좋을까요? (장례식장, 집, 종교시설, 기타)',
+        question: '장례식은 어디서 진행되면 좋을까요?',
         answer_box: [],
         answer_text: '',
         iscomplete: false
     },
     {
-        question: '당신과의 마지막 인사는 어떤 분위기에서 나누면 좋을까요? (즐겁게, 엄중하게, 전통적 방식으로, 종교 방식대로)',
+        question: '당신과의 마지막 인사는 어떤 분위기에서 나누면 좋을까요?',
         answer_box: [],
         answer_text: '',
         iscomplete: false
     },
     {
-        question: '이제 다시 자연으로 돌아갈 시간이에요. 어떤 방식으로 자연과 함께하고 싶으신가요? 안장 방식을 말씀해주세요. (매장, 화장, 수목장, 기타)',
+        question: '이제 다시 자연으로 돌아갈 시간이에요. 어떤 방식으로 자연과 함께하고 싶으신가요? 안장 방식을 말씀해주세요.',
         answer_box: [],
         answer_text: '',
         iscomplete: false
@@ -109,13 +112,27 @@ const funeral = [
 const digital = [
     {
         question: '네이버, 카카오를 비롯한 많은 사이트의 이메일 계정을 하나하나씩 떠올려보세요. 그냥 놔둘지, 삭제할지 고민해볼까요? 이 사람에게만 알려주고 싶으시면, 마루에게만 조용히 말해주세요.',
-        answer_box: [],
+        answer_box1: [],
+        answer_box2: [],
+        box_state1: '',
+        box_state2: '',
+        box_state3: '',
+        box_name1: '',
+        box_name2: '',
+        box_name3: '',
         answer_text: '',
         iscomplete: false
     },
     {
         question: '이제는 소셜미디어(SNS) 차례에요. 페이스북, 인스타그램, 트위터 등 당신의 기록이 담긴 계정들을 어떻게 정리할까요?',
-        answer_box: [],
+        answer_box1: [],
+        answer_box2: [],
+        box_state1: '',
+        box_state2: '',
+        box_state3: '',
+        box_name1: '',
+        box_name2: '',
+        box_name3: '',
         answer_text: '',
         iscomplete: false
     },
@@ -127,12 +144,6 @@ const digital = [
     },
     {
         question: '당신이 죽으면 디지털 자산(돈 가치가 있는 것)은 어떻게 되기를 원하십니까?',
-        answer_box: [],
-        answer_text: '',
-        iscomplete: false
-    },
-    {
-        question: '당신이 죽으면 사랑하는 사람들이 당신의 계정과 기기에 어떻게 액세스할 것입니까?',
         answer_box: [],
         answer_text: '',
         iscomplete: false
