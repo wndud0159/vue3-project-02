@@ -124,7 +124,7 @@
 <script>
 import {ref, onBeforeMount, computed} from 'vue'
 import store from '../store'
-import {CHECKLISTS_COLLECTION, HEART_COLLECTION, USER_COLLECTION} from '../firebase'
+import {CHECKLISTS_COLLECTION, USER_COLLECTION} from '../firebase'
 export default {
     emits: ["state-complete", 'state-incomplete'],
     setup(pops, {emit}) {

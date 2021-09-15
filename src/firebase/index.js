@@ -21,10 +21,5 @@ export const storage = firebase.storage()
 
 
 export const USER_COLLECTION = database.collection('users')
-export const HEART_COLLECTION = database.collection('heart')
-export const FINANCE_COLLECTION = database.collection('finance')
-export const DIGITAL_COLLECTION = database.collection('digital')
-export const MAINTAIN_COLLECTION = database.collection('maintain')
-export const PETS_COLLECTION = database.collection('pets')
-export const INHERITANCES_COLLECTION = database.collection('inheritances')
 export const CHECKLISTS_COLLECTION = database.collection('checklists')
+export const INHERITANCES_COLLECTION = database.collection('inheritances')
