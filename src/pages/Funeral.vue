@@ -99,6 +99,9 @@
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
                 <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='저는 제 장례식이 종교 방식대로 진행되기를 원해요'><span>종교 방식대로</span>
             </div>
+            <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
+                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
+            </div>
         </div>
         <!-- checkbox section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
@@ -110,11 +113,11 @@
             </div>
         </div> -->
         <!-- text section -->
-        <!-- <div class="w-full flex justify-center mb-10">
+        <div class="w-full flex justify-center mb-10">
             <textarea v-model="funeral[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
-        </div> -->
+        </div>
     </div>
 
     <!-- step4-->

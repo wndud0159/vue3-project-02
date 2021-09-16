@@ -122,13 +122,13 @@
         <!-- checkbox section -->
         <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="finance[3].answer_box" class="w-8 h-8" type="checkbox" :value="`변호사`"><span>변호사</span><input v-model="finance[3].box_name1" class="w-20 text-center border-2" placeholder="이름" type="text">
+                <input v-model="finance[3].answer_box" class="w-8 h-8" type="radio" :value="`변호사`"><span>변호사</span><input v-model="finance[3].box_name1" class="w-20 text-center border-2" placeholder="이름" type="text">
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="finance[3].answer_box" class="w-8 h-8" type="checkbox" :value="`회계사`"><span>회계사</span><input v-model="finance[3].box_name2" class="w-20 text-center border-2" placeholder="이름"  type="text">
+                <input v-model="finance[3].answer_box" class="w-8 h-8" type="radio" :value="`회계사`"><span>회계사</span><input v-model="finance[3].box_name2" class="w-20 text-center border-2" placeholder="이름"  type="text">
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input class="w-8 h-8" type="checkbox" value=""><span>기타</span>
+                <input v-model="finance[3].answer_box" class="w-8 h-8" type="radio" value="기타"><span>기타</span>
             </div>
         </div>
         <!-- text section -->

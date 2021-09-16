@@ -109,7 +109,7 @@
                 <div class="flex items-center">
                     <div class=" relative">
                         <i class="fas fa-chalkboard text-white bg-yellow-500 opacity-70 px-3 py-2.5 rounded-full text-2xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeDigital.length}}/5</div>
+                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeDigital.length}}/4</div>
                     </div>
                     <div class="flex ml-5">
                         <div class=" space-y-2 md:space-y-1">
@@ -153,6 +153,24 @@
                         <div class=" space-y-2 md:space-y-1">
                             <div class="-mb-1">버킷리스트</div>
                             <div>삶을 충만하게 채울 권리</div>
+                        </div>
+                    </div>
+                </div>
+                    <i class="fas fa-chevron-right"></i>
+            </div>
+            </router-link>
+
+            <!-- will -->
+            <router-link to="/will"  class="w-full mb-10">
+            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
+                <div class="flex items-center">
+                    <div class=" relative">
+                        <i class="fas fa-microphone text-white bg-indigo-600 opacity-70 px-4 py-2 rounded-full text-3xl"></i>
+                    </div>
+                    <div class="flex ml-5">
+                        <div class=" space-y-2 md:space-y-1">
+                            <div class="-mb-1">유언장 작성</div>
+                            <div>작성하신 답변으로 유언장을 만들어보세요</div>
                         </div>
                     </div>
                 </div>

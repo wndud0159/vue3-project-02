@@ -26,17 +26,17 @@
         <!-- radio section -->
         <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='저의 소셜미디어는 그대로 유지하겠습니다'><span>그대로 놔두세요</span>
+                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='저의 소셜미디어는 그대로 유지하겠습니다'><span>전부 그대로 놔두세요</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='저의 소셜미디어는 모두 삭제하겠습니다'><span>삭제하세요</span>
+                <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='저의 소셜미디어는 모두 삭제하겠습니다'><span>전부 삭제하세요</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
                 <input v-model="digital[0].answer_box1" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
             </div>
         </div>
         <!-- checkbox section -->
-        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
                 <input v-model="digital[0].answer_box2" class="w-8 h-8" type="checkbox" value="카카오"><span>카카오</span>
                 <select v-model="digital[0].box_state1" class=" w-20 py-0.5 text-center border-2">
@@ -64,7 +64,7 @@
                 </select>
                 <input v-model="digital[0].box_name3" class="w-20 text-center border-2 " placeholder="이름" type="text">
             </div>   
-        </div>
+        </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-10">
             <textarea v-model="digital[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
@@ -78,17 +78,17 @@
         <!-- radio section -->
         <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='저의 SNS는 그대로 유지하겠습니다'><span>그대로 놔두세요</span>
+                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='저의 SNS는 그대로 유지하겠습니다'><span>전부 그대로 놔두세요</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='저의 SNS는 모두 삭제하겠습니다'><span>삭제하세요</span>
+                <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='저의 SNS는 모두 삭제하겠습니다'><span>전부 삭제하세요</span>
             </div>
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
                 <input v-model="digital[1].answer_box1" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
             </div>
         </div>
         <!-- checkbox section -->
-        <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
+        <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-6 w-full">
                 <input v-model="digital[1].answer_box2" class="w-8 h-8" type="checkbox" value="페이스북"><span>페이스북</span>
                 <select v-model="digital[1].box_state1" class=" w-20 py-0.5 text-center border-2">
@@ -116,7 +116,7 @@
                 </select>
                 <input v-model="digital[1].box_name3" class="w-20 text-center border-2 " placeholder="이름" type="text">
             </div>   
-        </div>
+        </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-10">
             <textarea v-model="digital[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"

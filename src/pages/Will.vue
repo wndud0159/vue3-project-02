@@ -35,13 +35,49 @@
         <div  class=" ml-2 flex">[ 녹음불가 /<div class="text-primary "> 저장 혹은 취소 후 마이크 이용가능</div> ]</div>
         </div>
     </div>
-    <div class= "pt-1 w-full text-xs md:text-base shadow-md bg-white px-6 transition-all pb-40 md:pb-0  "> 
-      <div class="relative flex flex-col py-5  border-gray-200">
+    <div class= " w-full text-xs md:text-base shadow-md bg-white md:px-6 transition-all pb-40 md:pb-0  "> 
+      <div class="relative flex flex-col md:py-5  border-gray-200">
                 <div class="space-y-2 ">
                     <div class="md:flex flex-none">
-                        <div class="md:w-1/2 w-full">
+                        <div class=" h-auto  md:w-1/2 w-full flex flex-col py-3 px-1 md:px-6 bg-green-100 opacity-80 border-l-8  border-green-900 border-opacity-30">
+                          <button v-if="isChecklistButton" @click="showChecklistByComplete" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">답변했던 질문으로 유언장 만들기</button>
+                          <button v-if="isPdfButton" @click="onTextToPdfDownload" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">나만의 유언장 PDF 다운로드</button>
+                          <!-- will checklist section-->
+                          <div v-if="checklist.length || isChecklist" class="flex flex-col text-lg space-y-4">
+                            <div class="text-xl font-bold mb-3">원하시는 질문을 선택하시고 확인을 눌러주세요</div>
+                            <div>건강</div>
+                            <div v-if="checklist.health[3].iscomplete" class="flex items-center relative "><input  v-model="userSelection" :value="`${checklist.health[3].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.health[3].question}}</span></div>
+                            <div>재무</div>
+                            <div v-if="checklist.finance[0].iscomplete"  class="flex items-center "><input  v-model="userSelection" :value="`${checklist.finance[0].question}`" class="w-12 h-12 mr-3" type="checkbox"><span>{{checklist.finance[0].question}}</span></div>
+                            <div v-if="checklist.finance[2].iscomplete"  class="flex items-center "><input  v-model="userSelection" :value="`${checklist.finance[2].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.finance[2].question}}</span></div>
+                            <div v-if="checklist.finance[3].iscomplete"  class="flex "><input  v-model="userSelection" :value="`${checklist.finance[3].question}`" class="w-12 h-12 mr-3" type="checkbox"><span>{{checklist.finance[3].question}}</span></div>
+                            <div>유지</div>
+                            <div v-if="checklist.testament[0].iscomplete"  class="flex  items-center"><input  v-model="userSelection" :value="`${checklist.testament[0].question}`" class="w-11 h-11 mr-3" type="checkbox"><span>{{checklist.testament[0].question}}</span></div>
+                            <div v-if="checklist.testament[1].iscomplete"  class="flex items-center "><input  v-model="userSelection" :value="`${checklist.testament[1].question}`" class="w-12 h-12 mr-3" type="checkbox"><span>{{checklist.testament[1].question}}</span></div>
+                            <div v-if="checklist.testament[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.testament[2].question}`" class="w-14 h-14 mr-3" type="checkbox"><span>{{checklist.testament[2].question}}</span></div>
+                            <div v-if="checklist.testament[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.testament[3].question}`" class="w-16 h-16 mr-3" type="checkbox"><span>{{checklist.testament[3].question}}</span></div>
+                            <div>장례식</div>
+                            <div v-if="checklist.funeral[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[0].question}`" class="w-20 h-20 mr-3" type="checkbox"><span>{{checklist.funeral[0].question}}</span></div>
+                            <div v-if="checklist.funeral[1].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[1].question}`" class="w-4 h-4 mr-3" type="checkbox"><span>{{checklist.funeral[1].question}}</span></div>
+                            <div v-if="checklist.funeral[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[2].question}`" class="w-7 h-7 mr-3" type="checkbox"><span>{{checklist.funeral[2].question}}</span></div>
+                            <div v-if="checklist.funeral[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[3].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.funeral[3].question}}</span></div>
+                            <div>디지털</div>
+                            <div v-if="checklist.digital[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[0].question}`" class="w-16 h-16 mr-3" type="checkbox"><span>{{checklist.digital[0].question}}</span></div>
+                            <div v-if="checklist.digital[1].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[1].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.digital[1].question}}</span></div>
+                            <div v-if="checklist.digital[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[2].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[2].question}}</span></div>
+                            <div v-if="checklist.digital[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[3].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[3].question}}</span></div>
+                            <div>반려동물</div>
+                            <div v-if="checklist.pet[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.pet[0].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.pet[0].question}}</span></div>
+                            <button @click="onAnswerToText" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">확인</button>
+                          </div>
+                          <!-- will text seciton -->
+                          <div v-if="isUserWill" id="userWill" class=" space-x-4 text-xl">
+                            <span v-for="item in userWill" :key="item">{{item}}</span>
+                          </div>
+                        </div>
+                        <div class="md:w-1/2 w-full md:ml-6">
                             <div class="mb-2">
-                                <textarea placeholder="음성을 녹음하면 텍스트로 변환됩니다." readonly v-model="speechToText" class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
+                                <textarea placeholder="음성을 녹음하면 텍스트로 변환되는곳입니다" readonly v-model="speechToText" class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
                                  ></textarea>
                             </div>
                             <div  class="space-y-3" v-if="recordings.length > 0">
@@ -53,30 +89,6 @@
                             </div>
                         </div>
 
-                        <div class=" mt-4 md:mt-0 md:w-1/2 w-full flex flex-col h-full md:ml-6 py-3 px-6 bg-green-100 opacity-80 border-l-8  border-green-900 border-opacity-30">
-                          <div>
-                            <div>예</div>
-                            <ul class=" ml-5 list-disc mb-3">
-                                <li>나는 ooo이다. 오늘은 0000년 00월 00일이다. 나는 사후를 대비하기 위해서 내가 보유하고 있는 서울시 00구 000대로 000번지 00 아파트 00동 00호와 경기도 00시 00동 000번지 땅 그리고 사망당시 일체의 금융재산을 아들 000에게 전부 상속한다.</li>
-                            </ul>
-                          </div>
-                          <div class=" px-6 py-3 space-y-3 shadow-2xl bg-green-400 border-green-900 border-l-8">
-                            <div class=" font-bold">* 아래의 리스트를 말해야합니다. 빠지지 않도록 체크하면서 유언장을 구술하십시오.</div>
-                            <div class="flex items-center justify-center shadow-2xl  w-full py-4 rounded-xl bg-white">
-                            <input v-if="checklist1" @click="closeChecklist1" class="willChecklist mr-2" type="radio" value=1><span v-if="checklist1">유언의 취지 및 내용</span>
-                            <input v-if="checklist2" @click="closeChecklist2" class="willChecklist mr-2" type="radio" value=1><span v-if="checklist2">유언자 성명</span>
-                            <input v-if="checklist3" @click="closeChecklist3" class="willChecklist mr-2" type="radio" value=1><span v-if="checklist3">유언자 유언한 날짜 연월일</span>
-                            <input v-if="checklist4" @click="closeChecklist4" class="willChecklist mr-2" type="radio" value=1><span v-if="checklist4">증인 1명</span>
-                            <input v-if="checklist5" @click="closeChecklist5" class="willChecklist mr-2" type="radio" value=1><span v-if="checklist5">증인 성명</span>
-                            <input v-if="checklist6" @click="closeChecklist6" class="willChecklist mr-2" type="radio" value=1>
-                            <div v-if="checklist6" class="flex flex-col">
-                            <span>증인은 유언의 정확함</span>
-                            <div class="flex flex-col">(예시 : 저는 증인 000익고, 유언자 000의 유언이 정확함을 확인한다. )</div>
-                            </div>
-                            <div v-if="checklist7">모두 체크 하셨습니다.</div>
-                            </div>
-                          </div>
-                        </div>
                     </div>
                 </div> 
             </div>
@@ -90,70 +102,205 @@
 import RecorderService from '../shared/RecorderService'
 import {onBeforeMount, ref, computed} from 'vue'
 import store from '../store'
-import {USER_COLLECTION, storage} from '../firebase'
+import {USER_COLLECTION, CHECKLISTS_COLLECTION, storage} from '../firebase'
 import {useRouter} from 'vue-router'
 import axios from 'axios'
+import moment from 'moment'
+import html2pdf from 'html2pdf.js'
 
 
 export default {
   setup() {
-    onBeforeMount(() => {
-      const router = useRouter()
-        const currentUser = computed(() => store.state.user)
-            if(currentUser.value === null) {
-                router.push('/login')
-            }
+    const router = useRouter()
+    const currentUser = computed(() => store.state.user)
+    const isChecklist = ref(false)
+    const isPdfButton = ref(false)
+    const isChecklistButton = ref(true)
+    const isUserWill = ref(false)
+    const checklist = ref([])
+    const userSelection = ref([])
+    const userWill = ref([])
+
+
+    onBeforeMount(async() => {
+      if(currentUser.value === null) {
+          router.push('/login')
+      }
     })
 
+    const showChecklistByComplete =  async() => {
+       await CHECKLISTS_COLLECTION.where('uid', '==', currentUser.value.uid).get()
+        .then((querySnapshot) => {
+          if(querySnapshot.docs.length > 0) {
+            const documentSnapshot = querySnapshot.docs[0]
+            checklist.value = documentSnapshot.data()
+            console.log(checklist.value)
+          }
+        })
+      isChecklist.value = true
+    }
 
-    const checklist1 = ref(true)
-    const checklist2 = ref(false)
-    const checklist3 = ref(false)
-    const checklist4 = ref(false)
-    const checklist5 = ref(false)
-    const checklist6 = ref(false)
-    const checklist7 = ref(false)
+    const onAnswerToText = async () => {
+      userWill.value.push(moment(Date.now()).format('YYYY년 MM월 DD일'))
+      userWill.value.push('저는 ' + currentUser.value.username + '입니다')
+      userWill.value.push('저의 주소는 ' + currentUser.value.address + '입니다')
+      userSelection.value.forEach(element => {
+        // 건강
+        if(element === checklist.value.health[3].question){
+          if(checklist.value.health[3].answer_box !== 'false') {
+            userWill.value.push(checklist.value.health[3].answer_box)
+          }
+        }
+        // 재무
+        if(element === checklist.value.finance[0].question) {
+          userWill.value.push(checklist.value.finance[0].answer_text)
+        }
+        if(element === checklist.value.finance[2].question) {
+          userWill.value.push(checklist.value.finance[2].answer_text)
+        }
+        if(element === checklist.value.finance[3].question) {
+          if(checklist.value.finance[3].answer_box === '기타') {
+            userWill.value.push(checklist.value.finance[3].answer_text)
+          } else {
+            userWill.value.push('나의 재산에 관해서는')
+            userWill.value.push(checklist.value.finance[3].answer_box + ' ' + checklist.value.finance[3].box_name1 + checklist.value.finance[3].box_name2 + '에게 연락하세요')
+          }
+          
+        }
+        // 유언
+        if(element === checklist.value.testament[0].question) {
+          userWill.value.push(checklist.value.testament[0].answer_text)
+        }
+        if(element === checklist.value.testament[1].question) {
+          userWill.value.push(checklist.value.testament[1].answer_text)
+        }
+        if(element === checklist.value.testament[2].question) {
+          userWill.value.push(checklist.value.testament[2].answer_text)
+        }
+        if(element === checklist.value.testament[3].question) {
+          userWill.value.push(checklist.value.testament[3].answer_text)
+        }
+        // 장례식
+        if(element === checklist.value.funeral[0].question) {
+          userWill.value.push(checklist.value.funeral[0].answer_text)
+        }
+        if(element === checklist.value.funeral[1].question) {
+          if(checklist.value.funeral[1].answer_box === '기타') {
+            userWill.value.push(checklist.value.funeral[1].answer_text)
+          } else {
+            userWill.value.push(checklist.value.funeral[1].answer_box)
+          }
+        }
+        if(element === checklist.value.funeral[2].question) {
+          if(checklist.value.funeral[2].answer_box === '기타') {
+            userWill.value.push(checklist.value.funeral[2].answer_text)
+          } else {
+            userWill.value.push(checklist.value.funeral[2].answer_box)
+          }
+        }
+        if(element === checklist.value.funeral[3].question) {
+          if(checklist.value.funeral[3].answer_box === '기타') {
+            userWill.value.push(checklist.value.funeral[3].answer_text)
+          } else {
+            userWill.value.push(checklist.value.funeral[3].answer_box)
+          }
+        }
+        // 디지털
+        if(element === checklist.value.digital[0].question) {
+          if(checklist.value.digital[0].answer_box1 === '기타') {
+            userWill.value.push(checklist.value.digital[0].answer_text)
+          } else {
+            userWill.value.push(checklist.value.digital[0].answer_box1)
+          }
+        }
+        if(element === checklist.value.digital[1].question) {
+          if(checklist.value.digital[1].answer_box1 === '기타') {
+            userWill.value.push(checklist.value.digital[1].answer_text)
+          } else {
+            userWill.value.push(checklist.value.digital[1].answer_box1)
+          }
+        }
+        if(element === checklist.value.digital[2].question) {
+          userWill.value.push(checklist.value.digital[2].answer_text)
+        }
+        if(element === checklist.value.digital[3].question) {
+          userWill.value.push(checklist.value.digital[3].answer_text)
+        }
+        // 반려동물
+        if(element === checklist.value.pet[0].question) {
+          userWill.value.push(checklist.value.pet[0].answer_text)
+        }
+      })
+      // userWill.value.forEach(element => {
+      //   console.log(element)
+      // })
+      isChecklist.value = false
+      isChecklistButton.value = false
+      isPdfButton.value = true
+      isUserWill.value = true
+    }
 
-    const closeChecklist1 = () => {
-      checklist1.value = false
-      checklist2.value = true
-    }
-    const closeChecklist2 = () => {
-      checklist2.value = false
-      checklist3.value = true 
-    }
-    const closeChecklist3 = () => {
-      checklist3.value = false
-      checklist4.value = true
-    }
-    const closeChecklist4 = () => {
-      checklist4.value = false
-      checklist5.value = true
-    }
-    const closeChecklist5 = () => {
-      checklist5.value = false
-      checklist6.value = true
-    }
-    const closeChecklist6 = () => {
-      checklist6.value = false
-      checklist7.value = true
-    }
+    const onTextToPdfDownload = () => {
+           
+            let data = document.getElementById('userWill')
+            console.log('check : ', data)
+           
+            const options = {
+                filename: `invoice-#003.pdf`,
+                margin: 0,
+                image: {type: 'jpeg', quality: 0.95 },
+                html2canvas: { scrollY: 0, scale: 1, dpi: 400, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compressPDF: true }
+            }
+
+            try {
+
+              html2pdf().set(options).from(data).toPdf().output('bloburl').then(async (result) => {
+                  console.log('blob check : ', result)
+                  // console.log('url check : ', blobUrl)
+                  const pdf = await fetch(result).then(r=> r.blob()).then(blobFile=> new File([blobFile], "pdffile", {
+                      type: 'application/pdf'
+                  }));
+                  const blobUrl = window.URL.createObjectURL(pdf)
+                  console.log(typeof blobUrl)
+                  axios({
+                      url: blobUrl,
+                      method: 'GET',
+                      responseType: 'blob',
+                      // headers : {
+                      //     'Content-Type': 'application/pdf'
+                      // }
+                  }).then(response => {
+                      console.log('success', response)
+                      const url = window.URL.createObjectURL(new Blob([response.data]));
+                      const link = document.createElement('a');
+                      link.href = url;
+                      link.setAttribute('download', `'from_iback_${Date.now()}.pdf`);
+                      document.body.appendChild(link);
+                      link.click();
+                  }).catch(error => {
+                      console.log('fail', error.message)
+                      alert('axios error', error.message)
+                  })
+              })
+            } catch (error) {
+                alert('html2pdf error : ', error.message)
+            }
+        }
+    
 
 
     return {
-      checklist1,
-      checklist2,
-      checklist3,
-      checklist4,
-      checklist5,
-      checklist6,
-      checklist7,
-      closeChecklist1,
-      closeChecklist2,
-      closeChecklist3,
-      closeChecklist4,
-      closeChecklist5,
-      closeChecklist6,
+      onAnswerToText,
+      showChecklistByComplete,
+      checklist,
+      isChecklist,
+      isChecklistButton,
+      isPdfButton,
+      isUserWill,
+      userSelection,
+      userWill,
+      onTextToPdfDownload,
     }
   },
   data () {
