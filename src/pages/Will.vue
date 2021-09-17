@@ -44,7 +44,7 @@
                           <button v-if="isPdfButton" @click="onTextToPdfDownload" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">나만의 유언장 PDF 다운로드</button>
                           <!-- will checklist section-->
                           <div v-if="checklist.length || isChecklist" class="flex flex-col text-lg space-y-4">
-                            <div class="text-xl font-bold mb-3">원하시는 질문을 선택하시고 확인을 눌러주세요</div>
+                            <div class="text-xl font-bold mb-3">원하시는 질문을 선택하시고 확인을 눌러주세요<router-link to="welldyingchecklist" class="text-blue-700">(계획을 세우면 선택할 수 있습니다 이동하기)</router-link></div>
                             <div>건강</div>
                             <div v-if="checklist.health[3].iscomplete" class="flex items-center relative "><input  v-model="userSelection" :value="`${checklist.health[3].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.health[3].question}}</span></div>
                             <div>재무</div>
@@ -134,7 +134,9 @@ export default {
           if(querySnapshot.docs.length > 0) {
             const documentSnapshot = querySnapshot.docs[0]
             checklist.value = documentSnapshot.data()
-            console.log(checklist.value)
+          } else {
+            alert('현재 리스트가 존재하지 않습니다 나만의 계획을 세워보세요')
+            router.push('/welldyingchecklist')
           }
         })
       isChecklist.value = true

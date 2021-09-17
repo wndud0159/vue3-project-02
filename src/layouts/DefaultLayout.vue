@@ -148,7 +148,7 @@ export default {
         const onIbackIntroduce = () => {
           window.open('https://bigwavvv.notion.site/Bigwavv-3faaf9ea2d694c209e4f4ccfe0922698')
         } 
-
+        
 
         // runs after firebase is initialized
         auth.onAuthStateChanged(function(user) {
