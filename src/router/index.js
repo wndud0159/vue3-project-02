@@ -29,7 +29,7 @@ import Bucketlist from '../pages/Bucketlist.vue'
 const routes = [
     //메뉴
     { path: '/', name: 'home', component: Home, title: '홈', icon: 'fas fa-home text-xl', meta: { isMenu: true, requireAuth: true} },
-    { path: '/', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },
+    { path: '/businessalliance', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },
     { path: '/', name: 'seviceCenter', component: ServiceCenter, title: '고객센터', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, requireAuth: true} },
     
     { path: '/checklist', name: 'checklist', component: Checklist, title: '체크리스트작성', meta: { isMenu: false, requireAuth: true} },

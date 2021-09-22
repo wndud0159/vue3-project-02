@@ -173,8 +173,8 @@ import Finance from '../components/Finance.vue'
 import Digital from '../components/Digital.vue'
 import Maintain from '../components/Maintain.vue'
 import Pets from '../components/Pets.vue'
-import html2pdf from 'html2pdf.js'
 import {storage} from '../firebase'
+import html2pdf from 'html2pdf.js'
 import axios from 'axios'
 
 export default {
