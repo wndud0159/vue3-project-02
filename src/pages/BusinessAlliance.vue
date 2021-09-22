@@ -23,8 +23,8 @@
       </div>
       <!-- button section -->
       <div class="flex justify-center">
-        <button v-if="!isAgreement.length" class="px-10 py-4 bg-gray-100 rounded-lg" >제휴 협력 문의</button>
-        <button v-if="isAgreement.length" @click="onSendBusinessAllianceForm" class="px-10 py-4 bg-yellow-400 rounded-lg" >제휴 협력 문의</button>
+        <button v-if="!isAgreement.length || loading" class="px-10 py-4 bg-gray-100 rounded-lg" >제휴 협력 문의</button>
+        <button v-if="isAgreement.length && !loading" @click="onSendBusinessAllianceForm" class="px-10 py-4 bg-yellow-400 rounded-lg" >제휴 협력 문의</button>
       </div>
     </div>
   </div>
@@ -57,6 +57,7 @@ export default {
     const isInquiries = ref(true)
     const notInput = ref([])
     const regex =  ref(false)
+    const loading = ref(false)
 
     // regular expression /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/
     const onCheckEmailRegex = () => {
@@ -68,7 +69,7 @@ export default {
     }
 
     const onSendBusinessAllianceForm = async () => {
-      isAgreement.value = []
+      loading.value = true
       if(company_name.value !== '') {
         isCompany_name.value = true
         } else {
@@ -145,6 +146,7 @@ export default {
 
 
     return {
+      loading,
       company_name,
       user_name,
       position,

@@ -18,6 +18,8 @@ import Digital from '../pages/Digital.vue'
 import Pet from '../pages/Pet.vue'
 import Bucketlist from '../pages/Bucketlist.vue'
 
+import VideoTest from '../pages/VideoTest.vue'
+
 
 
 
@@ -46,6 +48,7 @@ const routes = [
     { path: '/pet', component: Pet, meta: { isMenu: false, requireAuth: true} },
     { path: '/bucketlist', component: Bucketlist, meta: { isMenu: false, requireAuth: true} },
     
+    { path: '/videotest', component: VideoTest, meta: { isMenu: false, requireAuth: true} },
     
     // { path: '/inheritance', name: 'inheritance', component: Inheritance, meta: { isMenu: true, requireAuth: true } },
     
