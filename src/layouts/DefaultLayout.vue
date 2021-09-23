@@ -33,21 +33,21 @@
           <div class="flex">
 
           <router-link to='/' 
-          :class="`flex items-center justify-center h-20 pt-2   w-1/4 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
             <span>홈</span>
           </router-link>
           <a @click="onIbackIntroduce"
-          :class="`flex items-center justify-center h-20 pt-2   w-1/4 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
             <span>아이백이란?</span>
           </a>
           <router-link to='/businessalliance' 
-          :class="`flex items-center justify-center h-20 pt-2   w-1/4 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
+          :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
             <span>사업제휴</span>
           </router-link>
-          <!-- <router-link to='/' 
+          <div @click="nonServiceMessage"
           :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
             <span>고객센터</span>
-          </router-link> -->
+          </div>
           </div>
         </div>
       </div>
@@ -60,25 +60,25 @@
     <div class="  fixed border-t-4 lg:border-0 border-gray-100 bottom-0 w-full bg-white text-gray-500 z-30">
       <div class="flex items-center justify-center text-center text-sm lg:hidden">
         <router-link to='/' 
-        :class="` w-1/3 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i class="fas fa-home text-xl"></i>
           <span class="text-base">홈</span>
         </router-link>
         <a  @click="onIbackIntroduce"
-        :class="` w-1/3 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i class="fas fa-book text-xl"></i>
           <span class="text-base">아이백이란?</span>
         </a>  
         <router-link to='/businessalliance' 
-        :class="` w-1/3 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+        :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i class="fas fa-envelope text-xl"></i>
           <span class="text-base">사업제휴</span>
         </router-link>  
-        <!-- <router-link to='/' 
+        <div @click="nonServiceMessage"
         :class="` w-1/4 py-2 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i class="fas fa-chalkboard text-xl"></i>
           <span class="text-base">고객센터</span>
-        </router-link>     -->
+        </div>    
       </div>
     </div>
 
@@ -104,11 +104,11 @@
             <button class="py-5 ">유언장 작성 기능</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </router-link> -->
-          <div class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+          <div @click="nonServiceMessage" class="flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
             <button class="py-5 ">서비스 이용약관</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </div>
-          <div class="flex items-center w-full md:px-6 px-3  justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+          <div @click="nonServiceMessage" class="flex items-center w-full md:px-6 px-3  justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
             <button class="py-5">개인정보 보호정책</button>
             <i class="fas fa-angle-right text-gray-400 "></i>
           </div>
@@ -131,12 +131,14 @@ import {ref, onBeforeMount, computed} from 'vue'
 import router from '../router'
 import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
+import LoadingModal from '../components/LoadingModal.vue'
 
 
 export default {
 
     components: {
       ProfileEditModal,
+      LoadingModal,
     },
     setup() {
         const showProfileEditModal = ref(false)
@@ -144,6 +146,9 @@ export default {
         const routes = ref([])
         const currentUser = computed(() => store.state.user)
         
+        const nonServiceMessage =() => {
+          alert('현재 서비스 개발중 입니다.')
+        }
 
         const onIbackIntroduce = () => {
           window.open('https://bigwavvv.notion.site/Bigwavv-3faaf9ea2d694c209e4f4ccfe0922698')
@@ -199,7 +204,7 @@ export default {
           }
 
         return {
-            sideToggleMenu, router, routes, currentUser, logout, showProfileEditModal, onIbackIntroduce
+            sideToggleMenu, router, routes, currentUser, logout, showProfileEditModal, onIbackIntroduce, nonServiceMessage
         }
     }
 }

@@ -18,6 +18,7 @@
       <button class="">구글로 로그인</button>
     </div>
     
+  <LoadingModal v-if="isLoading"/>
   </div>
 </template>
 
@@ -28,12 +29,16 @@ import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
 import axios from 'axios'
 import firebase from 'firebase'
-
+import LoadingModal from '../components/LoadingModal.vue'
 
 export default {
+  components: {
+    LoadingModal
+  },
   setup() {
     const router = useRouter()
     const userData = ref([])
+    const isLoading = ref(false)
     
 
     onBeforeMount(() => {
@@ -66,6 +71,7 @@ export default {
 
   
     const loginWithKakao = async () => {
+      isLoading.value = true
        window.Kakao.Auth.login({
          scope: 'profile_nickname, profile_image, account_email',
          success: async function(response) {
@@ -153,6 +159,7 @@ export default {
     }
 
     const loginWithGoogle = async() => {
+      isLoading.value = true
       try{
         var provider = new firebase.auth.GoogleAuthProvider();
         // 추가적인 권한이 있을 경우에는 아래와 같이 추가합니다.
@@ -223,7 +230,7 @@ export default {
 
 
     return {
-      loginWithKakao, loginWithNaver, loginWithGoogle,
+      loginWithKakao, loginWithNaver, loginWithGoogle, isLoading,
     }
   }
 

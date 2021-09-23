@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-center items-center text-4xl mt-40">잠시만 기다려 주세요 로그인 중 입니다.</div>
+  <LodingModal/>
 </template>
 
 <script>
@@ -8,8 +8,13 @@ import {useRouter} from 'vue-router'
 import axios from 'axios'
 import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
+import LoadingModal from '../components/LoadingModal.vue'
+
 export default {
     
+components: {
+  LoadingModal
+},
 setup() {
     const userData = ref([])
     const router = useRouter()
