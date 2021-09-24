@@ -1,5 +1,5 @@
 <template>
-  <div  class="flex flex-col h-screen overflow-y-scroll items-center pt-24 pb-48 md:pb-10 px-3 md:px-20">
+  <div  class="flex flex-col  items-center px-3 md:px-20">
     <!-- title section -->
     <!-- businessalliance form section -->
     <div   class="flex flex-col md:px-20 w-full">

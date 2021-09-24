@@ -1,6 +1,6 @@
 <template>
   
-  <div class="flex flex-col mt-44 md:mt-80 lg:mt-56 items-center justify-center mr-10 ml-10 ">
+  <div class="flex relative flex-col mt-44 md:mt-56  items-center justify-center mr-10 ml-10 ">
     <div class=" mb-10 flex flex-col w-full md:w-1/2 items-center">
       <div class="text-4xl font-bold text-primary mb-4 text-center">로그인</div>
       <div class="text-gray-500">아이백에 오신 걸 환영합니다. 기존에 사용하시는 계정으로 간편하게 로그인하세요.</div>

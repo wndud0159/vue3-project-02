@@ -8,9 +8,9 @@
             <div v-if="step1">안녕하세요? 마루에요 이름을 입력해주세요.</div>
             <div v-if="step2">{{userName}}님 반갑습니다 주소를 적어주세요.</div>
             <div v-if="step3" class="w-full text-center space-y-4">
-                <div>안녕하세요? {{currentUser.username}}님과 함께 삶의 마지막 이정표를 그려갈 ‘마루’에요.</div>
-                <div>내 삶을 돌아보고 정리하려면 어디서부터 시작할지 막막하시죠? 아래의 항목들을 하나하나 눌러보세요.</div>
-                <div>‘마루’가 준비한 질문에 답하면 ‘좋은 마무리/ 죽음/마침표’에 도달하는 이정표가 완성될 거에요.</div>
+                <div> {{currentUser.username}}님, 저는 ‘마루’에요.</div>
+                <div> 아래 질문에 하나하나 답하다 보면  &nbsp;  좋은 마무리를 위한 삶의 이정표가&nbsp;&nbsp; 완성될 거에요</div>
+                <!-- <div>준비한 질문에 하나하나 답하다 보면 ‘좋은 마무리’에 도달하는 이정표가 완성될 거에요.</div> -->
             </div>
         </div>
         <!-- userInfo section -->
@@ -25,7 +25,7 @@
 
         <!-- checklist section -->
         <div v-if="checklistState" class="w-full md:w-1/2">
-        <div @click="onPrevStep3" class=" cursor-pointer underline text-blue-800">이름,주소 다시 입력하기</div>
+        <!-- <div @click="onPrevStep3" class=" cursor-pointer underline text-blue-800">이름,주소 다시 입력하기</div> -->
 
         <!-- health -->
         <router-link to="/health" class="w-full mb-5">

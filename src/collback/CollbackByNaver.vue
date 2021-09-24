@@ -1,5 +1,7 @@
 <template>
-  <LodingModal/>
+<div class=" relative flex flex-col mt-80 items-center justify-center mr-10 ml-10">
+  <LoadingModal/>
+  </div>
 </template>
 
 <script>

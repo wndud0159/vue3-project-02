@@ -5,11 +5,11 @@ module.exports = {
     extend: {
       colors: {
         // 기본
-        primary: "#1DA1F2",
+        primary: "#005953",
         // 클릭시 hover
         dark: "#1a91da",
         // 못누르는
-        light: "#a5d0f5",
+        light: "#26847E",
         // 클릭시 hover
         lighter: "#D4E5F4",
         // 네이버

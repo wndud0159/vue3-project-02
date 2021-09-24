@@ -4,7 +4,8 @@
 @tailwind utilities;
 
 #app {
-  font-family: "Montserrat", DroidSans, AppleSDGothicNeo, Sans-serif, Helvetica;
+  /* font-family: "Montserrat", DroidSans, AppleSDGothicNeo, Sans-serif, Helvetica; */
+  font-family: "Spoqa Han Sans Neo";
 }
 button {
   @apply focus:outline-none;
