@@ -1,196 +1,173 @@
 <template>
-    <div class="flex flex-col h-screen overflow-y-scroll items-center pt-24 pb-48 md:pb-10 px-3 md:px-20">
-        <div class="mb-10">
-            <img class="object-cover border-4 border-gray-100 w-24 h-24 rounded-full" src="/maru_beta_image.png" alt="">
-        </div>
-        <!-- title section -->
-        <div v-if="stepState" class="flex flex-col items-center text-2xl md:text-4xl mb-10 font-bold text-gray-700 w-7/8 md:w-4/6">
-            <div v-if="step1">안녕하세요? 마루에요 이름을 입력해주세요.</div>
-            <div v-if="step2">{{userName}}님 반갑습니다 주소를 적어주세요.</div>
-            <div v-if="step3" class="w-full text-center space-y-4">
-                <div> {{currentUser.username}}님, 저는 ‘마루’에요.</div>
-                <div> 아래 질문에 하나하나 답하다 보면  &nbsp;  좋은 마무리를 위한 삶의 이정표가&nbsp;&nbsp; 완성될 거에요</div>
-                <!-- <div>준비한 질문에 하나하나 답하다 보면 ‘좋은 마무리’에 도달하는 이정표가 완성될 거에요.</div> -->
+    <div class="flex flex-col  items-center w-full  px-3">
+        
+        <!-- top section by image, title -->
+        <div class="  w-full flex flex-col justify-center items-center rounded-sm pb-8 pt-8">
+            <!-- image section -->
+            <img class="object-cover w-40 h-40 rounded-full mb-8" src="/maru.png" alt="">
+            <!-- title section -->
+            <div v-if="stepState" class="flex flex-col items-center text-2xl md:text-4xl font-semibold w-full ">
+                <div v-if="step1">안녕하세요? 마루에요 이름을 입력해주세요.</div>
+                <div v-if="step2">{{userName}}님 반갑습니다 주소를 적어주세요.</div>
+                <div v-if="step3" class="w-full text-center">
+                    <div> {{currentUser.username}}님, 저는 ‘마루’에요. 아래 질문에 하나하나 답하다 보면 좋은 마무리를 위한 삶의 이정표가 완성될 거에요</div>
+                </div>
             </div>
         </div>
         <!-- userInfo section -->
-        <div v-if="userInfoState" class="w-full mb-10 flex flex-col items-center text-xl">
-                <input v-model="userName" v-if="step1" type="text" class="md:w-1/2 w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
+        <div v-if="userInfoState" class="w-full mb-8 flex flex-col items-center text-xl">
+                <input v-model="userName" v-if="step1" type="text" class="md:w-96 w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
                 <div v-if="step2" class="w-full flex flex-col relative items-center space-y-5">
-                <input @click="showVueDaumPostcode" readonly v-model="userAddress" placeholder="도로명 입력" type="text" class="md:w-1/2  w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
-                <input v-model="userDetailAddress" placeholder="상세주소 입력" type="text" class="md:w-1/2  w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
+                <input @click="showVueDaumPostcode" readonly v-model="userAddress" placeholder="도로명 입력" type="text" class="md:w-96  w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
+                <input v-model="userDetailAddress" placeholder="상세주소 입력" type="text" class="md:w-96  w-full text-center border border-gray-300 focus:ring-2 focus:outline-none rounded-lg px-4 py-4">
                 <VueDaumPostcode class="w-full md:w-1/2 absolute -top-5" v-if="addressState" @complete="onComplete" />
                 </div>
         </div>
 
-        <!-- checklist section -->
-        <div v-if="checklistState" class="w-full md:w-1/2">
-        <!-- <div @click="onPrevStep3" class=" cursor-pointer underline text-blue-800">이름,주소 다시 입력하기</div> -->
-
-        <!-- health -->
-        <router-link to="/health" class="w-full mb-5">
-            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-heart text-white bg-red-300 px-3 py-2 rounded-full text-3xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeHealth.length}}/{{4}}</div>
+        <!-- new checklist -->
+        <div v-if="checklistState" class="w-full ">
+            <div class="md:flex">
+            <!-- health -->
+            <router-link to="/health" class=" flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer ">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">건강</div>
+                        <div class="-mb-2">{{completeHealth.length}} / 4</div>
                     </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">건강</div>
-                            <div>건강하게 늙어갈 권리</div>
-                        </div>
-                    </div>
+                    <div>건강에 대한 결정권</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
-                <i class="fas fa-chevron-right"></i>
-            </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/health.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
 
             <!-- finance -->
-            <router-link to="/finance" class="w-full mb-5">
-            <div @click="showfinanceLists" class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-briefcase text-white bg-green-600 opacity-70 px-3 py-2 rounded-full text-3xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeFinance.length}}/4</div>
+            <router-link to="/finance" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">재무</div>
+                        <div class="-mb-2">{{completeFinance.length}} / 4</div>
                     </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">재무</div>
-                            <div>자산을 알맞게 처분할 권리</div>
-                        </div>
-                    </div>
+                    <div>자산을 알맞게 처리할 권리</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
-                <i class="fas fa-chevron-right"></i>
-            </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/finance.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
-
-            <!-- testament -->
-            <router-link to="/testament" class="w-full mb-5">
-            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-cloud text-white bg-green-400 opacity-70 px-3 py-2.5 rounded-full text-2xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeTestament.length}}/4</div>
-                    </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">유언</div>
-                            <div>마지막 말과 생각을 남길 권리</div>
-                        </div>
-                    </div>
-                </div>
-                <i class="fas fa-chevron-right"></i>
             </div>
+            <div class="md:flex">
+            <!-- testament -->
+            <router-link to="/testament" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">유언</div>
+                        <div class="-mb-2">{{completeTestament.length}} / 4</div>
+                    </div>
+                    <div>마지막 말과 생각을 남길 권리</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/testament.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
 
             <!-- funeral -->
-            <router-link to="/funeral" class="w-full mb-5">
-            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-cloud text-white bg-green-400 opacity-70 px-3 py-2.5 rounded-full text-2xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeFuneral.length}}/4</div>
+            <router-link to="/funeral" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">장례식</div>
+                        <div class="-mb-2">{{completeFuneral.length}} / 4</div>
                     </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">장례식</div>
-                            <div>나의 삶을 추모하고 유족을 위로할 권리</div>
-                        </div>
-                    </div>
+                    <div>삶을 추모하고 유족을 위로할 권리</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
-                <i class="fas fa-chevron-right"></i>
-            </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/funeral.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
-                 
-            <!-- digital -->
-            <router-link to="/digital"  class="w-full mb-5">
-            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-chalkboard text-white bg-yellow-500 opacity-70 px-3 py-2.5 rounded-full text-2xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeDigital.length}}/4</div>
-                    </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">디지털</div>
-                            <div>디지털 정보를 정리할 권리</div>
-                        </div>
-                    </div>
-                </div>
-                <i class="fas fa-chevron-right"></i>
             </div>
+
+            <div class="md:flex">
+            <!-- digital -->
+            <router-link to="/digital" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">디지털</div>
+                        <div class="-mb-2">{{completeDigital.length}} / 4</div>
+                    </div>
+                    <div>디지털 정보를 정리할 권리</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/digital.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
 
             <!-- pet -->
-            <router-link to="/pet" class="w-full mb-5">
-            <div  class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-paw text-white bg-blue-300 opacity-70 px-3 py-2 rounded-full text-3xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completePet.length}}/1</div>
+            <router-link to="/pet" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">반려동물</div>
+                        <div class="-mb-2">{{completePet.length}} / 1</div>
                     </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">애완동물</div>
-                            <div>반려동물과의 마지막 삶</div>
-                        </div>
-                    </div>
+                    <div>반려동물과의 마지막 삶</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
-                <i class="fas fa-chevron-right"></i>
-            </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/pet.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
-
-            <!-- bucketlist -->
-            <router-link to="/bucketlist"  class="w-full mb-10">
-            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-fill text-white bg-primary opacity-70 px-3 py-2 rounded-full text-3xl"></i>
-                        <div class=" absolute bg-light text-sm rounded-full -bottom-3 ml-8 opacity-90 px-2 border-2 border-white">{{completeBucketlist.length}}/1</div>
-                    </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">버킷리스트</div>
-                            <div>삶을 충만하게 채울 권리</div>
-                        </div>
-                    </div>
-                </div>
-                    <i class="fas fa-chevron-right"></i>
             </div>
+            
+            <div class="md:flex">
+            <!-- bucketlist -->
+            <router-link to="/bucketlist" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">버킷리스트</div>
+                        <div class="-mb-2">{{completeBucketlist.length}} / 1</div>
+                    </div>
+                    <div>삶을 충만하게 채울 권리</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/bucketlist.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
 
             <!-- will -->
-            <router-link to="/will"  class="w-full mb-10">
-            <div class="text-xs md:text-base flex cursor-pointer bg-white w-full py-4  px-6 shadow-md items-center justify-between border-b border-gray-200 ">
-                <div class="flex items-center">
-                    <div class=" relative">
-                        <i class="fas fa-microphone text-white bg-indigo-600 opacity-70 px-4 py-2 rounded-full text-3xl"></i>
+            <router-link to="/will" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+                <div class=" space-y-2">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-semibold mr-1">유언장 작성</div>
                     </div>
-                    <div class="flex ml-5">
-                        <div class=" space-y-2 md:space-y-1">
-                            <div class="-mb-1">유언장 작성</div>
-                            <div>작성하신 답변으로 유언장을 만들어보세요</div>
-                        </div>
-                    </div>
+                    <div>답변을 통한 유언장 만들기</div>
+                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
-                    <i class="fas fa-chevron-right"></i>
-            </div>
+                <div class=" flex-1 flex justify-end">
+                    <img src="/will.png" class="w-20 h-20" alt="">
+                </div>
             </router-link>
-
+            </div>
+            <div @click="onPrevStep3" class=" cursor-pointer underline text-blue-800">이름,주소 다시 입력하기</div>
+            
         </div>
+
+
 
 
         <!-- button section -->
         <div v-if="stepState" class="flex  justify-center w-full">
-            <div v-if="step1" class=" space-x-4"> 
-                <button v-if="!userName" class=" bg-gray-100 py-3 px-10 rounded-lg">다음으로</button>    
-                <button v-if="userName" @click="onSaveStep1" class=" bg-yellow-300 py-3 px-10 rounded-lg">다음으로</button>
+            <div v-if="step1" class=" space-x-4 w-full flex justify-center"> 
+                <button v-if="!userName" class="w-full bg-gray-100 py-3 md:w-96  rounded-lg">다음으로</button>    
+                <button v-if="userName" @click="onSaveStep1" class=" bg-primary py-3 text-white w-full md:w-96 rounded-lg">다음으로</button>
             </div>
-            <div v-if="step2" class=" space-x-4">
-                <button @click="onPrevStep2" class=" bg-gray-100 py-3 px-10 rounded-lg">이전으로</button>    
-                <button v-if="!userAddress || !userDetailAddress" class=" bg-gray-100 py-3 px-10 rounded-lg">다음으로</button>  
-                <button v-if="userAddress && userDetailAddress" @click="onSaveStep2" class=" bg-yellow-300 py-3 px-10 rounded-lg">다음으로</button>  
+            <div v-if="step2" class=" w-full flex justify-center">
+                <button @click="onPrevStep2" class=" bg-gray-100 w-1/2 md:w-44 mr-8 py-3 rounded-lg">이전으로</button>    
+                <button v-if="!userAddress || !userDetailAddress" class=" bg-gray-100 w-1/2 py-3 md:w-44  rounded-lg">다음으로</button>  
+                <button v-if="userAddress && userDetailAddress" @click="onSaveStep2" class="bg-primary text-white w-1/2 md:w-44 py-3  rounded-lg">다음으로</button>  
             </div>  
         </div>
     </div>

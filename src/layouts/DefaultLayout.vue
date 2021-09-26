@@ -1,7 +1,7 @@
 <template>
  <div class="flex flex-col">
     <!-- header-section -->
-    <div class=" bg-white pl-10 pr-10 hidden   md:flex md:flex-col fixed w-full border-b-2  border-gray-100 top-0 z-30">
+    <div class=" bg-white pl-10 pr-10 hidden  md:flex md:flex-col fixed w-full border-b-2  border-gray-100 top-0 z-30">
       
       <!-- top banner -->
       <div class=" relative">
@@ -24,8 +24,8 @@
       <!--top nav bar -->
     <div class="flex items-center -mb-0.5 ">
         <!-- title  logo-->
-        <router-link to="/" class=" font-bold text-2xl flex-1 text-primary flex items-center">
-          <i class="fas fa-feather-alt text-4xl mr-1"></i>
+        <router-link to="/" class=" font-semibold text-3xl flex-1 text-primary -mt-0.5 flex items-center">
+          <img src="/iback_logo.ico" class="w-10 -mt-1 h-10 mr-0.5" alt="">
           <span>iback</span>
         </router-link>
         <!--tmenu -->
@@ -103,14 +103,14 @@
         </div>
 
         <div class="flex flex-col mt-10">
-            <button  @click="nonServiceMessage" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-              나의 체크리스트 <i class="fas fa-angle-right text-gray-400 "></i></button>
-            <button  @click="nonServiceMessage" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-              공지사항 <i class="fas fa-angle-right text-gray-400 "></i></button>
-            <button  @click="nonServiceMessage" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-              서비스 이용약관 <i class="fas fa-angle-right text-gray-400 "></i></button>
-            <button  @click="nonServiceMessage" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
-              개인정보 보호정책 <i class="fas fa-angle-right text-gray-400 "></i></button>
+            <!-- <button  @click="nonServiceMessage" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+              나의 체크리스트 <i class="fas fa-angle-right text-gray-400 "></i></button> -->
+            <router-link to="/notice"  @click="sideToggleMenu = false" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+              공지사항 <i class="fas fa-angle-right text-gray-400 "></i></router-link>
+            <router-link to="/termsofuse"  @click="sideToggleMenu = false" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+              서비스 이용약관 <i class="fas fa-angle-right text-gray-400 "></i></router-link>
+            <router-link to="/privacypolicy" @click="sideToggleMenu = false" class="py-5 flex items-center  w-full md:px-6 px-3 justify-between border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
+              개인정보 보호정책 <i class="fas fa-angle-right text-gray-400 "></i></router-link>
             <button @click="logout" class="py-4 text-left text-gray-500 w-full md:px-6 px-3">로그아웃</button>
         </div>
       </div>

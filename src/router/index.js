@@ -22,6 +22,10 @@ import Bucketlist from '../pages/Bucketlist.vue'
 
 import VideoTest from '../pages/VideoTest.vue'
 
+import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
+import TermsOfUse from '../pages/TermsOfUse.vue'
+import Notice from '../pages/Notice.vue'
+
 
 
 
@@ -51,6 +55,9 @@ const routes = [
     { path: '/bucketlist', component: Bucketlist, meta: { isMenu: false, requireAuth: true} },
     
     { path: '/videotest', component: VideoTest, meta: { isMenu: false, requireAuth: true} },
+    { path: '/privacypolicy', component: PrivacyPolicy, meta: { isMenu: false, requireAuth: true} },
+    { path: '/termsofuse', component: TermsOfUse, meta: { isMenu: false, requireAuth: true} },
+    { path: '/notice', component: Notice, meta: { isMenu: false, requireAuth: true} },
     
     // { path: '/inheritance', name: 'inheritance', component: Inheritance, meta: { isMenu: true, requireAuth: true } },
     

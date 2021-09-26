@@ -1,13 +1,18 @@
 <template>
-<div class="flex flex-col h-screen overflow-y-scroll items-center pt-24 pb-48 md:pb-10 px-3 md:px-20">
+<div class="flex flex-col items-center px-3 mb-8">
     <!-- image section by maru -->
-    <div class="mb-10">
-            <img class="object-cover border-4 border-gray-100 w-24 h-24 rounded-full" src="/maru_beta_image.png" alt="">
-    </div>
-    <!-- question section -->
-    <div v-if="pet.length" class=" mb-10 text-2xl md:text-4xl font-bold text-gray-700 w-7/8 md:w-4/6">
-        <div v-if="step1" class="flex flex-col items-center space-y-1">
-            <div>1. {{pet[0].question}}</div>
+    <div class="w-full flex flex-col justify-center items-center rounded-sm pt-8 pb-8">
+        <!-- image section -->
+        <img class="object-cover w-40 h-40 rounded-full mb-8" src="/maru.png" alt="">
+        <!-- question section -->
+        <div v-if="pet.length" class="flex flex-col items-center text-2xl font-semibold w-full md:w-96">
+            <div v-if="step1" class="flex flex-col items-center ">
+                <div class="mb-8 ">1. {{pet[0].question}}</div>
+                <div class="w-full flex flex-col items-center text-lg text-white bg-lighter rounded-xl px-3 py-3 -mt-2">
+                    <div>답변 예시 :</div>
+                    <div>반려동물은 아들 교환이가 대신 돌보기를 원합니다.</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -33,8 +38,8 @@
             </div>
         </div> -->
         <!-- text section -->
-        <div class="w-full flex justify-center mb-10">
-            <textarea v-model="pet[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-1/2 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+        <div class="w-full flex justify-center mb-8">
+            <textarea v-model="pet[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
@@ -43,14 +48,16 @@
     
     <!-- button section -->
     <div v-if="pet.length" class="flex  justify-center w-full">
-        <div v-if="step1" class="">
-            <button @click="onPrevStep1" class=" bg-gray-100 py-3 px-10 rounded-lg mr-5">이전으로</button>    
-            <button v-if="!pet[0].answer_text && !pet[0].answer_box.length" class=" bg-gray-100 py-3 px-10 rounded-lg">저장 / 다음</button>    
-            <button v-if="pet[0].answer_text || pet[0].answer_box.length" @click="onSaveStep1" class=" bg-yellow-300 py-3 px-10 rounded-lg">저장 / 다음</button>
-            <div>
-                <button @click="onLaterStep1" class="bg-green-400 py-3 px-10 rounded-lg mt-5 w-full">나중에 적겠습니다</button>
+        <div v-if="step1" class="w-full flex flex-col items-center">
+            <div class=" flex w-full justify-center">
+            <button @click="onPrevStep1" class=" bg-gray-100 py-3 w-1/2 md:w-44 mr-8 rounded-lg">이전으로</button>    
+            <button v-if="!pet[0].answer_text && !pet[0].answer_box.length" class=" bg-gray-100 py-3 w-1/2 md:w-44 rounded-lg">저장 / 다음</button>    
+            <button v-if="pet[0].answer_text || pet[0].answer_box.length" @click="onSaveStep1" class=" bg-primary py-3 w-1/2 md:w-44 rounded-lg text-white">저장 / 다음</button>
             </div>
-        </div>  
+            <div class="w-full flex justify-center">
+                <button @click="onLaterStep1" class="bg-lighter py-3 w-full md:w-96  text-white rounded-lg mt-8">나중에 적겠습니다</button>
+            </div>
+        </div> 
     </div>
 </div>
 </template>

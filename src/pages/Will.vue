@@ -65,7 +65,7 @@
                             <div v-if="checklist.digital[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[0].question}`" class="w-16 h-16 mr-3" type="checkbox"><span>{{checklist.digital[0].question}}</span></div>
                             <div v-if="checklist.digital[1].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[1].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.digital[1].question}}</span></div>
                             <div v-if="checklist.digital[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[2].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[2].question}}</span></div>
-                            <div v-if="checklist.digital[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[3].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[3].question}}</span></div>
+                            <!-- <div v-if="checklist.digital[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[3].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[3].question}}</span></div> -->
                             <div>반려동물</div>
                             <div v-if="checklist.pet[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.pet[0].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.pet[0].question}}</span></div>
                             <button @click="onAnswerToText" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">확인</button>
@@ -143,9 +143,10 @@ export default {
     }
 
     const onAnswerToText = async () => {
-      userWill.value.push(moment(Date.now()).format('YYYY년 MM월 DD일'))
-      userWill.value.push('저는 ' + currentUser.value.username + '입니다')
-      userWill.value.push('저의 주소는 ' + currentUser.value.address + '입니다')
+      userWill.value.push('오늘은 '+moment(Date.now()).format('YYYY년 MM월 DD일')+'입니다.')
+      userWill.value.push('저는 ' + currentUser.value.username + '입니다.')
+      userWill.value.push('집주소는 ' + currentUser.value.address + '입니다.')
+      userWill.value.push('지금부터 나의 유언을 남기도록 하겠습니다.')
       userSelection.value.forEach(element => {
         // 건강
         if(element === checklist.value.health[3].question){
@@ -164,8 +165,7 @@ export default {
           if(checklist.value.finance[3].answer_box === '기타') {
             userWill.value.push(checklist.value.finance[3].answer_text)
           } else {
-            userWill.value.push('나의 재산에 관해서는')
-            userWill.value.push(checklist.value.finance[3].answer_box + ' ' + checklist.value.finance[3].box_name1 + checklist.value.finance[3].box_name2 + '에게 연락하세요')
+            userWill.value.push('나의 자산과 관련해서는 ' + checklist.value.finance[3].answer_box + ' ' + checklist.value.finance[3].box_name1 + checklist.value.finance[3].box_name2 + '에게 연락하세요. ' + '연락처는 ' + checklist.value.finance[3].box_number1 + checklist.value.finance[3].box_number2 + '입니다.')
           }
           
         }
@@ -209,30 +209,35 @@ export default {
         }
         // 디지털
         if(element === checklist.value.digital[0].question) {
-          if(checklist.value.digital[0].answer_box1 === '기타') {
+          if(checklist.value.digital[0].answer_check === '기타') {
             userWill.value.push(checklist.value.digital[0].answer_text)
           } else {
-            userWill.value.push(checklist.value.digital[0].answer_box1)
+            checklist.value.digital[0].answer_box.forEach((element) => {
+              userWill.value.push(element.box_type + '의 계정은' + element.box_state + ' 관리자는 ' + element.box_name + '입니다.')
+            })
           }
         }
         if(element === checklist.value.digital[1].question) {
-          if(checklist.value.digital[1].answer_box1 === '기타') {
+          if(checklist.value.digital[1].answer_check === '기타') {
             userWill.value.push(checklist.value.digital[1].answer_text)
           } else {
-            userWill.value.push(checklist.value.digital[1].answer_box1)
+            checklist.value.digital[1].answer_box.forEach((element) => {
+              userWill.value.push(element.box_type + '의 계정' + element.box_state + ' 관리자는 ' + element.box_name + '입니다.')
+            })
           }
         }
         if(element === checklist.value.digital[2].question) {
           userWill.value.push(checklist.value.digital[2].answer_text)
         }
-        if(element === checklist.value.digital[3].question) {
-          userWill.value.push(checklist.value.digital[3].answer_text)
-        }
+        // if(element === checklist.value.digital[3].question) {
+        //   userWill.value.push(checklist.value.digital[3].answer_text)
+        // }
         // 반려동물
         if(element === checklist.value.pet[0].question) {
           userWill.value.push(checklist.value.pet[0].answer_text)
         }
       })
+      userWill.value.push('나의 유언은 여기까지 입니다.')
       // userWill.value.forEach(element => {
       //   console.log(element)
       // })
