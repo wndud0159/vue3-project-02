@@ -67,8 +67,8 @@
           <span class="text-base">홈</span>
         </router-link>
         <div  @click="onIbackIntroduce" @mouseover="changeImage = true" @mouseout="changeImage = false" 
-        :class="` w-1/4 py-3 flex flex-col  items-center mt-0.6 space-y-1 cursor-pointer hover:text-primary`">
-          <img :src="`${changeImage ? '/iback_logo.ico' : '/iback_logo_navbar.png'}`" :class="`${changeImage ? 'w-7 h-7' : 'w-7 h-7 '}`" alt="">
+        :class="` w-1/4 py-3 flex flex-col  items-center mt-1  space-y-1.5 cursor-pointer hover:text-primary`">
+          <img :src="`${changeImage ? '/iback_logo_navbar_color.png' : '/iback_logo_navbar.png'}`" :class="`${changeImage ? 'w-6 h-6' : 'w-6 h-6 '}`" alt="">
           <span class="text-base">아이백이란?</span>
         </div>  
         <router-link to='/servicecenter' 
@@ -117,7 +117,6 @@
     </div>
     <ProfileEditModal v-if="showProfileEditModal" @close-modal="showProfileEditModal = false"/>
     <CongratulationsModalByPdf v-if="showCongratulationsByPdf" @close-Modal="showCongratulationsByPdf = false"/>
-    <Will v-if="nonPage" @open-modal="showCongratulationsByPdf = true"/>
 
   </div>  
 
@@ -174,7 +173,6 @@ import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
 import LoadingModal from '../components/LoadingModal.vue'
 import CongratulationsModalByPdf from '../components/CongratulationsModalByPdf.vue'
-import Will from '../pages/Will.vue'
 
 export default {
 
@@ -182,7 +180,6 @@ export default {
       ProfileEditModal,
       LoadingModal,
       CongratulationsModalByPdf,
-      Will,
 
     },
     setup() {
@@ -204,15 +201,15 @@ export default {
         
 
         // runs after firebase is initialized
-        auth.onAuthStateChanged(function(user) {
-            if (user) {
-              console.log('사용자 true', user);
-              // isLoggedIn.value = true // if we have a user
-            } else {
-              console.log('사용자 false');
-              // isLoggedIn.value = false // if we do not
-            }
-        })
+        // auth.onAuthStateChanged(function(user) {
+        //     if (user) {
+        //       console.log('사용자 true', user);
+        //       // isLoggedIn.value = true // if we have a user
+        //     } else {
+        //       console.log('사용자 false');
+        //       // isLoggedIn.value = false // if we do not
+        //     }
+        // })
 
 
         const logout = async () => {
@@ -232,6 +229,9 @@ export default {
         
 
         onBeforeMount(()  =>  {
+            if(currentUser.value === null) {
+                router.push('/login')
+            }
             // console.log(store.state.user)
             //라우터에 등록한 라우트 가져오기
             // routes.value = router.options.routes

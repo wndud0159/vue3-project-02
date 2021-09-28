@@ -4,22 +4,22 @@
         <!-- top section by image, title -->
         <div class="  w-full flex flex-col justify-center items-center rounded-sm pb-8 pt-8">
             <!-- image section -->
-            <img class="object-cover w-40 h-40 rounded-full mb-8" src="/maru.png" alt="">
+            <img class="object-cover w-40 h-40 rounded-full" src="/maru.png" alt="">
             <!-- title section -->
-            <div v-if="stepState" class="flex flex-col items-center text-2xl md:text-4xl font-semibold w-full ">
-                <div v-if="step1" class="w-full flex flex-col items-center">
+            <div v-if="stepState" class=" relative flex text-white flex-col items-center text-2xl font-semibold w-full ">
+                <img src="/speech_bubble02.png" :class="`${step3 ? 'h-52' : ''} -mt-4 h-40`" alt="">                    
+                <div v-if="step1" class="absolute top-12  flex flex-col items-center">
                    <div>안녕하세요?</div>
                    <div>이름을 입력해주세요.</div>
                 </div>
-                <div v-if="step2" class="flex flex-col items-center">
+                <div v-if="step2" class="absolute top-12  flex flex-col items-center">
                     <div>{{userName}}님, 반갑습니다.</div>
                     <div> 주소를 입력해 주세요.</div>
                 </div>
-                <div v-if="step3" class="w-full text-center">
-                    <div> {{currentUser.username}}님, 저는 ‘마루’에요.
-                        <div></div> 
-                        <div></div> 
-                        아래 질문에 하나하나 답하다 보면 좋은 마무리를 위한 삶의 이정표가 완성될 거에요</div>
+                <div v-if="step3" class="absolute top-12   text-center">
+                    <div> {{currentUser.username}}님, 저는 ‘마루’에요.</div>
+                        <div>아래 질문에 하나하나 답하다 보면 </div> 
+                        <div>좋은 마무리를 위한 삶의 이정표가 완성될 거에요</div> 
                 </div>
             </div>
         </div>
@@ -43,11 +43,11 @@
                         <div class="text-2xl font-semibold mr-1">건강</div>
                         <div class="-mb-2">{{completeHealth.length}} / 4</div>
                     </div>
-                    <div>건강에 대한 결정권</div>
+                    <div>건강하게 늙어갈 권리</div>
                     <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
-                    <img src="/health.png" class="w-20 h-20" alt="">
+                    <img src="/health.png" class="w-20 h-18" alt="">
                 </div>
             </router-link>
 
@@ -56,7 +56,7 @@
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">재무</div>
-                        <div class="-mb-2">{{completeFinance.length}} / 4</div>
+                        <div class="-mb-2">{{completeFinance.length}} / 3</div>
                     </div>
                     <div>자산을 알맞게 처리할 권리</div>
                     <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
@@ -104,13 +104,13 @@
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">디지털</div>
-                        <div class="-mb-2">{{completeDigital.length}} / 4</div>
+                        <div class="-mb-2">{{completeDigital.length}} / 3</div>
                     </div>
                     <div>디지털 정보를 정리할 권리</div>
                     <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
-                    <img src="/digital.png" class="w-20 h-20" alt="">
+                    <img src="/digital.png" class="w-20 h-18" alt="">
                 </div>
             </router-link>
 
@@ -156,7 +156,7 @@
                     <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
-                    <img src="/will01.png" class="w-20 h-20" alt="">
+                    <img src="/will01.png" class="w-18 h-20" alt="">
                 </div>
             </router-link>
             </div>

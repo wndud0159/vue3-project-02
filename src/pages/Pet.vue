@@ -3,14 +3,20 @@
     <!-- image section by maru -->
     <div class="w-full flex flex-col justify-center items-center rounded-sm pt-8 pb-8">
         <!-- image section -->
-        <img class="object-cover w-40 h-40 rounded-full mb-8" src="/maru.png" alt="">
+        <img class="object-cover w-40 h-40 rounded-full" src="/maru.png" alt="">
         <!-- question section -->
-        <div v-if="pet.length" class="flex flex-col items-center text-2xl font-semibold w-full md:w-96">
-            <div v-if="step1" class="flex flex-col items-center ">
-                <div class="mb-8 ">1. {{pet[0].question}}</div>
-                <div class="w-full flex flex-col items-center text-lg text-white bg-lighter rounded-xl px-3 py-3 -mt-2">
-                    <div>답변 예시 :</div>
-                    <div>반려동물은 아들 교환이가 대신 돌보기를 원합니다.</div>
+        <div v-if="pet.length" class="relative text-white flex flex-col items-center text-2xl font-semibold w-full md:w-96">
+            <img src="/speech_bubble02.png" :class="`' -mt-4 h-60 `" alt="">   
+            <div v-if="step1" class="absolute top-16 flex flex-col items-center ">
+                <div class="mb-12 w-full flex flex-col items-center">
+                    <div>마루의 친구가 있었네요!</div>
+                    <div>{{currentUser.username}}님 대신 <span class="highlight">누가</span></div>
+                    <div><span class="highlight">반려동물을 어떻게 돌보면 </span></div>
+                    <div>좋을지 말씀해주세요.</div>
+                </div>
+                <div class="w-full flex flex-col items-center text-lg text-light  ">
+                    <div>답변 가이드 :</div>
+                    <div>반려견 겨울이는 아들 국요환이 대신 돌보기를 원합니다. 슬개골이 약하니 조심해야 합니다.</div>
                 </div>
             </div>
         </div>
@@ -18,7 +24,7 @@
 
 
     <!-- step1 -->
-    <div v-if="step1 && pet.length" class="w-full">
+    <div v-if="step1 && pet.length" class="w-full mt-24">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -55,7 +61,7 @@
             <button v-if="pet[0].answer_text || pet[0].answer_box.length" @click="onSaveStep1" class=" bg-primary py-3 w-1/2 md:w-44 rounded-lg text-white">저장 / 다음</button>
             </div>
             <div class="w-full flex justify-center">
-                <button @click="onLaterStep1" class="bg-lighter py-3 w-full md:w-96  text-white rounded-lg mt-8">나중에 적겠습니다</button>
+                <button @click="onLaterStep1" class="bg-light py-3 w-full md:w-96  text-white rounded-lg mt-8">나중에 적겠습니다</button>
             </div>
         </div> 
     </div>
@@ -141,7 +147,7 @@ export default {
 
 
             pet,
-            
+            currentUser,
         }
 
     }

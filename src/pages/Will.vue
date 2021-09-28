@@ -39,7 +39,7 @@
 
       <div class="w-full flex flex-col items-center text-xl">
         <div>마루가 소개할 방법은</div>
-        <div class="mb-3">음성 유언장이에요.</div>
+        <div>음성 유언장이에요.</div>
       </div>
 
       <div class="w-full flex flex-col items-center text-xl">
@@ -75,8 +75,24 @@
     <!-- step2 -->
     <div v-if="step2" class="flex flex-col w-full items-center space-y-7">
       <div class="flex flex-col w-full items-center text-lg font-semibold">
-        <div @click="showChecklistByComplete" ><span class="text-light">원하시는 질문</span>을 선택하시고</div>
-        <div>확인을 눌러주세요</div>
+        <!-- image section by maru -->
+    <div class="w-full flex flex-col justify-center items-center rounded-sm pt-8 pb-8">
+        <!-- question section -->
+        <div class="relative text-white flex flex-col items-center text-2xl font-semibold w-full md:w-96">
+            <img src="/speech_bubble01.png" :class="`'  h-60 `" alt="">   
+            <div v-if="step2" class="absolute top-8 flex flex-col items-center ">
+                <div class="mb-12 w-full flex flex-col items-center">
+                    <div>유언장에 담고 싶은</div>
+                    <div>내용을 선택해주세요.</div>
+                    <div>답변이 없더라도</div>
+                    <div>유언장만 작성도 가능하답니다.</div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- image section -->
+        <img class="object-cover -mt-5 w-40 h-40 rounded-full" src="/maru.png" alt="">
+    </div>
       </div>
       <div class="space-y-7">
         <div class="flex flex-col space-y-4 w-full md:items-start">
@@ -106,17 +122,17 @@
               </div>
               <div>{{checklist.finance[0].question}}</div>
             </div>
+            <div v-if="checklist.finance[1].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.finance[1].question}`">
+              </div>
+              <div>{{checklist.finance[1].question}}</div>
+            </div>
             <div v-if="checklist.finance[2].iscomplete" class="flex ">
               <div>
               <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.finance[2].question}`">
               </div>
               <div>{{checklist.finance[2].question}}</div>
-            </div>
-            <div v-if="checklist.finance[3].iscomplete" class="flex ">
-              <div>
-              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.finance[3].question}`">
-              </div>
-              <div>{{checklist.finance[3].question}}</div>
             </div>
           </div>
         </div>
@@ -251,24 +267,16 @@
         <div>다운로드 버튼을 눌러볼까요?</div>
       </div>
       <div @click="startRecording" v-if="!recordingInProgress && !recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
-        <i class="fas fa-microphone text-lighter bg-gray-200 text-6xl px-5 py-3 rounded-full"></i>
+        <i class="fas fa-microphone text-primary bg-gray-200 text-6xl px-5 py-3 rounded-full"></i>
         <div>[마이크를 눌러주세요]</div>
       </div>
       <div @click="stopRecording" v-if="recordingInProgress" class="w-full flex flex-col items-center text-sm space-y-2">
         <i class="fas fa-microphone bg-gray-200 animate-pulse text-red-500  text-6xl px-5 py-3 rounded-full"></i>
-        <div class="flex">[ 음성녹음 진행중 /<div class="text-primary"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
+        <div class="flex">[ 음성녹음 진행중 /<div class="text-light"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
       </div>
       <div  v-if="recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
-        <i class="fas fa-microphone bg-gray-200 animate-pulse text-white  text-6xl px-5 py-3 rounded-full"></i>
-        <div class="flex">[ 녹음불가 /<div class="text-primary ">취소 후 마이크 이용가능</div> ]</div>
-      </div>
-
-      <div id="userWill" class="w-full md:w-96 flex flex-col items-center text-xl bg-green-100 opacity-80 px-7 py-7 space-y-1">
-        <div v-for="item in userWill" :key="item">{{item}}</div>
-      </div>
-
-      <div class="w-full flex justify-center text-xl md:w-96">
-        <button @click="onTextToPdfDownload" class="w-full bg-lighter text-white py-2 -mt-7 hover:bg-primary">유언장 PDF 다운로드</button>       
+        <i class="fas fa-microphone bg-gray-200 text-white  text-6xl px-5 py-3 rounded-full"></i>
+        <div class="flex">[ 녹음불가 /<div class="text-light ">취소 후 마이크 이용가능</div> ]</div>
       </div>
 
       <div class="w-full flex flex-col items-center text-xl" v-if="recordings.length > 0">
@@ -276,10 +284,27 @@
           <audio class="w-full md:w-96" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
         </div>
         <div class="w-full flex justify-center">
-          <button  class=" bg-lighter py-3 w-1/2 hover:bg-primary text-white md:w-44 mr-8 rounded-lg">녹음파일 다운로드</button>    
+          <button @click="saveRecording"  class=" bg-light py-3 w-1/2 hover:bg-primary text-white md:w-44 mr-8 rounded-lg">녹음파일 다운로드</button>    
             <button @click="deleteRecording" class="bg-gray-100 py-3 w-1/2 md:w-44 rounded-lg">취소</button>  
         </div>
       </div>
+      <!-- pdf download button section -->
+      <div class="w-full flex justify-center text-xl md:w-96">
+        <button @click="onRecordingDownload" class="w-full bg-light text-white py-2 -mb-7 rounded-md hover:bg-primary">유언장 PDF 다운로드</button>       
+      </div>
+      <!-- will text section -->
+      <div id="userWill" :class="`w-full h-screen flex flex-col items-start text-xl bg-lighter  px-7 py-7 space-y-1`">
+        <div v-for="item in userWill" :key="item">{{item}}</div>
+      </div>
+
+      <!-- <div id="userWill" class="w-full flex h-screen flex-col items-start text-xl  px-40 py-20 space-y-1">
+        <div class="w-full" v-for="item in userWill" :key="item">{{item}}</div>
+      </div> -->
+      
+
+      
+
+      
     </div>
 
     <!-- step4 -->
@@ -295,9 +320,11 @@
         <div class="highlight">단, 효력이 있는 유언장은</div>
         <div class="highlight">의사결정이 가능한 만 17세 이상</div>
         <div class="highlight">유언장 작성자와 증인 한 명이 필요해요.</div>
-        <div>작성자가 유언의 취지, 성명, 오늘 날짜 연/월/일을 말하고,</div>
+        <div>작성자가 유언의 취지, 성명,</div>
+        <div>오늘 날짜 연/월/일을 말하고,</div>   
         <div>증인이 증인 이름과 유언 작성자 유언이</div>
-        <div>정확하다고 말해야 법적 효력있는 유언장이 완성돼요. </div>
+        <div>정확하다고 말해야</div>
+        <div>법적 효력있는 유언장이 완성돼요.</div>
         <div class="text-primary">(「민법」 제1061조)</div>
       </div>
       <div class="w-full flex flex-col items-center text-xl">
@@ -306,21 +333,31 @@
         <div>아이백이 제공하는 예시를 살펴볼까요?</div>
       </div>
       <div @click="startRecording" v-if="!recordingInProgress && !recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
-        <i class="fas fa-microphone text-lighter bg-gray-200 text-6xl px-5 py-3 rounded-full"></i>
+        <i class="fas fa-microphone text-primary bg-gray-200 text-6xl px-5 py-3 rounded-full"></i>
         <div>[마이크를 눌러주세요]</div>
       </div>
       <div @click="stopRecording" v-if="recordingInProgress" class="w-full flex flex-col items-center text-sm space-y-2">
         <i class="fas fa-microphone bg-gray-200 animate-pulse text-red-500  text-6xl px-5 py-3 rounded-full"></i>
-        <div class="flex">[ 음성녹음 진행중 /<div class="text-primary"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
+        <div class="flex">[ 음성녹음 진행중 /<div class="text-light"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
       </div>
       <div  v-if="recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
-        <i class="fas fa-microphone bg-gray-200 animate-pulse text-white  text-6xl px-5 py-3 rounded-full"></i>
-        <div class="flex">[ 녹음불가 /<div class="text-primary ">취소 후 마이크 이용가능</div> ]</div>
+        <i class="fas fa-microphone bg-gray-200 text-white  text-6xl px-5 py-3 rounded-full"></i>
+        <div class="flex">[ 녹음불가 /<div class="text-light ">취소 후 마이크 이용가능</div> ]</div>
       </div>
 
-      <div id="userWill" class="w-full md:w-96 flex flex-col items-center text-xl bg-green-100 opacity-80 px-2 py-7  space-y-7">
-        <div class="bg-light text-white px-8 py-2 rounded-3xl">유언장예시</div>
-        <div class="w-full">
+      <div class="w-full flex flex-col items-center text-xl" v-if="recordings.length > 0">
+        <div v-for="(recording) in recordings" :key="recording.ts" class="w-full mb-7 flex justify-center">
+          <audio class="w-full md:w-96" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
+        </div>
+        <div class="w-full flex justify-center">
+          <button  @click="saveRecording" class=" bg-light py-3 w-1/2 hover:bg-primary text-white md:w-44 mr-8 rounded-lg">녹음파일 다운로드</button>    
+            <button @click="deleteRecording" class="bg-gray-100 py-3 w-1/2 md:w-44 rounded-lg">취소</button>  
+        </div>
+      </div>
+
+      <div id="userWill" class="w-full md:w-96  flex flex-col items-center text-xl bg-lighter px-2 py-7  space-y-7">
+        <div class="bg-primary text-white px-8 py-2 rounded-3xl">유언장예시</div>
+        <div class="w-full px-4">
           <div>나는 김영수이다.</div>
           <div>오늘은 2021년 1월 1일이다.</div>
           <div>내가 보유하고 있는 </div>
@@ -330,7 +367,7 @@
           <div>(신한은행 110-423-000001)는 </div>
           <div>딸 김은영에게 전부 상속한다. </div>
         </div>
-        <div class="w-full">
+        <div class="w-full px-4">
           <div>나는 증인 박민수이고,</div>
           <div>유언자 김영수의 유언이 정확함을 확인한다. </div>
           <div>유언내용은 사망 당시 전체 재산을 </div>
@@ -338,76 +375,7 @@
         </div>
       </div>
 
-      
-
-      <div class="w-full flex flex-col items-center text-xl" v-if="recordings.length > 0">
-        <div v-for="(recording) in recordings" :key="recording.ts" class="w-full mb-7 flex justify-center">
-          <audio class="w-full md:w-96" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
-        </div>
-        <div class="w-full flex justify-center">
-          <button  @click="onRecordingDownload" class=" bg-lighter py-3 w-1/2 hover:bg-primary text-white md:w-44 mr-8 rounded-lg">녹음파일 다운로드</button>    
-            <button @click="deleteRecording" class="bg-gray-100 py-3 w-1/2 md:w-44 rounded-lg">취소</button>  
-        </div>
-      </div>
     </div>
-
-<!-- 1 -->
-    <!-- <div v-if="currentUser.record_url" class=" md:text-lg text-xs  flex cursor-pointer bg-white w-full py-6  px-6 shadow-md items-center  border-b border-gray-200 ">
-      <div class=" relative w-full flex  items-center">
-          <i class="far fa-save text-white bg-green-600 opacity-80 px-3 py-2 rounded-full text-4xl"></i>
-          <div class=" absolute bg-light  :left-0 text-sm rounded-full -bottom-2 ml-8 opacity-90 px-2 border-2 border-white ">1/1</div>
-          <div class="ml-3">{{currentUser.nickname}}의 저장공간</div>
-      </div>
-    </div>
-    <div v-if="currentUser.record_url" class= " w-full text-xs md:text-base shadow-md bg-white px-6 transition-all mb-5"> 
-      <div class="relative flex md:flex-row flex-col border-b py-5  border-gray-200">
-        <div class="md:w-1/2 w-full mb-3 md:mb-0">
-          <audio class="w-full md:pr-4" :src="currentUser.record_url" controls="true"></audio>
-        </div>
-        <div class="md:w-1/2 w-full md:pl-2">
-          <button @click="downloadSaveRecording"  class="bg-light rounded-md px-10 py-3 mr-2 hover:bg-dark">다운로드</button>
-          <button @click="deleteSaveRecording" class="border-2 border-light rounded-md px-10 py-2.5 ">삭제</button>
-        </div>
-      </div>
-    </div> -->
-
-    
-    
-    
-    <!-- <div class="text-xs md:text-lg flex cursor-pointer bg-white w-full py-4 px-6 shadow-md items-center justify-start  border-b border-gray-200 ">
-        <div v-if="!recordings.length" class="flex items-center">
-        <i @click="startRecording" v-if="!recordingInProgress" class="fas hover:opacity-70 fa-microphone rounded-full text-4xl py-2 px-4 bg-gray-200"></i>
-        <div v-if="!recordingInProgress" class=" ml-2">[ 마이크를 눌러주세요. ]</div>
-        <i @click="stopRecording" v-if="recordingInProgress" class="fas hover:opacity-70 fa-microphone animate-pulse text-red-500 rounded-full text-4xl py-2 px-4 bg-gray-200"></i>
-        <div v-if="recordingInProgress" class=" ml-2 flex">[ 음성녹음 진행중 /<div class="text-primary"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
-        </div>
-        <div v-if="recordings.length" class="flex items-center">
-        <i class="fas  fa-microphone text-white rounded-full text-4xl py-2 px-4 bg-gray-200"></i>
-        <div  class=" ml-2 flex">[ 녹음불가 /<div class="text-primary ">취소 후 마이크 이용가능</div> ]</div>
-        </div>
-    </div> -->
-    <!-- <div class= " w-full text-xs md:text-base shadow-md bg-white md:px-6 transition-all pb-40 md:pb-0  "> 
-      <div class="relative flex flex-col md:py-5  border-gray-200">
-        <div class="space-y-2 ">
-          <div class="md:flex flex-none">
-                  <div class="md:w-1/2 w-full md:ml-6">
-                      <div class="mb-2">
-                          <textarea placeholder="음성을 녹음하면 텍스트로 변환되는곳입니다" readonly v-model="speechToText" class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
-                            ></textarea>
-                      </div>
-                      <div  class="space-y-3" v-if="recordings.length > 0">
-                          <div v-for="(recording) in recordings" :key="recording.ts" class="">
-                                <audio class="w-full" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
-                          </div>
-                          <button  @click="saveRecording"  class="bg-light py-3 px-10 rounded-md mr-2 cursor-default ">저장</button>
-                          <button @click="deleteRecording"  class="border-2 border-light py-2.5 px-10 rounded-md">취소</button>
-                      </div>
-                  </div>
-
-          </div>
-        </div> 
-      </div>
-    </div> -->
   
   </div>
 </template>
@@ -423,10 +391,9 @@ import moment from 'moment'
 import html2pdf from 'html2pdf.js'
 
 export default {
-  emits: ["open-modal", 'state-incomplete'],
   components: {
   },
-  setup(pops, {emit}) {
+  setup() {
     const step1 = ref(true)
     const step2 = ref(false)
     const step3 = ref(false)
@@ -442,6 +409,8 @@ export default {
     const checklist = ref([])
     const userSelection = ref([])
     const userWill = ref([])
+
+    const isPdf = ref(false)
 
 
     onBeforeMount(async() => {
@@ -490,24 +459,31 @@ export default {
       userSelection.value.forEach(element => {
         // 건강
         if(element === checklist.value.health[3].question){
-          if(checklist.value.health[3].answer_box !== 'false') {
-            userWill.value.push(checklist.value.health[3].answer_box)
+          if(checklist.value.health[3].answer_box !== '아니요' && checklist.value.health[3].answer_box !== '관심있습니다') {
+            userWill.value.push('나는 장기기증을 희망합니다. 등록기관에 제출한 장기기증 문서를 참고해주세요.')
           }
         }
         // 재무
         if(element === checklist.value.finance[0].question) {
-          userWill.value.push(checklist.value.finance[0].answer_text)
+            if(checklist.value.funeral[0].answer_check === '기타') {
+              userWill.value.push(checklist.value.funeral[0].answer_text)
+            } else {         
+                checklist.value.finance[0].answer_box.forEach((element) => {
+                userWill.value.push("나는 " + element.box_type + '보험이 있으며, 수혜자는' + element.box_name + '입니다.')
+              })
+            }
+        }
+        if(element === checklist.value.finance[1].question) {
+          userWill.value.push(checklist.value.finance[1].answer_text)
         }
         if(element === checklist.value.finance[2].question) {
-          userWill.value.push(checklist.value.finance[2].answer_text)
-        }
-        if(element === checklist.value.finance[3].question) {
-          if(checklist.value.finance[3].answer_box === '기타') {
-            userWill.value.push(checklist.value.finance[3].answer_text)
-          } else {
-            userWill.value.push('나의 자산과 관련해서는 ' + checklist.value.finance[3].answer_box + ' ' + checklist.value.finance[3].box_name1 + checklist.value.finance[3].box_name2 + '에게 연락하세요. ' + '연락처는 ' + checklist.value.finance[3].box_number1 + checklist.value.finance[3].box_number2 + '입니다.')
-          }
-          
+            if(checklist.value.funeral[2].answer_check === '기타') {
+              userWill.value.push(checklist.value.funeral[2].answer_text)
+            } else { 
+                checklist.value.finance[2].answer_box.forEach((element) => {
+                userWill.value.push(element.box_name + '(' + element.box_type + ')님이 재산을 관리하고 있습니다. 연락처는 ' + element.box_number + '입니다.')
+              })
+            }
         }
         // 유언
         if(element === checklist.value.testament[0].question) {
@@ -541,11 +517,7 @@ export default {
           }
         }
         if(element === checklist.value.funeral[3].question) {
-          if(checklist.value.funeral[3].answer_box === '기타') {
-            userWill.value.push(checklist.value.funeral[3].answer_text)
-          } else {
-            userWill.value.push(checklist.value.funeral[3].answer_box)
-          }
+          userWill.value.push(checklist.value.funeral[3].answer_box[0].box_type1 + '을 한뒤, ' + checklist.value.funeral[3].answer_box[0].box_type1 + ' 방식으로 진행해 주세요. ' + checklist.value.funeral[3].answer_text)
         }
         // 디지털
         if(element === checklist.value.digital[0].question) {
@@ -591,15 +563,14 @@ export default {
     }
 
     const onRecordingDownload = () => {
-      console.log('dd')
-      emit('open-modal')
+      isPdf.value = true
+      onTextToPdfDownload()
     }
 
-    const onTextToPdfDownload = () => {
-           
-            let data = document.getElementById('userWill')
+    const onTextToPdfDownload = async () => {
+      let data = await document.getElementById('userWill')
             console.log('check : ', data)
-           
+            
             const options = {
                 filename: `invoice-#003.pdf`,
                 margin: 0,
@@ -610,38 +581,41 @@ export default {
 
             try {
 
-              html2pdf().set(options).from(data).toPdf().output('bloburl').then(async (result) => {
-                  console.log('blob check : ', result)
-                  // console.log('url check : ', blobUrl)
-                  const pdf = await fetch(result).then(r=> r.blob()).then(blobFile=> new File([blobFile], "pdffile", {
-                      type: 'application/pdf'
-                  }));
-                  const blobUrl = window.URL.createObjectURL(pdf)
-                  console.log(typeof blobUrl)
-                  axios({
-                      url: blobUrl,
-                      method: 'GET',
-                      responseType: 'blob',
-                      // headers : {
-                      //     'Content-Type': 'application/pdf'
-                      // }
-                  }).then(response => {
-                      console.log('success', response)
-                      const url = window.URL.createObjectURL(new Blob([response.data]));
-                      const link = document.createElement('a');
-                      link.href = url;
-                      link.setAttribute('download', `'from_iback_${Date.now()}.pdf`);
-                      document.body.appendChild(link);
-                      link.click();
-                  }).catch(error => {
-                      console.log('fail', error.message)
-                      alert('axios error', error.message)
-                  })
-              })
-            } catch (error) {
-                alert('html2pdf error : ', error.message)
-            }
-        }
+            html2pdf().set(options).from(data).toPdf().output('bloburl').then(async (result) => {
+                console.log('blob check : ', result)
+                // console.log('url check : ', blobUrl)
+                const pdf = await fetch(result).then(r=> r.blob()).then(blobFile=> new File([blobFile], "pdffile", {
+                    type: 'application/pdf'
+                }));
+                const blobUrl = window.URL.createObjectURL(pdf)
+                console.log(typeof blobUrl)
+                axios({
+                    url: blobUrl,
+                    method: 'GET',
+                    responseType: 'blob',
+                    // headers : {
+                    //     'Content-Type': 'application/pdf'
+                    // }
+                }).then(response => {
+                    console.log('success', response)
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'file.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                }).catch(error => {
+                    console.log('fail', error.message)
+                    alert('axios error', error.message)
+                })
+
+
+            })
+                } catch (error) {
+                  alert('html2pdf error : ', error.message)
+                }
+                  isPdf.value = false
+    }
     
 
 
@@ -662,12 +636,14 @@ export default {
       userWill,
       onTextToPdfDownload,
       onRecordingDownload,
+      isPdf,
     }
   },
   data () {
     return {
       speechToText: '',
       currentUser: [],
+      record_at: [],
       saveRecord : [],
       recordSate : false,
       enableEchoCancellation: true,
@@ -743,19 +719,35 @@ export default {
       try {
         const uploadTask = await storage.ref(`record/${this.currentUser.uid}/record`).put(sound)
         this.saveRecord = await uploadTask.ref.getDownloadURL();
+        this.record_at = this.currentUser.record_at
+        this.record_at.push(Date.now())
         await USER_COLLECTION.doc(this.currentUser.uid).update({
           record_url: this.saveRecord,
+          record_at: this.record_at,
         })
-        store.commit("SET_RECORD_URL", this.saveRecord)
-        this.recordings = []
-        this.speechToText = ''
-        this.recordingInProgress = false
+        store.commit("SET_RECORD_AT", this.record_at)
+        // this.recordings = []
+        // this.speechToText = ''
+        // this.recordingInProgress = false
       } catch (error) {
         console.log('uproad error : ', error)
       }
+      this.downloadSaveRecording()
     },
 
     async downloadSaveRecording() {
+      // const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+      // type: this.recordings[0].mimeType
+      // }));
+
+      // axios({
+      //   method : 'post',
+      //   url: 'http://localhost:3000',
+      //   responseType: 'blob',
+      //   data: sound
+      // }).then(res => {
+
+      // })
       // Create a reference to the file we want to download
         const starsRef = await storage.ref(`record/${this.currentUser.uid}/record`)
         //Get the download URL

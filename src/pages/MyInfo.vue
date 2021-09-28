@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full px-2 mb-10 md:px-60">
+    <div v-if="currentUser" class="w-full px-2 mb-10 md:px-60">
         <div @click="onPrev" class="flex cursor-pointer  text-primary py-6 items-center">
             <i class="flex-1 fas fa-angle-left -mt-1 text-4xl mr-24"></i>
             <div class="flex  w-full -ml-40 justify-center text-xl font-semibold">내정보</div>
@@ -39,10 +39,22 @@
                             <i class="fas fa-sort-down text-3xl animate-bounce -mt-2.5"></i>
                         </div>
                         <div v-if="isHealth">
-                            <div class=" px-6" v-for="(item, index) in checklist.health" :key="index">
+                            <div class=" px-6">
                                 <div class="mb-3">
-                                    <div>{{index+1}}. {{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div>1. {{checklist.health[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.health[0].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>2. {{checklist.health[1].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.health[1].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>3. {{checklist.health[2].question}}</div>
+                                    <div class="text-light font-semibold">답변 : <span v-for="item in checklist.health[2].answer_box" :key="item">{{item}}, </span> {{checklist.health[2].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>4. {{checklist.health[3].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.health[3].answer_box}}</div>
                                 </div>
                             </div>
                         </div>
@@ -64,10 +76,18 @@
                             <i class="fas fa-sort-down text-3xl animate-bounce -mt-2.5"></i>
                         </div>
                         <div v-if="isFinance">
-                            <div class=" px-6" v-for="(item, index) in checklist.finance" :key="index">
+                            <div class=" px-6">
                                 <div class="mb-3">
-                                    <div>{{index+1}}. {{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div>1. {{checklist.finance[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : <span v-for="item in checklist.finance[0].answer_box" :key="item">{{item.box_type}}/{{item.box_name}}&nbsp;&nbsp;</span> {{checklist.finance[0].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>2. {{checklist.finance[1].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.finance[1].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>3. {{checklist.finance[2].question}}</div>
+                                    <div class="text-light font-semibold">답변 : <span v-for="item in checklist.finance[2].answer_box" :key="item">{{item.box_name}}/{{item.box_type}}/{{item.box_number}}&nbsp;&nbsp;</span> {{checklist.finance[2].answer_text}}</div>
                                 </div>
                             </div>
                         </div>
@@ -89,10 +109,22 @@
                             <i class="fas fa-sort-down text-3xl animate-bounce -mt-2.5"></i>
                         </div>
                         <div v-if="isTestament">
-                            <div class=" px-6" v-for="(item, index) in checklist.testament" :key="index">
+                            <div class=" px-6">
                                 <div class="mb-3">
-                                    <div>{{index+1}}. {{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div>1. {{checklist.testament[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.testament[0].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>2. {{checklist.testament[1].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.testament[1].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>3. {{checklist.testament[2].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.testament[2].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>4. {{checklist.testament[3].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.testament[3].answer_text}}</div>
                                 </div>
                             </div>
                         </div>
@@ -114,10 +146,22 @@
                             <i class="fas fa-sort-down text-3xl animate-bounce -mt-2.5"></i>
                         </div>
                         <div v-if="isFuneral">
-                            <div class=" px-6" v-for="(item, index) in checklist.funeral" :key="index">
+                            <div class=" px-6">
                                 <div class="mb-3">
-                                    <div>{{index+1}}. {{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div>1. {{checklist.funeral[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.funeral[0].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>2. {{checklist.funeral[1].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.funeral[1].answer_box}}&nbsp;&nbsp;{{checklist.funeral[1].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>3. {{checklist.funeral[2].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.funeral[2].answer_box}}&nbsp;&nbsp;{{checklist.funeral[2].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>4. {{checklist.funeral[3].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.funeral[3].answer_box[0].box_type1}}/{{checklist.funeral[3].answer_box[0].box_type2}} {{checklist.funeral[3].answer_text}}</div>
                                 </div>
                             </div>
                         </div>
@@ -139,10 +183,18 @@
                             <i class="fas fa-sort-down text-3xl animate-bounce -mt-2.5"></i>
                         </div>
                         <div v-if="isDigital">
-                            <div class=" px-6" v-for="(item, index) in checklist.digital" :key="index">
+                            <div class=" px-6">
                                 <div class="mb-3">
-                                    <div>{{index+1}}. {{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div>1. {{checklist.digital[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : <span v-for="item in checklist.digital[0].answer_box" :key="item">{{item.box_type}}/{{item.box_state}}/{{item.box_name}}&nbsp;&nbsp;</span> {{checklist.digital[0].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>2. {{checklist.digital[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : <span v-for="item in checklist.digital[0].answer_box" :key="item">{{item.box_type}}/{{item.box_state}}/{{item.box_name}}&nbsp;&nbsp;</span> {{checklist.digital[0].answer_text}}</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div>3. {{checklist.digital[0].question}}</div>
+                                    <div class="text-light font-semibold">답변 : {{checklist.digital[0].answer_text}}</div>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +219,7 @@
                             <div class=" px-6" v-for="(item, index) in checklist.pet" :key="index">
                                 <div class="mb-3">
                                     <div>{{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div class="text-light font-semibold">답변 : {{item.answer_text}}</div>
                                 </div>
                             </div>
                         </div>
@@ -189,10 +241,10 @@
                             <i class="fas fa-sort-down text-3xl animate-bounce -mt-2.5"></i>
                         </div>
                         <div v-if="isBucketlist">
-                            <div class=" px-6" v-for="(item, index) in checklist.bucketlist" :key="index">
+                            <div class=" px-6">
                                 <div class="mb-3">
-                                    <div>{{item.question}}</div>
-                                    <div class="text-primary">답변 : {{item.answer_text}}</div>
+                                    <div>{{checklist.bucketlist[0].question}}</div>
+                                    <div class="px-3 text-light font-semibold" v-for="(item, index) in checklist.bucketlist[0].answer_box" :key="index">{{index+1}}. 나는 {{item.box_who}} {{item.box_when}} {{item.box_what}} 싶어요.</div>
                                 </div>
                             </div>
                         </div>
@@ -204,8 +256,7 @@
                 <div class="flex flex-col w-full space-y-3">
                     <div class="text-xl font-semibold ">유언장 작성기록</div>
                     <div class="">
-                        <div class="">ㆍ {{currentUser.nickname}}님은 2021년 9월 30일 에 유언장을 다운로드 받았습니다.</div>
-                        <div class="">ㆍ {{currentUser.nickname}}님은 2021년 10월 1일 에 유언장을 다운로드 받았습니다.</div>
+                        <div v-for="item in currentUser.record_at" :key="item" class="">ㆍ {{currentUser.nickname}}님은 {{moment(item).format('YYYY년 MM월 DD일 HH시 mm분')}} 에 유언장을 다운로드 받았습니다.</div>
                     </div>
                 </div>
 
@@ -228,7 +279,9 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- logout -->
+                <button @click="logout" class="py-4 text-left border-b text-gray-500 w-full md:px-6 px-3">로그아웃</button>
 
 
                 
@@ -247,6 +300,8 @@ import {onBeforeMount, computed, ref} from 'vue'
 import store from '../store'
 import {CHECKLISTS_COLLECTION} from '../firebase' 
 import axios from 'axios'
+import {auth} from '../firebase'
+import moment from 'moment'
 
 export default {
     setup() {
@@ -263,12 +318,12 @@ export default {
         const isBucketlist = ref(false)
 
         onBeforeMount(async() => {
+
             await CHECKLISTS_COLLECTION.where('uid', '==', currentUser.value.uid).get()
             .then((querySnapshot) => {
                 if(querySnapshot.docs.length > 0) {
                     const documentSnapshot = querySnapshot.docs[0]
                     checklist.value = documentSnapshot.data()
-                    console.log(checklist.value.health[0].question)
                     isChecklist.value = true
                 } else {
                     alert('현재 리스트가 존재하지 않습니다 나만의 계획을 세워보세요')
@@ -277,6 +332,37 @@ export default {
             })
             window.scrollTo(0, 0)
         })
+
+        // runs after firebase is initialized
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+              console.log('사용자 true', user);
+              // isLoggedIn.value = true // if we have a user
+            } else {
+              console.log('사용자 false');
+              // isLoggedIn.value = false // if we do not
+            }
+        })
+
+
+        const logout = async () => {
+          // if (Kakao.Auth.getAccessToken()) {
+          //   Kakao.Auth.logout(function() {
+          //   store.commit("SET_USER", null)
+          //   router.replace('/login')
+          //   console.log('logout success by kakao')
+          //   });
+          // } else {
+            try{
+                store.commit("SET_USER", null)
+                auth.signOut();
+                router.replace('/login')
+                console.log('logout success')
+            } catch(error) {
+                console.log('logout error : ', error.message)
+            }
+          // }
+        }
 
         const downHealth = () => {
             isHealth.value = true
@@ -365,6 +451,9 @@ export default {
             isBucketlist,
             upBucketlist,
             downBucketlist,
+
+            logout,
+            moment,
 
             
         }

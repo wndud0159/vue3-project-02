@@ -56,6 +56,7 @@ export default {
             profile_image_url: userData.value[0].profile_image_url,
             username: '',
             address: '',
+            record_at: [],
             record_url: '',
             introduce_myself: '',
             provider : userData.value[0].provider,

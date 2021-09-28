@@ -11,10 +11,10 @@
     <div class=" absolute top-10 md:top-16  flex text-center flex-col items-start md:items-center w-full px-4">
         <div class="mb-6  md:text-5xl text-3xl md:mb-14  font-semibold w-full">
             <div class="">죽음은</div>
-            <div class=""><span class=" text-primary">'삶에 대한 이야기'</span>입니다</div>
+            <div class=""><span class=" text-light">'삶에 대한 이야기'</span>입니다</div>
         </div>
         <div class=" md:text-3xl text-xl mb-6 md:mb-10  w-full">
-            <div><span class="text-primary">죽음 연관어 1위</span>가 뭘까요?</div>
+            <div><span class="text-light">죽음 연관어 1위</span>가 뭘까요?</div>
             <div>아이러니하게도 '삶'입니다.</div>
         </div>
         <div class=" md:text-3xl  text-xl mb-6 md:mb-10  w-full">
@@ -29,7 +29,7 @@
 
         <!-- main button -->
         <div class="flex justify-center w-full">
-        <button @click="goWellDyingChecklist" class="text-white text-2xl border font-semibold border-primary bg-black py-6 px-20 rounded-2xl shadow-2xl">시작하기</button>
+        <button @click="goWellDyingChecklist" class="text-white text-2xl border font-semibold border-light bg-light py-6 px-20 rounded-2xl shadow-2xl hover:bg-primary hover:border-primary">시작하기</button>
         </div>
 
         <!-- modal -->

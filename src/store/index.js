@@ -26,8 +26,8 @@ const store = createStore({
         SET_INTRODUCE_MYSELF: (state, introduce_myself) => {
             state.user.introduce_myself = introduce_myself
         },
-        SET_RECORD_URL: (state, record_url) => {
-            state.user.record_url = record_url
+        SET_RECORD_AT: (state, record_at) => {
+            state.user.record_at = record_at
         },
         SET_MYCHECKLIST_COUNT: (state, count) => {
             state.user.mychecklist_count = count
