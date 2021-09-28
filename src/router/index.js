@@ -25,6 +25,7 @@ import VideoTest from '../pages/VideoTest.vue'
 import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
 import TermsOfUse from '../pages/TermsOfUse.vue'
 import Notice from '../pages/Notice.vue'
+import MyInfo from '../pages/MyInfo.vue'
 
 
 
@@ -37,8 +38,9 @@ import Notice from '../pages/Notice.vue'
 const routes = [
     //메뉴
     { path: '/', name: 'home', component: Home, title: '홈', icon: 'fas fa-home text-xl', meta: { isMenu: true, requireAuth: true} },
-    { path: '/businessalliance', name: 'businessAlliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },
-    { path: '/', name: 'seviceCenter', component: ServiceCenter, title: '고객센터', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, requireAuth: true} },
+    { path: '/servicecenter', name: 'sevicecenter', component: ServiceCenter, title: '고객센터', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, requireAuth: true} },
+    { path: '/myinfo', name: 'myinfo', component: MyInfo, title: '내정보', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, requireAuth: true} },
+    { path: '/businessalliance', name: 'businessalliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },
     
     { path: '/checklist', name: 'checklist', component: Checklist, title: '체크리스트작성', meta: { isMenu: false, requireAuth: true} },
     { path: '/will', name: 'will', component: Will, title: '유언장작성', meta: { isMenu: false, requireAuth: true} },

@@ -1,7 +1,358 @@
 <template>
-  <div class="flex flex-col h-screen overflow-y-scroll  bg-gray-200 items-center pt-28 lg:pt-40 pb-48 md:pb-10 px-3 md:px-20">
+  <div class="flex flex-col items-center pt-8 pb-8 px-3">
+    <!-- step1 -->
+    <div v-if="step1" class="flex flex-col w-full items-center space-y-7">
+      <div class="text-4xl font-semibold mb-3">유언장 작성하기</div>
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>이제 사랑하는 사람들에게</div>
+        <div>{{currentUser.username}}의 삶을 전해볼까요?</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>{{currentUser.username}}님이 적어둔 내용을 바탕으로</div>
+        <div>유언장을 작성해봤어요.</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>유언장을 미리 작성해두면</div>
+        <div class="flex">
+          <div class="highlight">{{currentUser.username}}님의 마지막 이야기</div><span class="">를</span>
+        </div>
+        <div class="flex">
+          <div class="highlight">사랑하는 사람들에게 남길 수 있고,</div>
+        </div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div class="flex">
+          <div class="highlight">남은 사람이 {{currentUser.username}}님의 삶을</div>
+        </div>
+        <div class="flex">
+          <div class="highlight">정리하는데 큰 도움이 돼요,</div>
+        </div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>법적 효력이 있는 유언장을</div>
+        <div>작성하는 방법은 5가지가 있어요.</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>마루가 소개할 방법은</div>
+        <div class="mb-3">음성 유언장이에요.</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>{{currentUser.username}}님의 유언 취지, 이름,</div>
+        <div>오늘 날짜 연/원/일을 말하고</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>참여하는 증인이</div>
+        <div>{{currentUser.username}}님 이름과 유언이</div>
+        <div>정확하다고 말해야</div>
+        <div>법적 효력있는</div>
+        <div>유언장이 완성돼요</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>다른 4가지 방법은</div>
+        <div>변호사, 공증인이 필요하지만,</div>
+        <div>아이백은 증인만 있다면</div>
+        <div>바로 유언장 작성이 가능해요.</div>
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>{{currentUser.username}}님의 중요한 정보가</div>
+        <div>한 눈에 다 정리되었어요.</div>
+        <div>유언장에 포함할 내용을</div>
+        <div>체크해보세요.</div>
+      </div>
+
+      <button @click="showChecklistByComplete" class="bg-light hover:bg-primary cursor-pointer w-full md:w-96 text-white py-2 rounded-md">시작하기</button>
+    </div>
+
+    <!-- step2 -->
+    <div v-if="step2" class="flex flex-col w-full items-center space-y-7">
+      <div class="flex flex-col w-full items-center text-lg font-semibold">
+        <div @click="showChecklistByComplete" ><span class="text-light">원하시는 질문</span>을 선택하시고</div>
+        <div>확인을 눌러주세요</div>
+      </div>
+      <div class="space-y-7">
+        <div class="flex flex-col space-y-4 w-full md:items-start">
+          <div class="flex items-center">
+            <img class="h-7 w-7 mr-3" src="/health.png" alt="">
+            <div class="text-lg font-semibold">건강</div>            
+          </div>
+          <div class="space-y-2">
+            <div v-if="checklist.health[3].iscomplete" class="flex ">
+              <div>
+              <input class="w-6 h-6 mr-3"  type="checkbox" v-model="userSelection" :value="`${checklist.health[3].question}`">
+              </div>
+              <div>{{checklist.health[3].question}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center">
+            <img class="h-7 w-7 mr-3" src="/finance.png" alt="">
+            <div class="text-lg font-semibold">재무</div>            
+          </div>
+          <div  class="space-y-2">
+            <div v-if="checklist.finance[0].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.finance[0].question}`">
+              </div>
+              <div>{{checklist.finance[0].question}}</div>
+            </div>
+            <div v-if="checklist.finance[2].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.finance[2].question}`">
+              </div>
+              <div>{{checklist.finance[2].question}}</div>
+            </div>
+            <div v-if="checklist.finance[3].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.finance[3].question}`">
+              </div>
+              <div>{{checklist.finance[3].question}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center">
+            <img class="h-7 w-7 mr-3" src="/testament.png" alt="">
+            <div class="text-lg font-semibold">유언</div>            
+          </div>
+          <div  class="space-y-3">
+            <div v-if="checklist.testament[0].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.testament[0].question}`">
+              </div>
+              <div>{{checklist.testament[0].question}}</div>
+            </div>
+            <div v-if="checklist.testament[1].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.testament[1].question}`">
+              </div>
+              <div>{{checklist.testament[1].question}}</div>
+            </div>
+            <div v-if="checklist.testament[2].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.testament[2].question}`">
+              </div>
+              <div>{{checklist.testament[2].question}}</div>
+            </div>
+            <div v-if="checklist.testament[3].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.testament[3].question}`">
+              </div>
+              <div>{{checklist.testament[3].question}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center">
+            <img class="h-7 w-7 mr-3" src="/funeral.png" alt="">
+            <div class="text-lg font-semibold">장례식</div>            
+          </div>
+          <div  class="space-y-3">
+            <div v-if="checklist.funeral[0].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.funeral[0].question}`">
+              </div>
+              <div>{{checklist.funeral[0].question}}</div>
+            </div>
+            <div v-if="checklist.funeral[1].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.funeral[1].question}`">
+              </div>
+              <div>{{checklist.funeral[1].question}}</div>
+            </div>
+            <div v-if="checklist.funeral[2].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.funeral[2].question}`">
+              </div>
+              <div>{{checklist.funeral[2].question}}</div>
+            </div>
+            <div v-if="checklist.funeral[3].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.funeral[3].question}`">
+              </div>
+              <div>{{checklist.funeral[3].question}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center">
+            <img class="h-7 w-7 mr-3" src="/digital.png" alt="">
+            <div class="text-lg font-semibold">디지털</div>            
+          </div>
+          <div  class="space-y-2">
+            <div v-if="checklist.digital[0].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.digital[0].question}`">
+              </div>
+              <div>{{checklist.digital[0].question}}</div>
+            </div>
+            <div v-if="checklist.digital[1].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.digital[1].question}`">
+              </div>
+              <div>{{checklist.digital[1].question}}</div>
+            </div>
+            <div v-if="checklist.digital[2].iscomplete" class="flex ">
+              <div>
+              <input  class="w-6 h-6 mr-3" type="checkbox" v-model="userSelection" :value="`${checklist.digital[2].question}`">
+              </div>
+              <div>{{checklist.digital[2].question}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center">
+            <img class="h-7 w-7 mr-3" src="/pet.png" alt="">
+            <div class="text-lg font-semibold">반려동물</div>            
+          </div>
+          <div class="space-y-2">
+            <div v-if="checklist.pet[0].iscomplete" class="flex ">
+              <div>
+              <input class="w-6 h-6 mr-3"  type="checkbox" v-model="userSelection" :value="`${checklist.pet[0].question}`">
+              </div>
+              <div>{{checklist.pet[0].question}}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <button @click="onAnswerToText" class="py-2 w-full md:w-96 hover:bg-primary cursor-pointer  text-white bg-light rounded-md">확인</button>
+    </div>
+
+    <!-- step3 -->
+    <div v-if="step3" class="flex flex-col w-full items-center space-y-7">
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>잘 했어요!</div>
+        <div>이제 법적효력이 있는</div>
+        <div>유언장이 완성됐어요.</div>
+        <div>완성된 유언장을 다운받으세요.</div>
+      </div>
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>안심하세요.</div>
+        <div>당신의 유언장은 당신만 볼 수 있어요.</div>
+        <div>마루는 물론 아이백 서버에도</div>
+        <div>저장되지 않아요.</div>
+      </div>
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>다운로드 버튼을 눌러볼까요?</div>
+      </div>
+      <div @click="startRecording" v-if="!recordingInProgress && !recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
+        <i class="fas fa-microphone text-lighter bg-gray-200 text-6xl px-5 py-3 rounded-full"></i>
+        <div>[마이크를 눌러주세요]</div>
+      </div>
+      <div @click="stopRecording" v-if="recordingInProgress" class="w-full flex flex-col items-center text-sm space-y-2">
+        <i class="fas fa-microphone bg-gray-200 animate-pulse text-red-500  text-6xl px-5 py-3 rounded-full"></i>
+        <div class="flex">[ 음성녹음 진행중 /<div class="text-primary"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
+      </div>
+      <div  v-if="recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
+        <i class="fas fa-microphone bg-gray-200 animate-pulse text-white  text-6xl px-5 py-3 rounded-full"></i>
+        <div class="flex">[ 녹음불가 /<div class="text-primary ">취소 후 마이크 이용가능</div> ]</div>
+      </div>
+
+      <div id="userWill" class="w-full md:w-96 flex flex-col items-center text-xl bg-green-100 opacity-80 px-7 py-7 space-y-1">
+        <div v-for="item in userWill" :key="item">{{item}}</div>
+      </div>
+
+      <div class="w-full flex justify-center text-xl md:w-96">
+        <button @click="onTextToPdfDownload" class="w-full bg-lighter text-white py-2 -mt-7 hover:bg-primary">유언장 PDF 다운로드</button>       
+      </div>
+
+      <div class="w-full flex flex-col items-center text-xl" v-if="recordings.length > 0">
+        <div v-for="(recording) in recordings" :key="recording.ts" class="w-full mb-7 flex justify-center">
+          <audio class="w-full md:w-96" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
+        </div>
+        <div class="w-full flex justify-center">
+          <button  class=" bg-lighter py-3 w-1/2 hover:bg-primary text-white md:w-44 mr-8 rounded-lg">녹음파일 다운로드</button>    
+            <button @click="deleteRecording" class="bg-gray-100 py-3 w-1/2 md:w-44 rounded-lg">취소</button>  
+        </div>
+      </div>
+    </div>
+
+    <!-- step4 -->
+    <div v-if="step4" class="flex flex-col w-full items-center space-y-7">
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>안녕하세요,</div>
+        <div>변호사와 공증인 없이 쉽고 간단하게</div>
+        <div>유언장을 작성할 수 있는 아이백입니다.</div>
+        <div>음성 녹음이 가능한 폰만 있다면,</div>
+        <div>지금 당장 유언장을 완성해볼까요?</div>
+      </div>
+      <div class="w-full flex flex-col items-center text-xl">
+        <div class="highlight">단, 효력이 있는 유언장은</div>
+        <div class="highlight">의사결정이 가능한 만 17세 이상</div>
+        <div class="highlight">유언장 작성자와 증인 한 명이 필요해요.</div>
+        <div>작성자가 유언의 취지, 성명, 오늘 날짜 연/월/일을 말하고,</div>
+        <div>증인이 증인 이름과 유언 작성자 유언이</div>
+        <div>정확하다고 말해야 법적 효력있는 유언장이 완성돼요. </div>
+        <div class="text-primary">(「민법」 제1061조)</div>
+      </div>
+      <div class="w-full flex flex-col items-center text-xl">
+        <div>유언장을 어떻게 쓸지</div>
+        <div>모르겠다고요?</div>
+        <div>아이백이 제공하는 예시를 살펴볼까요?</div>
+      </div>
+      <div @click="startRecording" v-if="!recordingInProgress && !recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
+        <i class="fas fa-microphone text-lighter bg-gray-200 text-6xl px-5 py-3 rounded-full"></i>
+        <div>[마이크를 눌러주세요]</div>
+      </div>
+      <div @click="stopRecording" v-if="recordingInProgress" class="w-full flex flex-col items-center text-sm space-y-2">
+        <i class="fas fa-microphone bg-gray-200 animate-pulse text-red-500  text-6xl px-5 py-3 rounded-full"></i>
+        <div class="flex">[ 음성녹음 진행중 /<div class="text-primary"> 녹음을 종료하시려면 마이크를 눌러주세요.</div> ]</div>
+      </div>
+      <div  v-if="recordings.length" class="w-full flex flex-col items-center text-sm space-y-2">
+        <i class="fas fa-microphone bg-gray-200 animate-pulse text-white  text-6xl px-5 py-3 rounded-full"></i>
+        <div class="flex">[ 녹음불가 /<div class="text-primary ">취소 후 마이크 이용가능</div> ]</div>
+      </div>
+
+      <div id="userWill" class="w-full md:w-96 flex flex-col items-center text-xl bg-green-100 opacity-80 px-2 py-7  space-y-7">
+        <div class="bg-light text-white px-8 py-2 rounded-3xl">유언장예시</div>
+        <div class="w-full">
+          <div>나는 김영수이다.</div>
+          <div>오늘은 2021년 1월 1일이다.</div>
+          <div>내가 보유하고 있는 </div>
+          <div>서울시 종로구 테헤란대로 101번지 아파트 </div>
+          <div>101동 204호와 땅 경기도 남양주 보문동 </div>
+          <div>21번지 13, 사망 당시 일체의 계좌 </div>
+          <div>(신한은행 110-423-000001)는 </div>
+          <div>딸 김은영에게 전부 상속한다. </div>
+        </div>
+        <div class="w-full">
+          <div>나는 증인 박민수이고,</div>
+          <div>유언자 김영수의 유언이 정확함을 확인한다. </div>
+          <div>유언내용은 사망 당시 전체 재산을 </div>
+          <div>딸 김은영에게 상속한다는 내용이다. </div>
+        </div>
+      </div>
+
+      
+
+      <div class="w-full flex flex-col items-center text-xl" v-if="recordings.length > 0">
+        <div v-for="(recording) in recordings" :key="recording.ts" class="w-full mb-7 flex justify-center">
+          <audio class="w-full md:w-96" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
+        </div>
+        <div class="w-full flex justify-center">
+          <button  @click="onRecordingDownload" class=" bg-lighter py-3 w-1/2 hover:bg-primary text-white md:w-44 mr-8 rounded-lg">녹음파일 다운로드</button>    
+            <button @click="deleteRecording" class="bg-gray-100 py-3 w-1/2 md:w-44 rounded-lg">취소</button>  
+        </div>
+      </div>
+    </div>
+
 <!-- 1 -->
-    <div v-if="currentUser.record_url" class=" md:text-lg text-xs  flex cursor-pointer bg-white w-full py-6  px-6 shadow-md items-center  border-b border-gray-200 ">
+    <!-- <div v-if="currentUser.record_url" class=" md:text-lg text-xs  flex cursor-pointer bg-white w-full py-6  px-6 shadow-md items-center  border-b border-gray-200 ">
       <div class=" relative w-full flex  items-center">
           <i class="far fa-save text-white bg-green-600 opacity-80 px-3 py-2 rounded-full text-4xl"></i>
           <div class=" absolute bg-light  :left-0 text-sm rounded-full -bottom-2 ml-8 opacity-90 px-2 border-2 border-white ">1/1</div>
@@ -18,12 +369,12 @@
           <button @click="deleteSaveRecording" class="border-2 border-light rounded-md px-10 py-2.5 ">삭제</button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     
     
     
-    <div class="text-xs md:text-lg flex cursor-pointer bg-white w-full py-4 px-6 shadow-md items-center justify-start  border-b border-gray-200 ">
+    <!-- <div class="text-xs md:text-lg flex cursor-pointer bg-white w-full py-4 px-6 shadow-md items-center justify-start  border-b border-gray-200 ">
         <div v-if="!recordings.length" class="flex items-center">
         <i @click="startRecording" v-if="!recordingInProgress" class="fas hover:opacity-70 fa-microphone rounded-full text-4xl py-2 px-4 bg-gray-200"></i>
         <div v-if="!recordingInProgress" class=" ml-2">[ 마이크를 눌러주세요. ]</div>
@@ -32,68 +383,31 @@
         </div>
         <div v-if="recordings.length" class="flex items-center">
         <i class="fas  fa-microphone text-white rounded-full text-4xl py-2 px-4 bg-gray-200"></i>
-        <div  class=" ml-2 flex">[ 녹음불가 /<div class="text-primary "> 저장 혹은 취소 후 마이크 이용가능</div> ]</div>
+        <div  class=" ml-2 flex">[ 녹음불가 /<div class="text-primary ">취소 후 마이크 이용가능</div> ]</div>
         </div>
-    </div>
-    <div class= " w-full text-xs md:text-base shadow-md bg-white md:px-6 transition-all pb-40 md:pb-0  "> 
+    </div> -->
+    <!-- <div class= " w-full text-xs md:text-base shadow-md bg-white md:px-6 transition-all pb-40 md:pb-0  "> 
       <div class="relative flex flex-col md:py-5  border-gray-200">
-                <div class="space-y-2 ">
-                    <div class="md:flex flex-none">
-                        <div class=" h-auto  md:w-1/2 w-full flex flex-col py-3 px-1 md:px-6 bg-green-100 opacity-80 border-l-8  border-green-900 border-opacity-30">
-                          <button v-if="isChecklistButton" @click="showChecklistByComplete" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">답변했던 질문으로 유언장 만들기</button>
-                          <button v-if="isPdfButton" @click="onTextToPdfDownload" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">나만의 유언장 PDF 다운로드</button>
-                          <!-- will checklist section-->
-                          <div v-if="checklist.length || isChecklist" class="flex flex-col text-lg space-y-4">
-                            <div class="text-xl font-bold mb-3">원하시는 질문을 선택하시고 확인을 눌러주세요<router-link to="welldyingchecklist" class="text-blue-700">(계획을 세우면 선택할 수 있습니다 이동하기)</router-link></div>
-                            <div>건강</div>
-                            <div v-if="checklist.health[3].iscomplete" class="flex items-center relative "><input  v-model="userSelection" :value="`${checklist.health[3].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.health[3].question}}</span></div>
-                            <div>재무</div>
-                            <div v-if="checklist.finance[0].iscomplete"  class="flex items-center "><input  v-model="userSelection" :value="`${checklist.finance[0].question}`" class="w-12 h-12 mr-3" type="checkbox"><span>{{checklist.finance[0].question}}</span></div>
-                            <div v-if="checklist.finance[2].iscomplete"  class="flex items-center "><input  v-model="userSelection" :value="`${checklist.finance[2].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.finance[2].question}}</span></div>
-                            <div v-if="checklist.finance[3].iscomplete"  class="flex "><input  v-model="userSelection" :value="`${checklist.finance[3].question}`" class="w-12 h-12 mr-3" type="checkbox"><span>{{checklist.finance[3].question}}</span></div>
-                            <div>유지</div>
-                            <div v-if="checklist.testament[0].iscomplete"  class="flex  items-center"><input  v-model="userSelection" :value="`${checklist.testament[0].question}`" class="w-11 h-11 mr-3" type="checkbox"><span>{{checklist.testament[0].question}}</span></div>
-                            <div v-if="checklist.testament[1].iscomplete"  class="flex items-center "><input  v-model="userSelection" :value="`${checklist.testament[1].question}`" class="w-12 h-12 mr-3" type="checkbox"><span>{{checklist.testament[1].question}}</span></div>
-                            <div v-if="checklist.testament[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.testament[2].question}`" class="w-14 h-14 mr-3" type="checkbox"><span>{{checklist.testament[2].question}}</span></div>
-                            <div v-if="checklist.testament[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.testament[3].question}`" class="w-16 h-16 mr-3" type="checkbox"><span>{{checklist.testament[3].question}}</span></div>
-                            <div>장례식</div>
-                            <div v-if="checklist.funeral[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[0].question}`" class="w-20 h-20 mr-3" type="checkbox"><span>{{checklist.funeral[0].question}}</span></div>
-                            <div v-if="checklist.funeral[1].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[1].question}`" class="w-4 h-4 mr-3" type="checkbox"><span>{{checklist.funeral[1].question}}</span></div>
-                            <div v-if="checklist.funeral[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[2].question}`" class="w-7 h-7 mr-3" type="checkbox"><span>{{checklist.funeral[2].question}}</span></div>
-                            <div v-if="checklist.funeral[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.funeral[3].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.funeral[3].question}}</span></div>
-                            <div>디지털</div>
-                            <div v-if="checklist.digital[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[0].question}`" class="w-16 h-16 mr-3" type="checkbox"><span>{{checklist.digital[0].question}}</span></div>
-                            <div v-if="checklist.digital[1].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[1].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.digital[1].question}}</span></div>
-                            <div v-if="checklist.digital[2].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[2].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[2].question}}</span></div>
-                            <!-- <div v-if="checklist.digital[3].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.digital[3].question}`" class="w-8 h-8 mr-3" type="checkbox"><span>{{checklist.digital[3].question}}</span></div> -->
-                            <div>반려동물</div>
-                            <div v-if="checklist.pet[0].iscomplete"  class="flex items-center"><input  v-model="userSelection" :value="`${checklist.pet[0].question}`" class="w-10 h-10 mr-3" type="checkbox"><span>{{checklist.pet[0].question}}</span></div>
-                            <button @click="onAnswerToText" class="bg-green-600 rounded-lg  text-white py-2 shadow-2xl border-4 border-green-600 text-lg mb-4 hover:bg-green-400 hover:border-green-400">확인</button>
+        <div class="space-y-2 ">
+          <div class="md:flex flex-none">
+                  <div class="md:w-1/2 w-full md:ml-6">
+                      <div class="mb-2">
+                          <textarea placeholder="음성을 녹음하면 텍스트로 변환되는곳입니다" readonly v-model="speechToText" class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
+                            ></textarea>
+                      </div>
+                      <div  class="space-y-3" v-if="recordings.length > 0">
+                          <div v-for="(recording) in recordings" :key="recording.ts" class="">
+                                <audio class="w-full" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
                           </div>
-                          <!-- will text seciton -->
-                          <div v-if="isUserWill" id="userWill" class=" space-x-4 text-xl">
-                            <span v-for="item in userWill" :key="item">{{item}}</span>
-                          </div>
-                        </div>
-                        <div class="md:w-1/2 w-full md:ml-6">
-                            <div class="mb-2">
-                                <textarea placeholder="음성을 녹음하면 텍스트로 변환되는곳입니다" readonly v-model="speechToText" class=" md:h-72 h-28 resize-none w-full outline-none py-2 px-2  border  rounded-md border-gray-300"
-                                 ></textarea>
-                            </div>
-                            <div  class="space-y-3" v-if="recordings.length > 0">
-                                <div v-for="(recording) in recordings" :key="recording.ts" class="">
-                                      <audio class="w-full" :src="recording.blobUrl" :type="recording.mimeType" controls="true"/>
-                                </div>
-                                <button  @click="saveRecording"  class="bg-light py-3 px-10 rounded-md mr-2 cursor-default ">저장</button>
-                                <button @click="deleteRecording"  class="border-2 border-light py-2.5 px-10 rounded-md">취소</button>
-                            </div>
-                        </div>
+                          <button  @click="saveRecording"  class="bg-light py-3 px-10 rounded-md mr-2 cursor-default ">저장</button>
+                          <button @click="deleteRecording"  class="border-2 border-light py-2.5 px-10 rounded-md">취소</button>
+                      </div>
+                  </div>
 
-                    </div>
-                </div> 
-            </div>
-    </div>
-  
+          </div>
+        </div> 
+      </div>
+    </div> -->
   
   </div>
 </template>
@@ -108,9 +422,17 @@ import axios from 'axios'
 import moment from 'moment'
 import html2pdf from 'html2pdf.js'
 
-
 export default {
-  setup() {
+  emits: ["open-modal", 'state-incomplete'],
+  components: {
+  },
+  setup(pops, {emit}) {
+    const step1 = ref(true)
+    const step2 = ref(false)
+    const step3 = ref(false)
+    const step4 = ref(false)
+
+
     const router = useRouter()
     const currentUser = computed(() => store.state.user)
     const isChecklist = ref(false)
@@ -126,7 +448,17 @@ export default {
       if(currentUser.value === null) {
           router.push('/login')
       }
+      window.scrollTo(0,0)
     })
+
+    const onNextStep1 = () => {
+      step1.value = false
+
+    }
+
+    const onNextStep2 = () => {
+      
+    }
 
     const showChecklistByComplete =  async() => {
        await CHECKLISTS_COLLECTION.where('uid', '==', currentUser.value.uid).get()
@@ -139,10 +471,18 @@ export default {
             router.push('/welldyingchecklist')
           }
         })
-      isChecklist.value = true
+        step1.value = false
+        step2.value = true
+        window.scrollTo(0,0)
     }
 
     const onAnswerToText = async () => {
+      if(userSelection.value.length < 1) {
+        step2.value = false 
+        step4.value = true
+        window.scrollTo(0,0)
+        return
+      }
       userWill.value.push('오늘은 '+moment(Date.now()).format('YYYY년 MM월 DD일')+'입니다.')
       userWill.value.push('저는 ' + currentUser.value.username + '입니다.')
       userWill.value.push('집주소는 ' + currentUser.value.address + '입니다.')
@@ -241,10 +581,18 @@ export default {
       // userWill.value.forEach(element => {
       //   console.log(element)
       // })
-      isChecklist.value = false
-      isChecklistButton.value = false
-      isPdfButton.value = true
-      isUserWill.value = true
+      // isChecklist.value = false
+      // isChecklistButton.value = false
+      // isPdfButton.value = true
+      // isUserWill.value = true
+      step2.value =false
+      step3.value =true
+      window.scrollTo(0,0)
+    }
+
+    const onRecordingDownload = () => {
+      console.log('dd')
+      emit('open-modal')
     }
 
     const onTextToPdfDownload = () => {
@@ -298,6 +646,11 @@ export default {
 
 
     return {
+      step1,
+      step2,
+      step3,
+      step4,
+
       onAnswerToText,
       showChecklistByComplete,
       checklist,
@@ -308,6 +661,7 @@ export default {
       userSelection,
       userWill,
       onTextToPdfDownload,
+      onRecordingDownload,
     }
   },
   data () {
@@ -361,18 +715,18 @@ export default {
     async onNewRecording (evt) {
       this.recordings.push(evt.detail.recording)
 
-      await axios.post('https://us-central1-iback-project.cloudfunctions.net/apiSpeechToText', await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
-        type: this.recordings[0].mimeType
-      })),{
-        headers: {
-          'Content-Type': 'application/octet-stream'
-        },
-      }).then((response) => {
-        console.log(response)
-        this.speechToText = response.data.text;
-      }).catch((error) => {
-        console.log(error.message)
-      })
+      // await axios.post('https://us-central1-iback-project.cloudfunctions.net/apiSpeechToText', await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
+      //   type: this.recordings[0].mimeType
+      // })),{
+      //   headers: {
+      //     'Content-Type': 'application/octet-stream'
+      //   },
+      // }).then((response) => {
+      //   console.log(response)
+      //   this.speechToText = response.data.text;
+      // }).catch((error) => {
+      //   console.log(error.message)
+      // })
 
       
     },

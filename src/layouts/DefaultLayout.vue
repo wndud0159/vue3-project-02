@@ -8,12 +8,12 @@
         <!-- login -->
         <div class="flex items-center justify-center" >
           <div class="absolute right-0 top-3 ">
-            <div v-if="currentUser" @click="sideToggleMenu = true" class="flex items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50">
+            <router-link to="/myinfo" v-if="currentUser" :class="`${router.currentRoute.value.path == '/myinfo' ? 'text-primary' : ''}  flex items-center space-x-1 hover:text-primary text-gray-500 hover:opacity-80 cursor-pointer z-50`">
               <img 
               :src="currentUser.profile_image_url" 
               class="w-12 h-12 rounded-full object-cover">
               <i class="fas fa-sort-down text-xl text-gray-400"></i>
-            </div>
+            </router-link>
           </div>
           <router-link v-if="!currentUser"  to="/login" class="absolute text-lg right-0  top-6 text-gray-500 hover:text-primary cursor-pointer pb-2" >
             <span>로그인</span>
@@ -40,9 +40,9 @@
           :class="`flex items-center justify-center py-6  border-b-2    w-1/4 cursor-pointer  border-gray-100 hover:border-primary hover:text-primary`">
             <span>아이백이란?</span>
           </div>
-          <router-link to='/businessalliance' 
+          <router-link to='/servicecenter' 
           :class="`${router.currentRoute.value.path == '/businessalliance' ? 'text-primary' : ''}   flex items-center justify-center py-6  border-b-2    w-1/4 cursor-pointer border-gray-100 hover:border-primary hover:text-primary`">
-            <span>사업제휴</span>
+            <span>고객센터</span>
           </router-link>
           <!-- <div @click="nonServiceMessage"
           :class="`flex items-center justify-center h-20 pt-2   w-1/6 cursor-pointer border-b-4 border-gray-100 hover:border-primary hover:text-primary`">
@@ -55,32 +55,32 @@
 <!-- 1 -->
     <!-- main section -->
     <div class=" md:mt-20 mb-20 md:mb-0 relative">
-        <router-view></router-view>
+        <router-view @open-modal="showCongratulationsBypdf = true"></router-view>
     </div>
 
     <!--bottom mobile menu -->
-    <div class="  fixed flex  text-center  md:hidden border-t-2  border-gray-100 mt-20 bottom-0 w-full bg-white text-gray-400 z-30">
+    <div class="  fixed flex  text-center items-center  md:hidden border-t-2 justify-center border-gray-100 mt-20 bottom-0 w-full bg-white text-gray-400 z-30">
       <!-- <div class="flex items-center justify-center text-center text-sm md:hidden"> -->
         <router-link to='/' 
         :class="` w-1/4 py-3 flex flex-col space-y-1  ${router.currentRoute.value.path == '/' ? 'text-primary' : ''} cursor-pointer hover:text-primary`">
           <i class="fas fa-home text-xl"></i>
           <span class="text-base">홈</span>
         </router-link>
-        <div  @click="onIbackIntroduce"
-        :class="` w-1/4 py-3 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
-          <i class="fas fa-book text-xl"></i>
+        <div  @click="onIbackIntroduce" @mouseover="changeImage = true" @mouseout="changeImage = false" 
+        :class="` w-1/4 py-3 flex flex-col  items-center mt-0.6 space-y-1 cursor-pointer hover:text-primary`">
+          <img :src="`${changeImage ? '/iback_logo.ico' : '/iback_logo_navbar.png'}`" :class="`${changeImage ? 'w-7 h-7' : 'w-7 h-7 '}`" alt="">
           <span class="text-base">아이백이란?</span>
         </div>  
-        <router-link to='/businessalliance' 
-        :class="` w-1/4 py-3 flex flex-col space-y-1  ${router.currentRoute.value.path == '/businessalliance' ? 'text-primary' : ''}  cursor-pointer hover:text-primary`">
-          <i class="fas fa-envelope text-xl"></i>
-          <span class="text-base">사업제휴</span>
+        <router-link to='/servicecenter' 
+        :class="` w-1/4 py-3 flex flex-col space-y-1  ${router.currentRoute.value.path == '/servicecenter' ? 'text-primary' : ''}  cursor-pointer hover:text-primary`">
+          <i class="fas fa-desktop text-xl"></i>
+          <span class="text-base">고객센터</span>
         </router-link>  
-        <div v-if="currentUser" @click="sideToggleMenu = true"
-        :class="` w-1/4 py-3 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
+        <router-link to="/myinfo" v-if="currentUser"
+        :class="` w-1/4 py-3 flex flex-col space-y-1 cursor-pointer ${router.currentRoute.value.path == '/myinfo' ? 'text-primary' : ''} `">
           <i class="fas fa-user text-xl"></i>
           <span class="text-base">내정보</span>
-        </div>   
+        </router-link>   
         <router-link to="/login" v-if="!currentUser"
         :class="` w-1/4 py-3 flex flex-col space-y-1 cursor-pointer hover:text-primary`">
           <i class="fas fa-user text-xl"></i>
@@ -116,6 +116,9 @@
       </div>
     </div>
     <ProfileEditModal v-if="showProfileEditModal" @close-modal="showProfileEditModal = false"/>
+    <CongratulationsModalByPdf v-if="showCongratulationsByPdf" @close-Modal="showCongratulationsByPdf = false"/>
+    <Will v-if="nonPage" @open-modal="showCongratulationsByPdf = true"/>
+
   </div>  
 
 
@@ -170,17 +173,22 @@ import router from '../router'
 import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
 import LoadingModal from '../components/LoadingModal.vue'
-
+import CongratulationsModalByPdf from '../components/CongratulationsModalByPdf.vue'
+import Will from '../pages/Will.vue'
 
 export default {
 
     components: {
       ProfileEditModal,
       LoadingModal,
+      CongratulationsModalByPdf,
+      Will,
+
     },
     setup() {
-
-
+        const changeImage = ref(false)
+        const nonPage = ref(false)
+        const showCongratulationsByPdf = ref(false)
         const showProfileEditModal = ref(false)
         const sideToggleMenu = ref(false)
         const routes = ref([])
@@ -244,7 +252,7 @@ export default {
           }
 
         return {
-            sideToggleMenu, router, routes, currentUser, logout, showProfileEditModal, onIbackIntroduce, nonServiceMessage
+            sideToggleMenu, router, routes, currentUser, logout, showProfileEditModal, onIbackIntroduce, nonServiceMessage, showCongratulationsByPdf, nonPage, changeImage,
         }
     }
 }

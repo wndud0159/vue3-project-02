@@ -1,8 +1,20 @@
 <template>
-  <div  class="flex flex-col  items-center px-3 md:px-20">
+  <div  class="w-full px-2 mb-10 md:px-60">
     <!-- title section -->
+    <div @click="onPrev" class="flex cursor-pointer  text-primary py-6 items-center">
+      <i class="flex-1 fas fa-angle-left -mt-1 text-4xl mr-24"></i>
+      <div class="flex  w-full -ml-40 justify-center text-xl font-semibold">사업제휴</div>
+    </div>
+    <div class="text-base text-black font-semibold space-y-5 mb-7 flex flex-col items-center">
+      <div>웰다잉 (Well-Dying) 종합 서비스, 빅웨이브</div>
+      <div class=" flex flex-col items-center">
+        <div>모든 사람의 존엄하고 행복한 인생과 삶의</div>
+        <div>마무리를 준비하기 위한 다양한 방향의 제휴를 기다립니다.</div>
+      </div>
+      <div>주소: 서울시 서초구 태봉로 114 AI양재허브센터 교총회관</div>
+    </div>
     <!-- businessalliance form section -->
-    <div   class="flex flex-col md:px-20 w-full">
+    <div   class="flex flex-col w-full">
       <div>회사명</div>
       <input v-model="company_name" type="text" :class="`${isCompany_name ? '' : 'border-red-500'} ${company_name.length ? 'border-blue-500' : ''} border-gray-200 border outline-none focus:ring-1 mb-5 py-2 px-2`">
       <div>성함</div>
@@ -23,15 +35,15 @@
       </div>
       <!-- button section -->
       <div class="flex justify-center">
-        <button v-if="!isAgreement.length || loading" class="px-10 py-4 bg-gray-100 rounded-lg" >제휴 협력 문의</button>
-        <button v-if="isAgreement.length && !loading" @click="onSendBusinessAllianceForm" class="px-10 py-4 bg-yellow-400 rounded-lg" >제휴 협력 문의</button>
+        <button v-if="!isAgreement.length || loading" class="px-10 py-4 w-full bg-gray-100 rounded-lg" >제휴 협력 문의</button>
+        <button v-if="isAgreement.length && !loading" @click="onSendBusinessAllianceForm" class="px-10 w-full py-4 bg-primary text-white rounded-lg" >제휴 협력 문의</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref, onBeforeMount} from 'vue'
 import emailjs from 'emailjs-com'
 import {useRouter} from 'vue-router'
 
@@ -58,6 +70,14 @@ export default {
     const notInput = ref([])
     const regex =  ref(false)
     const loading = ref(false)
+
+    onBeforeMount(() => {
+            window.scrollTo(0, 0)
+        })
+
+    const onPrev = () => {
+        router.go(-1)
+    }
 
     // regular expression /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/
     const onCheckEmailRegex = () => {
@@ -169,6 +189,7 @@ export default {
 
       onSendBusinessAllianceForm,
       onCheckEmailRegex,
+      onPrev,
     }
   }
 }

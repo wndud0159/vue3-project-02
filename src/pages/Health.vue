@@ -61,7 +61,7 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="health[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="health[0].answer_text" placeholder="ㅁㅁㅁ님의 답변을 적어주세요." class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
@@ -112,7 +112,7 @@
         <!-- checkbox section -->
         <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 py-3 flex md:w-96 items-center space-x-2 w-full">
-                <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="사전연명치료금지서"><span>사전연명치료금지서</span>
+                <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="사전연명치료금지서"><span>사전연명치료의향서</span>
             </div>
             <div class="bg-gray-100 px-3 py-3 flex md:w-96 items-center space-x-2 w-full">
                 <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="의료대리인"><span>의료대리인</span>

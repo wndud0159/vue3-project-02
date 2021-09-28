@@ -7,15 +7,16 @@ module.exports = {
         // 기본
         primary: "#004741",
         // 클릭시 hover
-        dark: "#142A2C",
+        dark: "#0A1B1D",
         // 못누르는
-        light: "#26847E",
+        light: "#9EC3C1",
         // 클릭시 hover
-        lighter: "#6DACAA",
+        lighter: "#E4EDED",
         // 네이버
         naver: '#00C43B',
         // 카카오
-        kakao: '#FFEB34'
+        kakao: '#FFEB34',
+        //
       },
       backgroundImage: theme => ({
         'checklist': "url('/checklist02.png')",

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col  items-center w-full  px-3">
+    <div class="flex flex-col  items-center w-full pb-7  px-3">
         
         <!-- top section by image, title -->
         <div class="  w-full flex flex-col justify-center items-center rounded-sm pb-8 pt-8">
@@ -7,10 +7,19 @@
             <img class="object-cover w-40 h-40 rounded-full mb-8" src="/maru.png" alt="">
             <!-- title section -->
             <div v-if="stepState" class="flex flex-col items-center text-2xl md:text-4xl font-semibold w-full ">
-                <div v-if="step1">안녕하세요? 마루에요 이름을 입력해주세요.</div>
-                <div v-if="step2">{{userName}}님 반갑습니다 주소를 적어주세요.</div>
+                <div v-if="step1" class="w-full flex flex-col items-center">
+                   <div>안녕하세요?</div>
+                   <div>이름을 입력해주세요.</div>
+                </div>
+                <div v-if="step2" class="flex flex-col items-center">
+                    <div>{{userName}}님, 반갑습니다.</div>
+                    <div> 주소를 입력해 주세요.</div>
+                </div>
                 <div v-if="step3" class="w-full text-center">
-                    <div> {{currentUser.username}}님, 저는 ‘마루’에요. 아래 질문에 하나하나 답하다 보면 좋은 마무리를 위한 삶의 이정표가 완성될 거에요</div>
+                    <div> {{currentUser.username}}님, 저는 ‘마루’에요.
+                        <div></div> 
+                        <div></div> 
+                        아래 질문에 하나하나 답하다 보면 좋은 마무리를 위한 삶의 이정표가 완성될 거에요</div>
                 </div>
             </div>
         </div>
@@ -28,7 +37,7 @@
         <div v-if="checklistState" class="w-full ">
             <div class="md:flex">
             <!-- health -->
-            <router-link to="/health" class=" flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer ">
+            <router-link to="/health" class=" flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer ">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">건강</div>
@@ -43,7 +52,7 @@
             </router-link>
 
             <!-- finance -->
-            <router-link to="/finance" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/finance" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">재무</div>
@@ -59,7 +68,7 @@
             </div>
             <div class="md:flex">
             <!-- testament -->
-            <router-link to="/testament" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/testament" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">유언</div>
@@ -74,7 +83,7 @@
             </router-link>
 
             <!-- funeral -->
-            <router-link to="/funeral" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/funeral" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">장례식</div>
@@ -91,7 +100,7 @@
 
             <div class="md:flex">
             <!-- digital -->
-            <router-link to="/digital" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/digital" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">디지털</div>
@@ -106,7 +115,7 @@
             </router-link>
 
             <!-- pet -->
-            <router-link to="/pet" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/pet" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">반려동물</div>
@@ -123,7 +132,7 @@
             
             <div class="md:flex">
             <!-- bucketlist -->
-            <router-link to="/bucketlist" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/bucketlist" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:mr-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">버킷리스트</div>
@@ -138,7 +147,7 @@
             </router-link>
 
             <!-- will -->
-            <router-link to="/will" class="flex w-full md:w-1/2 border border-gray-100 shadow-md rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
+            <router-link to="/will" class="flex w-full md:w-1/2 border border-gray-200  rounded-sm mb-5 md:ml-2 items-center py-5 px-5 md:px-10 cursor-pointer">
                 <div class=" space-y-2">
                     <div class="flex items-center">
                         <div class="text-2xl font-semibold mr-1">유언장 작성</div>
@@ -147,12 +156,13 @@
                     <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
-                    <img src="/will.png" class="w-20 h-20" alt="">
+                    <img src="/will01.png" class="w-20 h-20" alt="">
                 </div>
             </router-link>
             </div>
-            <div @click="onPrevStep3" class=" cursor-pointer underline text-blue-800">이름,주소 다시 입력하기</div>
-            
+            <div class="w-full flex justify-center">
+                <button class="w-full md:w-96 cursor-pointer py-2 rounded-lg text-white bg-light" @click="onPrevStep3">이름,주소 다시 입력하기</button>
+            </div>
         </div>
 
 
