@@ -10,23 +10,20 @@
                 <div class="bg-white flex flex-col w-full items-center space-y-7 relative pb-7  pt-14">
                     <div class="flex flex-col items-center">
                         <div>{{currentUser.username}}님,</div>
-                        <div>완성된 유언장을</div>
-                        <div> 다운로드 하셨네요!</div>
+                        <div>녹음 유언장이 완성 됐어요.</div>
+                        <div>녹음한 유언을 들어볼 수 있답니다.</div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div>유언장은 {{currentUser.username}}님의</div>
-                        <div>기기에만 저장됩니다.</div>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div>아이백 서버에는</div>
+                        <div>유언장은 아이백 서버에</div>
                         <div>저장되지 않으니 안심하세요.</div>
                     </div>
                     <div class="flex flex-col items-center">
                         <div>아이백은 유언장에서 가장 중요한</div>
-                        <div>자산정리 서비스 역시 준비 중이에요</div>
+                        <div>자산정리 서비스 역시 준비 중이에요..</div>
                     </div>
                     <div class="flex flex-col items-center">
                         <div>조금만 기다려주세요.</div>
+                        <div>여기서 기다리고 있을게요</div>
                         <div class="text-light">(자산정리 서비스 내년 상반기 초 오픈 예정)</div>
                     </div>
                     <div class="flex flex-col items-center">

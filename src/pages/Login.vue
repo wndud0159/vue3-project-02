@@ -9,7 +9,7 @@
       <i class="fas fa-comment px-px"></i>
       <button class="">카카오로 로그인</button>
     </div>
-    <div @click="loginWithNaver" class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
+    <div @click="nonServiceMessage" class="flex items-center space-x-1 bg-naver w-full md:w-1/2 justify-center  py-2 rounded-md shadow mb-3 hover:opacity-30">
       <img src="/naver.ico" class="w-5 h-5" alt="">
       <button class="text-white">네이버로 로그인</button>
     </div>
@@ -44,6 +44,10 @@ export default {
     onBeforeMount(() => {
         // console.log('유저상태', store.state.user)  
     })
+
+    const nonServiceMessage =() => {
+          alert('현재 서비스 개발중 입니다. 카카오 및 구글로그인 해주세요.')
+        }
 
 
     const onCreateUsers = async ()  => {
@@ -231,7 +235,7 @@ export default {
 
 
     return {
-      loginWithKakao, loginWithNaver, loginWithGoogle, isLoading,
+      loginWithKakao, loginWithNaver, loginWithGoogle, isLoading, nonServiceMessage
     }
   }
 

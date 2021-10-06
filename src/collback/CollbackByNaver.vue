@@ -59,6 +59,7 @@ setup() {
             profile_image_url: userData.value[0].profile_image_url,
             address: '',
             username: '',
+            record_at: [],
             record_url: '',
             introduce_myself: '',
             provider : userData.value[0].provider,

@@ -16,7 +16,8 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>남편 김상훈이 나 대신 결정을 내리면 좋겠어요. 내 동생 이지윤은 결정에 관여하지 않았으면 해요.</div>
+                    <div>남편 김상훈이 나 대신 결정을 내리면 좋겠어요.</div>
+                    <div>내 동생 이지윤은 결정에 관여하지 않았으면 해요.</div>
                 </div>
             </div>
             <div v-if="step2" class="absolute top-16 flex flex-col items-center">
@@ -28,7 +29,8 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>저는 10년 째 당뇨 투병중입니다. 심근 경색이 있습니다.</div>
+                    <div>저는 10년 째 당뇨 투병중입니다.</div>
+                    <div>심근 경색이 있습니다.</div>
                 </div>
             </div>
             <div v-if="step3" class="absolute top-16 flex flex-col items-center ">
@@ -40,7 +42,9 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>의사와 연명의료계획서를 작성했습니다. 김영수를 성년후견인 지정했습니다.</div>
+                    <div>의사와 연명의료계획서를 작성했습니다.</div>
+                    <div> 김영수를 성년후견인 지정했습니다.</div>
+                    <div @click="onLetterOfIntent" class="text-blue-500 underline">사전연명의향서 알아보기</div>
                 </div>
             </div>
             
@@ -52,8 +56,9 @@
                     <div>하셨나요?</div>
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
-                    <div>국립장기조직혈액관리원 또는 장기이식등록기관을 통해 기증 안내를 받으실 수 있습니다. 뇌사 또는 사후 장기기증 희망등록을 하게 되면 등록증이 발급 되고, 실제 기증시점이 오면 가족의 동의가 있어야 기증이 이루어지기 때문에 기증희망 사실을 가족에게 알려 주셔야 합니다. 자세한 정보를 찾아보세요</div>
-                    <div class="text-blue-500 underline">장기기증희망 알아보기</div>
+                    <div>국립장기조직혈액관리원 또는 장기이식등록기관을 통해 기증 안내를 받으실 수 있습니다.</div>
+                    <div>뇌사 또는 사후 장기기증 희망등록을 하게 되면 등록증이 발급 되고, 실제 기증시점이 오면 가족의 동의가 있어야 기증이 이루어지기 때문에 기증희망 사실을 가족에게 알려 주셔야 합니다. 자세한 정보를 찾아보세요</div>
+                    <div @click="onOrganDonation" class="text-blue-500 underline">장기기증희망 알아보기</div>
                 </div>
             </div>
         </div>
@@ -61,7 +66,7 @@
 
 
     <!-- step1 -->
-    <div v-if="step1 && health.length" class="w-full">
+    <div v-if="step1 && health.length" class="w-full mt-5">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -89,7 +94,7 @@
     </div>
 
     <!-- step2 -->
-    <div v-if="step2 && health.length" class="w-full">
+    <div v-if="step2 && health.length" class="w-full mt-5">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -120,7 +125,7 @@
     </div>
 
     <!-- step3 -->
-    <div v-if="step3 && health.length" class="w-full mt-24">
+    <div v-if="step3 && health.length" class="w-full mt-32">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -139,7 +144,7 @@
                 <input v-model="health[2].answer_box" class="w-8 h-8" type="checkbox" value="성년후견인"><span>성년후견인</span>
             </div>
             <div class="  px-2  flex md:w-96 items-center space-x-2 w-full">
-                <input v-model="health[2].answer_check" class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
+                <input v-model="health[2].answer_check" class="w-8 h-8" type="checkbox" value="직접입력"><span>직접입력</span>
             </div>
         </div>
         <!-- text section -->
@@ -151,7 +156,7 @@
     </div>
 
     <!-- step4-->
-    <div v-if="step4 && health.length" class="w-full mt-48">
+    <div v-if="step4 && health.length" class="w-full  mt-60">
         <!-- radio section -->
         <div class="text-xl mb-8 flex flex-col items-center w-full space-y-5">
             <div class="px-2 md:w-96 flex items-center space-x-2 w-full">
@@ -261,6 +266,13 @@ export default {
             window.scrollTo(0,0)
         })
 
+        const onLetterOfIntent = () => {
+            window.open('https://www.lst.go.kr/addt/video.do')
+        }
+
+        const onOrganDonation = () => {
+            window.open('https://www.konos.go.kr/konosis/sub2/sub02_01_01.jsp')
+        }
 
 
 
@@ -405,6 +417,9 @@ export default {
 
             health,
             currentUser,
+            
+            onLetterOfIntent,
+            onOrganDonation,
             
         }
 

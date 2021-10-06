@@ -16,7 +16,10 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>스위스에서 가족과 패러글라이딩을 하고 싶어요. 동해 바다에서 남편과 같이 석양을 보고 싶어요. 친구들과 함께 고아원 봉사활동을 하고 싶어요. 소설책을 출간하고 싶어요.</div>
+                    <div>스위스에서 가족과 패러글라이딩을 하고 싶어요.</div>
+                    <div>동해 바다에서 남편과 같이 석양을 보고 싶어요.</div>
+                    <div>친구들과 함께 고아원 봉사활동을 하고 싶어요.</div>
+                    <div>소설책을 출간하고 싶어요.</div>
                 </div>
             </div>
         </div>
@@ -24,7 +27,7 @@
 
 
     <!-- step1 -->
-    <div v-if="step1 && bucketlist.length" class="w-full mt-36">
+    <div v-if="step1 && bucketlist.length" class="w-full mt-44">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">

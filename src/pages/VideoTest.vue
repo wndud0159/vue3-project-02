@@ -1,7 +1,8 @@
 <template>
   <div class="flex flex-col h-screen overflow-y-scroll items-center pt-24 pb-48 md:pb-10 px-3 md:px-20">
       <div class="mt-20">
-          <button @click="testLiveStreaming">클릭</button>
+          <button @click="onClick" class="bg-green-300 hover:bg-green-700 text-white py-3 px-10 rounded-full shadow-xl">클릭하세요</button>
+          <button>클릭2</button>
       </div>
   </div>
 </template>
@@ -12,6 +13,11 @@ import {ref} from 'vue'
 
 export default {
     setup() {
+        const welcomeMessage = "안녕하세요 저는 최주영입니다."
+
+        const onClick = () => { 
+            alert(welcomeMessage);
+        }
         // const access_token = ref('')
         // const data = {
         //     'apiKey': 'oMvfrWAicBxXM4ppMsNqZERJ62XP8f7DmJQflqClXCk'
@@ -47,7 +53,7 @@ export default {
         }
 
         return {
-          testLiveStreaming
+          testLiveStreaming, onClick
         }
     }
 }

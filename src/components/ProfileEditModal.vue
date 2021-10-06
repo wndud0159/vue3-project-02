@@ -65,6 +65,7 @@ import {storage, USER_COLLECTION} from '../firebase'
 import store from '../store'
 
 export default {
+    emits: ["close-modal"],
     setup(props, {emit}) {
         const currentUser = computed(() => store.state.user)
         const profileImage = ref(null)

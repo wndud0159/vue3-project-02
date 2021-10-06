@@ -16,7 +16,7 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>[삼성생명] 보험이며, 수혜자는 [남편 한호열, 딸 한새벽, 아들 한준호]입니다.</div>
+                    <div>삼성생명 보험이며, 수혜자는 남편 한호열, 딸 한새벽, 아들 한준호입니다.</div>
                 </div>
             </div>
             <div v-if="step2" class="absolute top-16 flex flex-col items-center">
@@ -28,7 +28,9 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>은행 계좌 목록은 휴대폰 메모장에 정리해놓았습니다. 아이백증권에 주식 계좌가 있습니다. 아이백은행을 통해 신용대출을 받았습니다. </div>
+                    <div>은행 계좌 목록은 휴대폰 메모장에 정리해놓았습니다.</div>
+                    <div>아이백증권에 주식 계좌가 있습니다.</div>
+                    <div>아이백은행을 통해 신용대출을 받았습니다.</div>
                 </div>
             </div>
             <div v-if="step3" class="absolute top-16 flex flex-col items-center ">
@@ -40,7 +42,9 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>이도현 회계사가 재산을 관리하고 있습니다. 연락처는 010-1111-1111입니다. 아이백 은행 신탁을 통해 관리하고 있습니다.</div>
+                    <div>이도현 회계사가 재산을 관리하고 있습니다.</div>
+                    <div>연락처는 010-1111-1111입니다.</div>
+                    <div>아이백 은행 신탁을 통해 관리하고 있습니다.</div>
                 </div>
             </div>
             
@@ -58,7 +62,7 @@
 
 
     <!-- step1 -->
-    <div v-if="step1 && finance.length" class="w-full mt-24 mb-8">
+    <div v-if="step1 && finance.length" class="w-full mt-28 mb-8">
         <!-- radio section -->
         <!-- <div class="text-xl mb-8 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-96 py-3 flex items-center space-x-2 w-full">
@@ -85,19 +89,19 @@
         </div>
         <div class="w-full flex justify-center">
             <div class="px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="finance[0].answer_check" class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
+                <input v-model="finance[0].answer_check" class="w-8 h-8" type="checkbox" value="직접입력"><span>직접입력</span>
             </div>
         </div>
         <!-- text section -->
         <div v-if="finance[0].answer_check.length" class="w-full flex justify-center -mt-2">
-            <textarea v-model="finance[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="finance[0].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step2 -->
-    <div v-if="step2 && finance.length" class="w-full mt-28">
+    <div v-if="step2 && finance.length" class="w-full mt-40">
         <!-- radio section -->
         <!-- <div class="text-xl mb-8 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-96 py-3 flex items-center space-x-2 w-full">
@@ -111,14 +115,14 @@
         
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="finance[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="finance[1].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
              rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step3 -->
-    <div v-if="step3 && finance.length" class="w-full mt-28 mb-8">
+    <div v-if="step3 && finance.length" class="w-full mt-36 mb-8">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -153,12 +157,12 @@
         </div>
         <div class="w-full flex justify-center">
             <div class="px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="finance[2].answer_check" class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
+                <input v-model="finance[2].answer_check" class="w-8 h-8" type="checkbox" value="직접입력"><span>직접입력</span>
             </div>
         </div>
         <!-- text section -->
         <div v-if="finance[2].answer_check.length" class="w-full flex justify-center -mt-2">
-            <textarea v-model="finance[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="finance[2].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>

@@ -289,12 +289,25 @@
         </div>
       </div>
       <!-- pdf download button section -->
-      <div class="w-full flex justify-center text-xl md:w-96">
-        <button @click="onRecordingDownload" class="w-full bg-light text-white py-2 -mb-7 rounded-md hover:bg-primary">유언장 PDF 다운로드</button>       
+      <div class="w-full flex justify-center text-xl ">
+        <button @click="onRecordingDownload" class="w-full bg-light text-white py-2 -mb-7 rounded-md hover:bg-primary ">유언장 PDF 다운로드</button>       
       </div>
       <!-- will text section -->
-      <div id="userWill" :class="`w-full h-screen flex flex-col items-start text-xl bg-lighter  px-7 py-7 space-y-1`">
-        <div v-for="item in userWill" :key="item">{{item}}</div>
+      <div id="userWill" :class="` font-sans w-full relative  will h-full justify-center overflow-y-scroll items-center flex flex-col  text-xl space-y-1 `">
+        <img src="/bg_03.png" class="w-full  h-full" alt="">
+        <div class="absolute top-0">
+          <div class=" relative">
+            <img src="/will_top.png" class=" w-full h-28 px-10  -mb-24" alt="">
+            <div class="pb-10 text-5xl text-center h-full w-full">유언장</div>
+            <img src="/will_bottom.png" class="w-full  h-28 px-10 -mt-24 mb-4" alt="">
+            <div class=" px-10">
+            <div class="h-full text-center w-full mb-3" v-for="item in userWill" :key="item">{{item}}</div>
+            </div>
+            <img src="/will_bottom02.png" class="w-full h-8 px-10 mt-10" alt="">
+            <img src="/iback_logo_navbar_color.png" class="absolute bottom-12 right-6 opacity-40" alt="">
+          </div>
+        </div>
+
       </div>
 
       <!-- <div id="userWill" class="w-full flex h-screen flex-col items-start text-xl  px-40 py-20 space-y-1">
@@ -324,7 +337,8 @@
         <div>오늘 날짜 연/월/일을 말하고,</div>   
         <div>증인이 증인 이름과 유언 작성자 유언이</div>
         <div>정확하다고 말해야</div>
-        <div>법적 효력있는 유언장이 완성돼요.</div>
+        <div>법적 효력있는</div>
+        <div> 유언장이 완성돼요.</div>
         <div class="text-primary">(「민법」 제1061조)</div>
       </div>
       <div class="w-full flex flex-col items-center text-xl">
@@ -377,6 +391,9 @@
 
     </div>
   
+  <CongratulationsModalByPdf v-if="isPdf" @close-modal="isPdf = false"/>
+  <CongratulationsModalByRecording v-if="isRecord" @close-modal="isRecord = false" />
+  <CongratulationsModalByDownload v-if="isDownload" @close-modal="isDownload = false" />
   </div>
 </template>
 
@@ -389,9 +406,16 @@ import {useRouter} from 'vue-router'
 import axios from 'axios'
 import moment from 'moment'
 import html2pdf from 'html2pdf.js'
+import CongratulationsModalByPdf from '../components/CongratulationsModalByPdf.vue'
+import CongratulationsModalByRecording from '../components/CongratulationsModalByRecording.vue'
+import CongratulationsModalByDownload from '../components/CongratulationsModalByDownload.vue'
 
 export default {
+  emits: ['close-modal'],
   components: {
+    CongratulationsModalByPdf,
+    CongratulationsModalByRecording,
+    CongratulationsModalByDownload,
   },
   setup() {
     const step1 = ref(true)
@@ -465,7 +489,7 @@ export default {
         }
         // 재무
         if(element === checklist.value.finance[0].question) {
-            if(checklist.value.funeral[0].answer_check === '기타') {
+            if(checklist.value.funeral[0].answer_check === '직접입력') {
               userWill.value.push(checklist.value.funeral[0].answer_text)
             } else {         
                 checklist.value.finance[0].answer_box.forEach((element) => {
@@ -477,7 +501,7 @@ export default {
           userWill.value.push(checklist.value.finance[1].answer_text)
         }
         if(element === checklist.value.finance[2].question) {
-            if(checklist.value.funeral[2].answer_check === '기타') {
+            if(checklist.value.funeral[2].answer_check === '직접입력') {
               userWill.value.push(checklist.value.funeral[2].answer_text)
             } else { 
                 checklist.value.finance[2].answer_box.forEach((element) => {
@@ -503,14 +527,14 @@ export default {
           userWill.value.push(checklist.value.funeral[0].answer_text)
         }
         if(element === checklist.value.funeral[1].question) {
-          if(checklist.value.funeral[1].answer_box === '기타') {
+          if(checklist.value.funeral[1].answer_box === '직접입력') {
             userWill.value.push(checklist.value.funeral[1].answer_text)
           } else {
             userWill.value.push(checklist.value.funeral[1].answer_box)
           }
         }
         if(element === checklist.value.funeral[2].question) {
-          if(checklist.value.funeral[2].answer_box === '기타') {
+          if(checklist.value.funeral[2].answer_box === '직접입력') {
             userWill.value.push(checklist.value.funeral[2].answer_text)
           } else {
             userWill.value.push(checklist.value.funeral[2].answer_box)
@@ -521,7 +545,7 @@ export default {
         }
         // 디지털
         if(element === checklist.value.digital[0].question) {
-          if(checklist.value.digital[0].answer_check === '기타') {
+          if(checklist.value.digital[0].answer_check === '직접입력') {
             userWill.value.push(checklist.value.digital[0].answer_text)
           } else {
             checklist.value.digital[0].answer_box.forEach((element) => {
@@ -530,7 +554,7 @@ export default {
           }
         }
         if(element === checklist.value.digital[1].question) {
-          if(checklist.value.digital[1].answer_check === '기타') {
+          if(checklist.value.digital[1].answer_check === '직접입력') {
             userWill.value.push(checklist.value.digital[1].answer_text)
           } else {
             checklist.value.digital[1].answer_box.forEach((element) => {
@@ -563,59 +587,59 @@ export default {
     }
 
     const onRecordingDownload = () => {
-      isPdf.value = true
       onTextToPdfDownload()
     }
 
     const onTextToPdfDownload = async () => {
       let data = await document.getElementById('userWill')
-            console.log('check : ', data)
+        console.log('check : ', data)
             
-            const options = {
-                filename: `invoice-#003.pdf`,
-                margin: 0,
-                image: {type: 'jpeg', quality: 0.95 },
-                html2canvas: { scrollY: 0, scale: 1, dpi: 400, letterRendering: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compressPDF: true }
-            }
+        const options = {
+            filename: `invoice-#003.pdf`,
+            margin: 0,
+            image: {type:"jpg", quality: 0.95},
+            html2canvas: {useCORS: true, scrollY: 0,scale:1, dpi: 300, letterRendering: true, },
+            jsPDF: { unit: 'mm', format: 'a4',orientation: 'portrait',compressPDF: true}
+        }
 
-            try {
+        try {
 
-            html2pdf().set(options).from(data).toPdf().output('bloburl').then(async (result) => {
-                console.log('blob check : ', result)
-                // console.log('url check : ', blobUrl)
-                const pdf = await fetch(result).then(r=> r.blob()).then(blobFile=> new File([blobFile], "pdffile", {
-                    type: 'application/pdf'
-                }));
-                const blobUrl = window.URL.createObjectURL(pdf)
-                console.log(typeof blobUrl)
-                axios({
-                    url: blobUrl,
-                    method: 'GET',
-                    responseType: 'blob',
-                    // headers : {
-                    //     'Content-Type': 'application/pdf'
-                    // }
-                }).then(response => {
-                    console.log('success', response)
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'file.pdf');
-                    document.body.appendChild(link);
-                    link.click();
-                }).catch(error => {
-                    console.log('fail', error.message)
-                    alert('axios error', error.message)
-                })
-
-
+        html2pdf().set(options).from(data).toPdf().output('bloburl').then(async (result) => {
+            console.log('blob check : ', result)
+            // console.log('url check : ', blobUrl)
+            const pdf = await fetch(result).then(r=> r.blob()).then(blobFile=> new File([blobFile], "pdffile", {
+                type: 'application/pdf'
+            }));
+            const blobUrl = window.URL.createObjectURL(pdf)
+            console.log(typeof blobUrl)
+            axios({
+                url: blobUrl,
+                method: 'GET',
+                responseType: 'blob',
+                // headers : {
+                //     'Content-Type': 'application/pdf'
+                // }
+            }).then(response => {
+                console.log('success', response)
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'iback_will_service.pdf');
+                document.body.appendChild(link);
+                link.click();
+            }).catch(error => {
+                console.log('fail', error.message)
+                alert('axios error', error.message)
             })
-                } catch (error) {
-                  alert('html2pdf error : ', error.message)
-                }
-                  isPdf.value = false
-    }
+
+
+        })
+        } catch (error) {
+          alert('html2pdf error : ', error.message)
+        }
+        isPdf.value = true
+      }
+
     
 
 
@@ -645,6 +669,8 @@ export default {
       currentUser: [],
       record_at: [],
       saveRecord : [],
+      isDownload: false,
+      isRecord: false,
       recordSate : false,
       enableEchoCancellation: true,
       recordingInProgress: false,
@@ -687,6 +713,7 @@ export default {
     async stopRecording () {
       await this.recorderSrvc.stopRecording()
       this.recordingInProgress = false
+      this.isRecord = true
     },
     async onNewRecording (evt) {
       this.recordings.push(evt.detail.recording)
@@ -726,9 +753,9 @@ export default {
           record_at: this.record_at,
         })
         store.commit("SET_RECORD_AT", this.record_at)
-        // this.recordings = []
-        // this.speechToText = ''
-        // this.recordingInProgress = false
+        this.recordings = []
+        this.speechToText = ''
+        this.recordingInProgress = false
       } catch (error) {
         console.log('uproad error : ', error)
       }
@@ -736,18 +763,7 @@ export default {
     },
 
     async downloadSaveRecording() {
-      // const sound = await fetch(this.recordings[0].blobUrl).then(r=> r.blob()).then(blobFile=> new File([blobFile], "audio", {
-      // type: this.recordings[0].mimeType
-      // }));
-
-      // axios({
-      //   method : 'post',
-      //   url: 'http://localhost:3000',
-      //   responseType: 'blob',
-      //   data: sound
-      // }).then(res => {
-
-      // })
+      
       // Create a reference to the file we want to download
         const starsRef = await storage.ref(`record/${this.currentUser.uid}/record`)
         //Get the download URL
@@ -791,6 +807,8 @@ export default {
               break;
           }
         });
+        this.isDownload = true
+        this.deleteRecording()
     },
     async deleteSaveRecording() {
       // Create a reference to the file to delete

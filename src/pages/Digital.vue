@@ -16,7 +16,10 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>[카카오]의 계정은 삭제해주세요 관리자는 김윤아입니다. / 이메일 계정을 모두 유지하겠습니다. / 이메일 계정을 모두 삭제해주세요.</div>
+                    <div>카카오의 계정은 삭제해주세요.</div>
+                    <div> 관리자는 김윤아입니다.</div>
+                    <div>이메일 계정을 모두 유지하겠습니다.</div>
+                    <div>이메일 계정을 모두 삭제해주세요.</div>
                 </div>
             </div>
             <div v-if="step2" class="absolute top-16 flex flex-col items-center">
@@ -28,7 +31,10 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>[인스타그램]의 계정은 삭제해주세요 관리자는 티파니입니다. / SNS 계정을 모두 유지하겠습니다. / SNS 계정을 모두 삭제해주세요.</div>
+                    <div>인스타그램의 계정은 삭제해주세요.</div>
+                    <div>관리자는 티파니입니다.</div>
+                    <div>SNS 계정을 모두 유지하겠습니다.</div>
+                    <div>SNS 계정을 모두 삭제해주세요.</div>
                 </div>
             </div>
             <div v-if="step3" class="absolute top-16 flex flex-col items-center ">
@@ -40,7 +46,8 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>보관할 사진과 영상들은 노트북 ‘사랑해’ 폴더에 모아놨습니다. 디지털 파일들은 모두 삭제해주세요.</div>
+                    <div>보관할 사진과 영상들은 노트북 ‘사랑해’ 폴더에 모아놨습니다.</div>
+                    <div>디지털 파일들은 모두 삭제해주세요.</div>
                 </div>
             </div>
             
@@ -50,7 +57,7 @@
 
 
     <!-- step1 -->
-    <div v-if="step1 && digital.length" class="w-full mt-28">
+    <div v-if="step1 && digital.length" class="w-full mt-44">
         <!-- radio section -->
         <!-- <div class="text-xl mb-8 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -89,19 +96,19 @@
         </div>
         <div class="w-full flex justify-center">
             <div class="px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="digital[0].answer_check" class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
+                <input v-model="digital[0].answer_check" class="w-8 h-8" type="checkbox" value="직접입력"><span>직접입력</span>
             </div>
         </div>
         <!-- text section -->
         <div v-if="digital[0].answer_check.length" class="w-full flex justify-center -mt-2">
-            <textarea v-model="digital[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="digital[0].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step2 -->
-    <div v-if="step2 && digital.length" class="w-full mt-28">
+    <div v-if="step2 && digital.length" class="w-full mt-44">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -140,19 +147,19 @@
         </div>
         <div class="w-full flex justify-center">
             <div class="px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="digital[1].answer_check" class="w-8 h-8" type="checkbox" value="기타"><span>기타</span>
+                <input v-model="digital[1].answer_check" class="w-8 h-8" type="checkbox" value="직접입력"><span>직접입력</span>
             </div>
         </div>
         <!-- text section -->
         <div v-if="digital[1].answer_check.length" class="w-full flex justify-center  -mt-2">
-            <textarea v-model="digital[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="digital[1].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
              rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step3 -->
-    <div v-if="step3 && digital.length" class="w-full mt-28">
+    <div v-if="step3 && digital.length" class="w-full mt-36">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -176,7 +183,7 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="digital[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="digital[2].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>

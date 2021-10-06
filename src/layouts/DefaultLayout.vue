@@ -115,8 +115,6 @@
         </div>
       </div>
     </div>
-    <ProfileEditModal v-if="showProfileEditModal" @close-modal="showProfileEditModal = false"/>
-    <CongratulationsModalByPdf v-if="showCongratulationsByPdf" @close-Modal="showCongratulationsByPdf = false"/>
 
   </div>  
 
@@ -166,20 +164,14 @@
   });
 
 
-import ProfileEditModal from '../components/ProfileEditModal.vue'
 import {ref, onBeforeMount, computed} from 'vue'
 import router from '../router'
 import store from '../store'
 import {USER_COLLECTION, auth} from '../firebase'
-import LoadingModal from '../components/LoadingModal.vue'
-import CongratulationsModalByPdf from '../components/CongratulationsModalByPdf.vue'
 
 export default {
 
     components: {
-      ProfileEditModal,
-      LoadingModal,
-      CongratulationsModalByPdf,
 
     },
     setup() {
@@ -192,7 +184,7 @@ export default {
         const currentUser = computed(() => store.state.user)
         
         const nonServiceMessage =() => {
-          alert('현재 서비스 개발중 입니다. 문의는 우측 하단 아이콘을 눌러주세요.')
+          alert('현재 서비스 개발중 입니다. 카카오 및 구글로그인 해주세요.')
         }
 
         const onIbackIntroduce = () => {

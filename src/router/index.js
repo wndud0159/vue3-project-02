@@ -7,7 +7,6 @@ import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
 import ServiceCenter from '../pages/ServiceCenter.vue'
 import BusinessAlliance from '../pages/BusinessAlliance.vue'
-import Checklist from '../pages/Checklist.vue'
 import Will from '../pages/Will.vue'
 import CollbackByNaver from '../collback/CollbackByNaver.vue'
 
@@ -42,7 +41,6 @@ const routes = [
     { path: '/myinfo', name: 'myinfo', component: MyInfo, title: '내정보', icon: 'fas fa-chalkboard text-xl', meta: { isMenu: true, requireAuth: true} },
     { path: '/businessalliance', name: 'businessalliance', component: BusinessAlliance, title: '사업제휴', icon: 'fas fa-envelope text-xl', meta: { isMenu: true, requireAuth: true} },
     
-    { path: '/checklist', name: 'checklist', component: Checklist, title: '체크리스트작성', meta: { isMenu: false, requireAuth: true} },
     { path: '/will', name: 'will', component: Will, title: '유언장작성', meta: { isMenu: false, requireAuth: true} },
     
     

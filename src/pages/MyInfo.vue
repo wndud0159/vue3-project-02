@@ -5,11 +5,11 @@
             <div class="flex  w-full -ml-40 justify-center text-xl font-semibold">내정보</div>
         </div>
         <div class="w-full px-2 md:px-0 space-y-7">
-            <div class="w-full flex flex-col items-center space-y-4 mb-20">  
+            <div class="w-full flex flex-col items-center space-y-4 mb-16">  
                 <img :src="`${currentUser.profile_image_url}`" class="w-24 h-24 rounded-full" alt="">   
                 <div class="w-full flex flex-col items-center">
                     <div class="text-3xl">{{currentUser.nickname}} <span class="text-xl">님</span> </div>
-                    <div class="text-primary text-xl">프로필 수정</div>
+                    <div @click="showProfileModal" class="text-primary cursor-pointer hover:text-dark pt-3 text-xl">프로필 수정</div>
                 </div>
             </div>
             <!-- <div class="w-full flex flex-col items-center text-lg font-semibold space-y-2">
@@ -281,7 +281,7 @@
                 </div>
 
                 <!-- logout -->
-                <button @click="logout" class="py-4 text-left border-b text-gray-500 w-full md:px-6 px-3">로그아웃</button>
+                <button @click="logout" class="py-4 text-left border-b text-gray-500 w-full">로그아웃</button>
 
 
                 
@@ -292,6 +292,7 @@
         </div>
 
     </div>
+    <ProfileEditModal v-if="isProfile" @close-modal="isProfile = false"/>
 </template>
 
 <script>
@@ -302,8 +303,14 @@ import {CHECKLISTS_COLLECTION} from '../firebase'
 import axios from 'axios'
 import {auth} from '../firebase'
 import moment from 'moment'
+import ProfileEditModal from '../components/ProfileEditModal.vue'
+
+
 
 export default {
+    components: {
+        ProfileEditModal,
+    },
     setup() {
         const currentUser = computed(() => store.state.user)
         const router = useRouter()
@@ -316,6 +323,9 @@ export default {
         const isDigital = ref(false)
         const isPet = ref(false)
         const isBucketlist = ref(false)
+        const isProfile = ref (false)
+
+
 
         onBeforeMount(async() => {
 
@@ -332,6 +342,10 @@ export default {
             })
             window.scrollTo(0, 0)
         })
+
+        const showProfileModal = () => {
+            isProfile.value = true
+        }
 
         // runs after firebase is initialized
         auth.onAuthStateChanged(function(user) {
@@ -454,6 +468,8 @@ export default {
 
             logout,
             moment,
+            isProfile,
+            showProfileModal,
 
             
         }

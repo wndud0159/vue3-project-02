@@ -62,7 +62,7 @@
 
 
     <!-- step1 -->
-    <div v-if="step1 && testament.length" class="w-full mt-44">
+    <div v-if="step1 && testament.length" class="w-full mt-48">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -83,14 +83,14 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="testament[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="testament[0].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step2 -->
-    <div v-if="step2 && testament.length" class="w-full mt-28">
+    <div v-if="step2 && testament.length" class="w-full mt-36">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -114,7 +114,7 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="testament[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="testament[1].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
              rows="4">
             </textarea>
         </div>
@@ -142,14 +142,14 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="testament[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="testament[2].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step4-->
-    <div v-if="step4 && testament.length" class="w-full mt-28">
+    <div v-if="step4 && testament.length" class="w-full mt-36">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -170,7 +170,7 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="testament[3].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="testament[3].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>

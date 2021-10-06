@@ -44,7 +44,7 @@
                         <div class="-mb-2">{{completeHealth.length}} / 4</div>
                     </div>
                     <div>건강하게 늙어갈 권리</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/health.png" class="w-20 h-18" alt="">
@@ -59,7 +59,7 @@
                         <div class="-mb-2">{{completeFinance.length}} / 3</div>
                     </div>
                     <div>자산을 알맞게 처리할 권리</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/finance.png" class="w-20 h-20" alt="">
@@ -75,7 +75,7 @@
                         <div class="-mb-2">{{completeTestament.length}} / 4</div>
                     </div>
                     <div>마지막 말과 생각을 남길 권리</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/testament.png" class="w-20 h-20" alt="">
@@ -90,7 +90,7 @@
                         <div class="-mb-2">{{completeFuneral.length}} / 4</div>
                     </div>
                     <div>삶을 추모하고 유족을 위로할 권리</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/funeral.png" class="w-20 h-20" alt="">
@@ -107,7 +107,7 @@
                         <div class="-mb-2">{{completeDigital.length}} / 3</div>
                     </div>
                     <div>디지털 정보를 정리할 권리</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/digital.png" class="w-20 h-18" alt="">
@@ -122,7 +122,7 @@
                         <div class="-mb-2">{{completePet.length}} / 1</div>
                     </div>
                     <div>반려동물과의 마지막 삶</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/pet.png" class="w-20 h-20" alt="">
@@ -139,7 +139,7 @@
                         <div class="-mb-2">{{completeBucketlist.length}} / 1</div>
                     </div>
                     <div>삶을 충만하게 채울 권리</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/bucketlist.png" class="w-20 h-20" alt="">
@@ -153,7 +153,7 @@
                         <div class="text-2xl font-semibold mr-1">유언장 작성</div>
                     </div>
                     <div>답변을 통한 유언장 만들기</div>
-                    <button class="bg-light text-white px-5 py-2 rounded-full">시작하기</button>
+                    <button class="bg-primary text-white px-5 py-2 rounded-full">시작하기</button>
                 </div>
                 <div class=" flex-1 flex justify-end">
                     <img src="/will01.png" class="w-18 h-20" alt="">

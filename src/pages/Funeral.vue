@@ -15,7 +15,8 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>다들 저에게 마지막 편지를 써서 읽어주세요. 제가 가장 좋아하던 김광석 노래들을 틀어주세요.</div>
+                    <div>다들 저에게 마지막 편지를 써서 읽어주세요.</div>
+                    <div>제가 가장 좋아하던 김광석 노래들을 틀어주세요.</div>
                 </div>
             </div>
             <div v-if="step2" class="absolute top-16 flex flex-col items-center">
@@ -26,7 +27,9 @@
                 </div>
                 <div class="w-full flex flex-col items-center text-lg text-light  ">
                     <div>답변 가이드 :</div>
-                    <div>성당에서 장례식을 진행하고 싶습니다. 집에서 장례식을 진행하고 싶습니다. 장례식을 하고 싶지 않아요.</div>
+                    <div>성당에서 장례식을 진행하고 싶습니다.</div>
+                    <div>집에서 장례식을 진행하고 싶습니다.</div>
+                    <div>장례식을 하고 싶지 않아요.</div>
                 </div>
             </div>
             <div v-if="step3" class="absolute top-16 flex flex-col items-center ">
@@ -78,14 +81,14 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="funeral[0].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="funeral[0].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step2 -->
-    <div v-if="step2 && funeral.length" class="w-full mt-24">
+    <div v-if="step2 && funeral.length" class="w-full mt-32">
         <!-- radio section -->
         <!-- <div class="text-xl mb-10 flex flex-col items-center w-full space-y-3">
             <div class="bg-gray-100 px-3 md:w-1/2 py-3 flex items-center space-x-2 w-full">
@@ -110,7 +113,7 @@
                 <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="장례식은 교회에서 하고 싶습니다."><span>교회</span>
             </div>
             <div class=" px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="장례식은 불교에서 하고 싶습니다."><span>불교</span>
+                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="장례식은 절에서 하고 싶습니다."><span>절</span>
             </div>
             <!-- <div class=" px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
                 <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="장례식은 종교시설에서 하고 싶습니다.">
@@ -123,12 +126,12 @@
                 </select>
             </div> -->
             <div class=" px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="기타"><span>기타</span>
+                <input v-model="funeral[1].answer_box" class="w-8 h-8" type="radio" value="직접입력"><span>직접입력</span>
             </div>
         </div>
         <!-- text section -->
-        <div v-if="funeral[1].answer_box === '기타'" class="w-full flex justify-center mb-8 -mt-10">
-            <textarea v-model="funeral[1].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+        <div v-if="funeral[1].answer_box === '직접입력'" class="w-full flex justify-center mb-8 -mt-10">
+            <textarea v-model="funeral[1].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
              rows="4">
             </textarea>
         </div>
@@ -151,7 +154,7 @@
                 <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='장례식은 종교 방식대로 진행되기를 원합니다.'><span>종교 방식대로</span>
             </div>
             <div class=" px-2 md:w-96 py-2 flex items-center space-x-2 w-full">
-                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='기타'><span>기타</span>
+                <input v-model="funeral[2].answer_box" class="w-8 h-8" type="radio" value='직접입력'><span>직접입력</span>
             </div>
         </div>
         <!-- checkbox section -->
@@ -164,15 +167,15 @@
             </div>
         </div> -->
         <!-- text section -->
-        <div v-if="funeral[2].answer_box === '기타'" class="w-full flex justify-center mb-8 -mt-10">
-            <textarea v-model="funeral[2].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+        <div v-if="funeral[2].answer_box === '직접입력'" class="w-full flex justify-center mb-8 -mt-10">
+            <textarea v-model="funeral[2].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
     </div>
 
     <!-- step4-->
-    <div v-if="step4 && funeral.length" class="w-full mt-16">
+    <div v-if="step4 && funeral.length" class="w-full mt-20">
         <!-- radio section -->
         <div  class="text-xl flex items-center w-full justify-center">
             <div class="px-2 md:w-96 py-3 w-full">
@@ -202,7 +205,7 @@
         </div> -->
         <!-- text section -->
         <div class="w-full flex justify-center mb-8">
-            <textarea v-model="funeral[3].answer_text" placeholder="희망사항" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
+            <textarea v-model="funeral[3].answer_text" :placeholder="`${currentUser.username}님의 답변을 적어주세요.`" class=" w-full resize-none md:w-96 outline-none py-2 px-2  focus:border-primary border focus:ring-4 focus:ring-primary focus:ring-opacity-25 ring-gray-300  rounded-md border-gray-300"
             rows="4">
             </textarea>
         </div>
@@ -439,6 +442,7 @@ export default {
             funeral,
             isSelection,
             showChange,
+            currentUser,
             
         }
 

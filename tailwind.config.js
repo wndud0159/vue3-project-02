@@ -2,6 +2,9 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      'sans' : ['Jeju Myeongjo', 'serif']
+    },
     extend: {
       colors: {
         // 기본
@@ -17,12 +20,11 @@ module.exports = {
         // 카카오
         kakao: '#FFEB34',
         //
+        bg_01: 'f7fdfd',
       },
       backgroundImage: theme => ({
-        'checklist': "url('/checklist02.png')",
-        'will': "url('/will01.png')",
-        'checklist-pc': "url('/checklist02.png')",
-        'will-pc': "url('/will01.png')",
+        'will': "url('/bg_03.png')",
+        
       })
     },
   },
