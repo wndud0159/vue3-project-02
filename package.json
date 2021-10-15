@@ -12,6 +12,7 @@
     "firebase": "^8.9.0",
     "html2pdf.js": "^0.9.1",
     "moment": "^2.29.1",
+    "uuid": "^3.4.0",
     "vue": "^3.0.5",
     "vue-daum-postcode": "^1.1.0",
     "vue-router": "^4.0.10",
